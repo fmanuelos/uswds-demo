@@ -1,26 +1,394 @@
+/* Only import the fonts you need! */
+@import "@fontsource-variable/open-sans";
+@import "@fontsource-variable/public-sans";
+@import "@fontsource-variable/roboto-mono";
+@import "@fontsource-variable/source-sans-3";
+@import "@fontsource/merriweather/300.css";
+@import "@fontsource/merriweather/400.css";
+@import "@fontsource/merriweather/700.css";
+@import "@fontsource/merriweather/900.css";
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tailwind CSS v4 Configuration */
+@theme {
+  /* Font Size with normalization support */
+  --font-size-xs: calc(0.75rem * var(--font-normalization, 1));
+  --font-size-sm: calc(0.875rem * var(--font-normalization, 1));
+  --font-size-base: calc(1rem * var(--font-normalization, 1));
+  --font-size-lg: calc(1.125rem * var(--font-normalization, 1));
+  --font-size-xl: calc(1.25rem * var(--font-normalization, 1));
+  --font-size-2xl: calc(1.5rem * var(--font-normalization, 1));
+  --font-size-3xl: calc(1.875rem * var(--font-normalization, 1));
+  --font-size-4xl: calc(2.25rem * var(--font-normalization, 1));
+  --font-size-5xl: calc(3rem * var(--font-normalization, 1));
+  --font-size-6xl: calc(3.75rem * var(--font-normalization, 1));
+  --font-size-7xl: calc(4.5rem * var(--font-normalization, 1));
+  --font-size-8xl: calc(6rem * var(--font-normalization, 1));
+  --font-size-9xl: calc(8rem * var(--font-normalization, 1));
+
+  /* Line heights */
+  --line-height-xs: calc(1rem * var(--font-normalization, 1));
+  --line-height-sm: calc(1.25rem * var(--font-normalization, 1));
+  --line-height-base: calc(1.5rem * var(--font-normalization, 1));
+  --line-height-lg: calc(1.75rem * var(--font-normalization, 1));
+  --line-height-xl: calc(1.75rem * var(--font-normalization, 1));
+  --line-height-2xl: calc(2rem * var(--font-normalization, 1));
+  --line-height-3xl: calc(2.25rem * var(--font-normalization, 1));
+  --line-height-4xl: calc(2.5rem * var(--font-normalization, 1));
+  --line-height-5xl: calc(1 * var(--font-normalization, 1));
+  --line-height-6xl: calc(1 * var(--font-normalization, 1));
+  --line-height-7xl: calc(1 * var(--font-normalization, 1));
+  --line-height-8xl: calc(1 * var(--font-normalization, 1));
+  --line-height-9xl: calc(1 * var(--font-normalization, 1));
+
+  /* Font families */
+  --font-family-merriweather: Merriweather, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-family-public-sans: "Public Sans Variable", "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family-source-sans: "Source Sans 3 Variable", "Source Sans Pro", Helvetica, Arial, sans-serif;
+  --font-family-open-sans: "Open Sans Variable", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family-roboto-mono: "Roboto Mono Variable", "Roboto Mono", "Bitstream Vera Sans Mono", "Consolas", "Courier", monospace;
+
+  /* USWDS Color Palette */
+  --color-red-cool-5: #f8eff1;
+  --color-red-cool-10: #f3e1e4;
+  --color-red-cool-20: #ecbec6;
+  --color-red-cool-30: #e09aa6;
+  --color-red-cool-40: #d27685;
+  --color-red-cool-50: #c05c7a;
+  --color-red-cool-60: #ad4467;
+  --color-red-cool-70: #8b2635;
+  --color-red-cool-80: #6d1a28;
+  --color-red-cool-90: #4f0e1b;
+  --color-red-5: #fef0f0;
+  --color-red-10: #fde0e1;
+  --color-red-20: #f8b9c5;
+  --color-red-30: #f394aa;
+  --color-red-40: #ee6c8e;
+  --color-red-50: #e54773;
+  --color-red-60: #d72d5a;
+  --color-red-70: #b21d38;
+  --color-red-80: #8b0a1a;
+  --color-red-90: #5c0011;
+  --color-red-warm-5: #fef2f2;
+  --color-red-warm-10: #fde5e5;
+  --color-red-warm-20: #f8c4c4;
+  --color-red-warm-30: #f2a3a3;
+  --color-red-warm-40: #ec8282;
+  --color-red-warm-50: #e66262;
+  --color-red-warm-60: #e04141;
+  --color-red-warm-70: #b52b2b;
+  --color-red-warm-80: #8a1515;
+  --color-red-warm-90: #5f0000;
+  --color-orange-5: #fff2e5;
+  --color-orange-10: #ffe0cc;
+  --color-orange-20: #ffbc78;
+  --color-orange-30: #ff9c3d;
+  --color-orange-40: #fa7d00;
+  --color-orange-50: #e5590b;
+  --color-orange-60: #d54309;
+  --color-orange-70: #b83c00;
+  --color-orange-80: #9c3500;
+  --color-orange-90: #802e00;
+  --color-orange-warm-5: #fff8f0;
+  --color-orange-warm-10: #ffeee0;
+  --color-orange-warm-20: #ffd5a3;
+  --color-orange-warm-30: #ffbc66;
+  --color-orange-warm-40: #ffa329;
+  --color-orange-warm-50: #e6890b;
+  --color-orange-warm-60: #c76f00;
+  --color-orange-warm-70: #a85c00;
+  --color-orange-warm-80: #8a4900;
+  --color-orange-warm-90: #6c3600;
+  --color-gold-5: #fffce5;
+  --color-gold-10: #fff7cc;
+  --color-gold-20: #ffeaa3;
+  --color-gold-30: #ffdd7a;
+  --color-gold-40: #ffd051;
+  --color-gold-50: #ffc228;
+  --color-gold-60: #ffb400;
+  --color-gold-70: #e6a000;
+  --color-gold-80: #cc8c00;
+  --color-gold-90: #b37800;
+  --color-yellow-5: #fffef0;
+  --color-yellow-10: #fffce0;
+  --color-yellow-20: #fff7a3;
+  --color-yellow-30: #fff266;
+  --color-yellow-40: #ffed29;
+  --color-yellow-50: #fee685;
+  --color-yellow-60: #fdd700;
+  --color-yellow-70: #e6c200;
+  --color-yellow-80: #ccad00;
+  --color-yellow-90: #b39800;
+  --color-green-cool-5: #ecf7ec;
+  --color-green-cool-10: #d8f0d8;
+  --color-green-cool-20: #9ccf9c;
+  --color-green-cool-30: #5eac5e;
+  --color-green-cool-40: #4d8055;
+  --color-green-cool-50: #446443;
+  --color-green-cool-60: #3b4d3b;
+  --color-green-cool-70: #2d4a2d;
+  --color-green-cool-80: #1f3a1f;
+  --color-green-cool-90: #112b11;
+  --color-green-5: #eef9e6;
+  --color-green-10: #ddf2cc;
+  --color-green-20: #9ddb99;
+  --color-green-30: #5dc466;
+  --color-green-40: #1dad33;
+  --color-green-50: #219633;
+  --color-green-60: #0d7f2e;
+  --color-green-70: #008329;
+  --color-green-80: #146724;
+  --color-green-90: #0f4b1f;
+  --color-green-warm-5: #f0f9e6;
+  --color-green-warm-10: #e0f2cc;
+  --color-green-warm-20: #b8db99;
+  --color-green-warm-30: #90c466;
+  --color-green-warm-40: #68ad33;
+  --color-green-warm-50: #4f9600;
+  --color-green-warm-60: #3d7f00;
+  --color-green-warm-70: #2b6800;
+  --color-green-warm-80: #195100;
+  --color-green-warm-90: #073a00;
+  --color-mint-5: #dbf6ed;
+  --color-mint-10: #b7eddb;
+  --color-mint-20: #92e5c9;
+  --color-mint-30: #6edcb7;
+  --color-mint-40: #49d3a5;
+  --color-mint-50: #25ca93;
+  --color-mint-60: #00c181;
+  --color-mint-70: #00a96e;
+  --color-mint-80: #00915b;
+  --color-mint-90: #007948;
+  --color-mint-cool-5: #d5f4ed;
+  --color-mint-cool-10: #abe9db;
+  --color-mint-cool-20: #81dec9;
+  --color-mint-cool-30: #57d3b7;
+  --color-mint-cool-40: #2dc8a5;
+  --color-mint-cool-50: #04bd93;
+  --color-mint-cool-60: #00b281;
+  --color-mint-cool-70: #009a6f;
+  --color-mint-cool-80: #00825d;
+  --color-mint-cool-90: #006a4b;
+  --color-cyan-5: #e0f7fa;
+  --color-cyan-10: #b2ebf2;
+  --color-cyan-20: #80deea;
+  --color-cyan-30: #4dd0e1;
+  --color-cyan-40: #26c6da;
+  --color-cyan-50: #00bcd4;
+  --color-cyan-60: #00acc1;
+  --color-cyan-70: #0097a7;
+  --color-cyan-80: #00838f;
+  --color-cyan-90: #006064;
+  --color-blue-cool-5: #e7f6f8;
+  --color-blue-cool-10: #ceedf1;
+  --color-blue-cool-20: #9ddae3;
+  --color-blue-cool-30: #6cc7d5;
+  --color-blue-cool-40: #3bb4c7;
+  --color-blue-cool-50: #0aa1b9;
+  --color-blue-cool-60: #028e9b;
+  --color-blue-cool-70: #007b7d;
+  --color-blue-cool-80: #00685f;
+  --color-blue-cool-90: #005541;
+  --color-blue-5: #eff6ff;
+  --color-blue-10: #dbeafe;
+  --color-blue-20: #bfdbfe;
+  --color-blue-30: #93c5fd;
+  --color-blue-40: #60a5fa;
+  --color-blue-50: #3b82f6;
+  --color-blue-60: #2563eb;
+  --color-blue-70: #1d4ed8;
+  --color-blue-80: #1e40af;
+  --color-blue-90: #1e3a8a;
+  --color-blue-warm-5: #e8f4fd;
+  --color-blue-warm-10: #d1e9fb;
+  --color-blue-warm-20: #a4d3f7;
+  --color-blue-warm-30: #76bdf3;
+  --color-blue-warm-40: #49a7ef;
+  --color-blue-warm-50: #1b91eb;
+  --color-blue-warm-60: #0f7bcd;
+  --color-blue-warm-70: #0365af;
+  --color-blue-warm-80: #004f91;
+  --color-blue-warm-90: #003973;
+  --color-indigo-cool-5: #e9f3ff;
+  --color-indigo-cool-10: #d3e7ff;
+  --color-indigo-cool-20: #a7cfff;
+  --color-indigo-cool-30: #7bb7ff;
+  --color-indigo-cool-40: #4f9fff;
+  --color-indigo-cool-50: #2387ff;
+  --color-indigo-cool-60: #0969da;
+  --color-indigo-cool-70: #0550ae;
+  --color-indigo-cool-80: #023882;
+  --color-indigo-cool-90: #002056;
+  --color-indigo-5: #f0f0ff;
+  --color-indigo-10: #e0e0ff;
+  --color-indigo-20: #c1c1ff;
+  --color-indigo-30: #a2a2ff;
+  --color-indigo-40: #8383ff;
+  --color-indigo-50: #6464ff;
+  --color-indigo-60: #4545ff;
+  --color-indigo-70: #2626ff;
+  --color-indigo-80: #0707ff;
+  --color-indigo-90: #0000e8;
+  --color-indigo-warm-5: #f0f0ff;
+  --color-indigo-warm-10: #e1e1ff;
+  --color-indigo-warm-20: #c3c3ff;
+  --color-indigo-warm-30: #a5a5ff;
+  --color-indigo-warm-40: #8787ff;
+  --color-indigo-warm-50: #6969ff;
+  --color-indigo-warm-60: #4b4bff;
+  --color-indigo-warm-70: #2d2dff;
+  --color-indigo-warm-80: #0f0fff;
+  --color-indigo-warm-90: #0000f0;
+  --color-violet-5: #f5f0ff;
+  --color-violet-10: #ebe0ff;
+  --color-violet-20: #d7c1ff;
+  --color-violet-30: #c3a2ff;
+  --color-violet-40: #af83ff;
+  --color-violet-50: #9b64ff;
+  --color-violet-60: #8745ff;
+  --color-violet-70: #7326ff;
+  --color-violet-80: #5f07ff;
+  --color-violet-90: #4b00e8;
+  --color-violet-warm-5: #faf0ff;
+  --color-violet-warm-10: #f5e1ff;
+  --color-violet-warm-20: #ebc3ff;
+  --color-violet-warm-30: #e1a5ff;
+  --color-violet-warm-40: #d787ff;
+  --color-violet-warm-50: #cd69ff;
+  --color-violet-warm-60: #c34bff;
+  --color-violet-warm-70: #b92dff;
+  --color-violet-warm-80: #af0fff;
+  --color-violet-warm-90: #a500f0;
+  --color-magenta-5: #fff0f7;
+  --color-magenta-10: #ffe1ef;
+  --color-magenta-20: #ffc3df;
+  --color-magenta-30: #ffa5cf;
+  --color-magenta-40: #ff87bf;
+  --color-magenta-50: #ff69af;
+  --color-magenta-60: #ff4b9f;
+  --color-magenta-70: #ff2d8f;
+  --color-magenta-80: #ff0f7f;
+  --color-magenta-90: #f0006f;
+  --color-gray-cool-5: #f7f9fa;
+  --color-gray-cool-10: #eff2f5;
+  --color-gray-cool-20: #dfe4ea;
+  --color-gray-cool-30: #cfd6df;
+  --color-gray-cool-40: #bfc8d4;
+  --color-gray-cool-50: #afbac9;
+  --color-gray-cool-60: #9facbe;
+  --color-gray-cool-70: #8f9eb3;
+  --color-gray-cool-80: #7f90a8;
+  --color-gray-cool-90: #6f829d;
+  --color-gray-5: #f9f9f9;
+  --color-gray-10: #f3f3f3;
+  --color-gray-20: #e6e6e6;
+  --color-gray-30: #d9d9d9;
+  --color-gray-40: #cccccc;
+  --color-gray-50: #bfbfbf;
+  --color-gray-60: #b3b3b3;
+  --color-gray-70: #a6a6a6;
+  --color-gray-80: #999999;
+  --color-gray-90: #8c8c8c;
+  --color-gray-warm-5: #faf9f7;
+  --color-gray-warm-10: #f5f3f0;
+  --color-gray-warm-20: #ebe7e1;
+  --color-gray-warm-30: #e1dbd2;
+  --color-gray-warm-40: #d7cfc3;
+  --color-gray-warm-50: #cdc3b4;
+  --color-gray-warm-60: #c3b7a5;
+  --color-gray-warm-70: #b9ab96;
+  --color-gray-warm-80: #af9f87;
+  --color-gray-warm-90: #a59378;
+
+  /* Responsive breakpoints */
+  --breakpoint-mobile-lg: 480px;
+  --breakpoint-tablet: 640px;
+  --breakpoint-desktop: 1024px;
+
+  /* Container sizes */
+  --size-mobile-lg: 480px;
+  --size-tablet: 640px;
+  --size-desktop: 1024px;
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Import Tailwind v4 compatible plugins via CSS */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+@plugin "tailwindcss-animate";
+
+/* Custom utilities */
+.font-merriweather {
+  --font-normalization: 1;
+  font-family: var(--font-family-merriweather);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.font-public-sans {
+  --font-normalization: 1;
+  font-family: var(--font-family-public-sans);
+}
+
+.font-source-sans {
+  --font-normalization: 1;
+  font-family: var(--font-family-source-sans);
+}
+
+.font-open-sans {
+  --font-normalization: 1;
+  font-family: var(--font-family-open-sans);
+}
+
+.font-roboto-mono {
+  --font-normalization: 1;
+  font-family: var(--font-family-roboto-mono);
+}
+
+/* Custom variants */
+/* @custom-variant thumb {
+  @media {
+    &::-webkit-slider-thumb, &::-moz-range-thumb, &::-ms-thumb {
+      @content;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@custom-variant track {
+  @media {
+    &::-webkit-slider-runnable-track, &::-moz-range-track, &::-ms-track {
+      @content;
+    }
+  }
 }
+
+@custom-variant valid {
+  @media {
+    &[data-valid] {
+      @content;
+    }
+  }
+}
+
+@custom-variant invalid {
+  @media {
+    &[data-invalid] {
+      @content;
+    }
+  }
+}
+
+@custom-variant forced-colors {
+  @media (forced-colors: active) {
+    @content;
+  }
+} */
+
+/* Hidden until found utility */
+/* @utility {
+  .\[hidden\=until-found\] {
+    @supports (content-visibility: hidden) {
+      display: inherit;
+      content-visibility: hidden;
+    }
+  }
+} */
