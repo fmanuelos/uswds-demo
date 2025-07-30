@@ -10,6 +10,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { SearchExamples } from "@/components/search-component"
 
 export default function Home() {
   return (
@@ -1020,7 +1021,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+
+      <SearchExamples />
+
       {/* Footer */}
       <footer className="mt-16 pt-8 border-t border-gray-30">
         <div className="text-center">

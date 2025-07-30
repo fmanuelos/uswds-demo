@@ -7,7 +7,29 @@ import { cn } from "@/lib/utils";
 const radioGroupVariants = cva("space-y-2");
 
 const radioItemVariants = cva(
-  "flex items-center justify-center shrink-0 relative cursor-pointer text-blue-60 border-none size-5 rounded-full ring-2 ring-offset-0 ring-gray-90 peer-focus:ring-2 peer-focus:ring-offset-0 peer-focus:ring-gray-90 peer-focus:outline peer-focus:outline-4 peer-focus:outline-offset-4 peer-focus:outline-blue-40 peer-disabled:ring-gray-50 peer-disabled:cursor-not-allowed peer-disabled:peer-checked:text-gray-50 peer-checked:ring-blue-60 peer-focus:peer-checked:ring-blue-60 before:size-4 before:rounded-full peer-checked:before:bg-blue-60 peer-checked:peer-disabled:before:bg-gray-50",
+  cn(
+    // Base layout and appearance
+    "flex items-center justify-center shrink-0 relative cursor-pointer",
+    "text-blue-60 border-none size-5 rounded-full",
+
+    // Default ring state
+    "ring-2 ring-offset-0 ring-gray-90",
+
+    // Focus states
+    "peer-focus:ring-2 peer-focus:ring-offset-0 peer-focus:ring-gray-90",
+    "peer-focus:outline peer-focus:outline-4 peer-focus:outline-offset-4 peer-focus:outline-blue-40",
+
+    // Disabled states
+    "peer-disabled:ring-gray-50 peer-disabled:cursor-not-allowed",
+    "peer-disabled:peer-checked:text-gray-50",
+
+    // Checked states
+    "peer-checked:ring-blue-60 peer-focus:peer-checked:ring-blue-60",
+
+    // Before pseudo-element (radio dot)
+    "before:size-4 before:rounded-full",
+    "peer-checked:before:bg-blue-60 peer-checked:peer-disabled:before:bg-gray-50"
+  ),
   {
     variants: {
       variant: {
