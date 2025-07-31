@@ -11,10 +11,18 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { SearchExamples } from "@/components/search-component"
+import { HeaderComponent } from "@/components/header-component"
 
 export default function Home() {
   return (
+    <>
+      <HeaderComponent />
+ 
+
     <div className="py-8 px-4 mx-auto max-w-screen-desktop font-public-sans">
+
+      
+
       <div className="mb-12">
         <h1 className="text-5xl font-bold max-w-prose mb-4 font-merriweather">
           USWDS + Tailwind UI Components
@@ -24,6 +32,8 @@ export default function Home() {
           design tokens and Tailwind CSS v4.
         </p>
       </div>
+
+      
 
       {/* Accordion Examples */}
       <section className="mb-12">
@@ -1022,10 +1032,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Search */}
       <SearchExamples />
 
-      {/* Footer */}
-      <footer className="mt-16 pt-8 border-t border-gray-30">
+    </div>
+    {/* Footer */}
+    <footer className="mt-16 pt-8 border-t border-gray-30">
         <div className="text-center">
           <p className="mb-4">
             Built with ❤️ using USWDS design tokens and Tailwind CSS v4
@@ -1037,6 +1049,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

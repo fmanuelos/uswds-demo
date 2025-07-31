@@ -83,9 +83,20 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onSearch?.(searchValue);
     };
 
-    const inputClasses = cn(searchInputVariants({ size }), className);
+    // Extract className from inputProps and buttonProps, then merge with variants
+    const { className: inputClassName, ...restInputProps } = inputProps || {};
+    const { className: buttonClassName, ...restButtonProps } = buttonProps || {};
 
-    const buttonClasses = cn(searchButtonVariants({ size, iconOnly }));
+    const inputClasses = cn(
+      searchInputVariants({ size }), 
+      className, // Base className prop
+      inputClassName // className from inputProps
+    );
+
+    const buttonClasses = cn(
+      searchButtonVariants({ size, iconOnly }),
+      buttonClassName // className from buttonProps
+    );
 
     return (
       <div>
@@ -101,7 +112,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               ref={ref}
-              {...inputProps}
+              {...restInputProps} // Spread without className
               {...props}
             />
             <button
@@ -109,7 +120,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
               className={buttonClasses}
               onClick={handleButtonClick}
               aria-label={iconOnly ? "search" : undefined}
-              {...buttonProps}
+              {...restButtonProps} // Spread without className
             >
               {iconOnly ? (
                 <div className="icon-[material-symbols--search] size-6" />
