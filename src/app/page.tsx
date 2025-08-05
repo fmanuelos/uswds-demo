@@ -11,7 +11,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { SearchExamples } from "@/components/search-component"
+import { SelectExamples } from "@/components/select-examples"
 import { HeaderComponent } from "@/components/header-component"
+import { FooterComponent } from "@/components/footer-component"
 
 export default function Home() {
   return (
@@ -1035,20 +1037,35 @@ export default function Home() {
       {/* Search */}
       <SearchExamples />
 
+      {/* Select */}
+      <SelectExamples />
+
+
+      <div className="space-x-12 flex">
+
+        <ul className="list-disc pl-8 mt-4 space-y-1">
+          <li>Unordered list item</li>
+          <li>Unordered list item</li>
+          <li>Unordered list item</li>
+        </ul>
+
+        <ol className="list-decimal pl-8 mt-4 space-y-1">
+          <li>Ordered list item</li>
+          <li>Ordered list item</li>
+          <li>Ordered list item</li>
+        </ol>
+
+        <ul className="list-none pl-8 mt-4 space-y-1">
+          <li>Unstyled list item</li>
+          <li>Unstyled list item</li>
+          <li>Unstyled list item</li>
+        </ul>
+
+      </div>
+
     </div>
-    {/* Footer */}
-    <footer className="mt-16 pt-8 border-t border-gray-30">
-        <div className="text-center">
-          <p className="mb-4">
-            Built with ❤️ using USWDS design tokens and Tailwind CSS v4
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button variant="link" size="sm">Documentation</Button>
-            <Button variant="link" size="sm">GitHub</Button>
-            <Button variant="link" size="sm">USWDS</Button>
-          </div>
-        </div>
-      </footer>
+
+    <FooterComponent />
     </>
   );
 }
