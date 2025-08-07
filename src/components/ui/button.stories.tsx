@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, fn } from '@storybook/test'
-import { within, userEvent } from '@storybook/testing-library'
 import { Button } from './button'
 
 const meta = {
@@ -64,8 +63,7 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Primary Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button', { name: /primary button/i })
     
     // Test primary variant styling
@@ -79,8 +77,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     children: 'Secondary Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test secondary variant has border
@@ -101,8 +98,7 @@ export const Success: Story = {
     variant: 'success',
     children: 'Success Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test success variant has green styling
@@ -122,8 +118,7 @@ export const Danger: Story = {
     variant: 'danger',
     children: 'Danger Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test danger variant has red styling
@@ -151,8 +146,7 @@ export const Small: Story = {
     size: 'sm',
     children: 'Small Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test small size classes
@@ -165,8 +159,7 @@ export const Large: Story = {
     size: 'lg',
     children: 'Large Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test large size classes
@@ -185,16 +178,18 @@ export const ExtraLarge: Story = {
 export const Interactive: Story = {
   args: {
     children: 'Click Me!',
-    onClick: fn(), // Use vitest spy
+    onClick: fn(),
   },
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas, userEvent, args }) => {
     const button = canvas.getByRole('button', { name: /click me!/i })
     
-    // Test button interaction (without spy assertion)
+    // Verify button is in the document
     await expect(button).toBeInTheDocument()
+
+    // Click button
     await userEvent.click(button)
-    // Click will be logged in Actions panel automatically
+
+    // Verify click handler was called
     await expect(args.onClick).toHaveBeenCalledTimes(1)
   },
 }
@@ -204,8 +199,7 @@ export const KeyboardNavigation: Story = {
   args: {
     children: 'Keyboard Test',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas, userEvent }) => {
     const button = canvas.getByRole('button')
     
     // Test keyboard navigation
@@ -214,7 +208,6 @@ export const KeyboardNavigation: Story = {
     
     // Test Enter key activation
     await userEvent.keyboard('{Enter}')
-    // Button should still be focused after activation
     await expect(button).toHaveFocus()
     
     // Test Space key activation
@@ -238,11 +231,10 @@ export const AccessibilityTest: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button', { name: /custom accessible label/i })
     
     // Test accessibility attributes
-    const button = canvas.getByRole('button', { name: /custom accessible label/i })
     await expect(button).toHaveAttribute('aria-label', 'Custom accessible label')
     await expect(button).toHaveAttribute('aria-describedby', 'button-description')
     
@@ -258,8 +250,7 @@ export const Disabled: Story = {
     disabled: true,
     children: 'Disabled Button',
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ canvas }) => {
     const button = canvas.getByRole('button')
     
     // Test disabled state
@@ -282,10 +273,8 @@ export const AllVariants: Story = {
       <Button variant="link">Link</Button>
     </div>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    
-    // Test that all variants are rendered
+  play: async ({ canvas, userEvent }) => {
+    // Get all variant buttons
     const primaryButton = canvas.getByRole('button', { name: /^primary$/i })
     const secondaryButton = canvas.getByRole('button', { name: /^secondary$/i })
     const outlineButton = canvas.getByRole('button', { name: /^outline$/i })
@@ -304,22 +293,26 @@ export const AllVariants: Story = {
     await expect(dangerButton).toBeInTheDocument()
     await expect(ghostButton).toBeInTheDocument()
     await expect(linkButton).toBeInTheDocument()
-    
-    // Test specific styling for key variants
-    await expect(primaryButton).toHaveClass('bg-blue-60', 'text-white')
-    await expect(secondaryButton).toHaveClass('border-2', 'border-blue-60')
-    await expect(successButton).toHaveClass('bg-green-60')
-    await expect(dangerButton).toHaveClass('bg-red-60')
-    
+
+
     // Test interactions work for all buttons
     await userEvent.click(primaryButton)
     await userEvent.click(secondaryButton)
     await userEvent.click(successButton)
+    await userEvent.click(warningButton)
+    await userEvent.click(dangerButton)
+    await userEvent.click(ghostButton)
+    await userEvent.click(linkButton)
     
-    // All buttons should still be in the document after clicks
-    await expect(primaryButton).toBeInTheDocument()
-    await expect(secondaryButton).toBeInTheDocument()
-    await expect(successButton).toBeInTheDocument()
+    // Test specific styling for key variants
+    await expect(primaryButton).toHaveClass('bg-blue-60', 'text-white')
+    await expect(secondaryButton).toHaveClass('border-2', 'border-blue-60')
+    await expect(outlineButton).toHaveClass('border-2', 'border-blue-60')
+    await expect(successButton).toHaveClass('bg-green-60')
+    await expect(warningButton).toHaveClass('bg-yellow-60')
+    await expect(dangerButton).toHaveClass('bg-red-60')
+    await expect(ghostButton).toHaveClass('bg-transparent')
+    await expect(linkButton).toHaveClass('text-blue-60')
   },
   parameters: {
     docs: {
@@ -340,26 +333,24 @@ export const AllSizes: Story = {
       <Button size="xl">Extra Large</Button>
     </div>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    
-    // Test that all sizes are rendered with correct classes
+  play: async ({ canvas, userEvent }) => {
+    // Get all size buttons
     const smallButton = canvas.getByRole('button', { name: /^small$/i })
     const defaultButton = canvas.getByRole('button', { name: /^default$/i })
     const largeButton = canvas.getByRole('button', { name: /^large$/i })
     const xlButton = canvas.getByRole('button', { name: /^extra large$/i })
-    
-    // Verify size-specific classes
-    await expect(smallButton).toHaveClass('px-3', 'py-2', 'text-sm')
-    await expect(defaultButton).toHaveClass('px-5', 'py-3')
-    await expect(largeButton).toHaveClass('px-6', 'py-4', 'text-lg')
-    await expect(xlButton).toHaveClass('px-8', 'py-5', 'text-xl')
     
     // Test that all sizes are clickable
     await userEvent.click(smallButton)
     await userEvent.click(defaultButton)
     await userEvent.click(largeButton)
     await userEvent.click(xlButton)
+    
+    // Verify size-specific classes
+    await expect(smallButton).toHaveClass('px-3', 'py-2', 'text-sm')
+    await expect(defaultButton).toHaveClass('px-5', 'py-3')
+    await expect(largeButton).toHaveClass('px-6', 'py-4', 'text-lg')
+    await expect(xlButton).toHaveClass('px-8', 'py-5', 'text-xl')
   },
   parameters: {
     docs: {
