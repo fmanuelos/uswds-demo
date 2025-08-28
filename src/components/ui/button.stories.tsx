@@ -22,7 +22,7 @@ const meta = {
     },
     size: {
       control: { type: 'select' },
-      options: ['sm', 'default', 'lg', 'xl'],
+      options: ['sm', 'default', 'lg', 'xl', 'icon'],
       description: 'The size of the button',
     },
     disabled: {
@@ -201,6 +201,33 @@ export const ExtraLarge: Story = {
   },
 }
 
+export const Icon: Story = {
+  args: {
+    size: 'icon',
+    variant: 'primary',
+    'aria-label': 'Search',
+  },
+  render: (args) => (
+    <Button {...args}>
+      <span className="icon-[material-symbols--search]" />
+    </Button>
+  ),
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button', { name: /search/i })
+    
+    // Test icon size classes
+    await expect(button).toHaveClass('size-9')
+    await expect(button).toHaveAttribute('aria-label', 'Search')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Icon-only button with fixed square dimensions. Always include an aria-label for accessibility.',
+      },
+    },
+  },
+}
+
 // Interactive test story
 export const Interactive: Story = {
   args: {
@@ -358,6 +385,9 @@ export const AllSizes: Story = {
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
       <Button size="xl">Extra Large</Button>
+      <Button size="icon" aria-label="Icon button">
+        <span className="icon-[material-symbols--settings]" />
+      </Button>
     </div>
   ),
   play: async ({ canvas, userEvent }) => {
@@ -366,18 +396,21 @@ export const AllSizes: Story = {
     const defaultButton = canvas.getByRole('button', { name: /^default$/i })
     const largeButton = canvas.getByRole('button', { name: /^large$/i })
     const xlButton = canvas.getByRole('button', { name: /^extra large$/i })
+    const iconButton = canvas.getByRole('button', { name: /icon button/i })
     
     // Test that all sizes are clickable
     await userEvent.click(smallButton)
     await userEvent.click(defaultButton)
     await userEvent.click(largeButton)
     await userEvent.click(xlButton)
+    await userEvent.click(iconButton)
     
     // Verify size-specific classes
     await expect(smallButton).toHaveClass('px-3', 'py-2', 'text-sm')
     await expect(defaultButton).toHaveClass('px-5', 'py-3')
     await expect(largeButton).toHaveClass('px-6', 'py-4', 'text-lg')
     await expect(xlButton).toHaveClass('px-8', 'py-5', 'text-xl')
+    await expect(iconButton).toHaveClass('size-9')
   },
   parameters: {
     docs: {
