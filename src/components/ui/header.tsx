@@ -257,7 +257,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
             )}>
               <em className="font-bold not-italic">
                 <a
-                  className="text-gray-90 focus:outline focus:outline-4 focus:outline-blue-40"
+                  className="text-gray-90 focus:outline focus:outline-4 focus:outline-blue-40v"
                   href={projectTitleHref}
                 >
                   {projectTitle}
@@ -271,7 +271,7 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
                 <DialogTrigger asChild>
                   <Button
                     size="sm"
-                    className="uppercase ml-auto leading-none text-white text-sm h-12 px-3 bg-blue-60 hover:bg-blue-warm-70 active:bg-blue-warm-80 focus:outline focus:outline-4 focus:outline-blue-40"
+                    className="uppercase ml-auto leading-none text-white text-sm h-12 px-3 bg-blue-60v hover:bg-blue-warm-70v active:bg-blue-warm-80v focus:outline focus:outline-4 focus:outline-blue-40v"
                   >
                     Menu
                   </Button>

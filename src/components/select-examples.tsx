@@ -9,8 +9,6 @@ export function SelectExamples() {
   }
 
   return (
-    <section className="mb-12">
-      <h2 className="text-3xl font-bold mb-6 font-merriweather">Select</h2>
       <div className="space-y-8">
         <div>
           <h3 className="text-xl font-bold mb-4">Basic Select</h3>
@@ -103,6 +101,5 @@ export function SelectExamples() {
           </div>
         </div>
       </div>
-    </section>
   )
 }

@@ -9,6 +9,7 @@ export function HeaderComponent() {
 
   return (
     <Header
+      className="fixed inset-x-0 top-0 z-50"
       projectTitle="USWDS Demo Site"
       navigation={{
         primary: [

@@ -8,8 +8,6 @@ export function SearchExamples() {
   }
 
   return (
-    <section className="mb-12">
-      <h2 className="text-3xl font-bold mb-6 font-merriweather">Search</h2>
       <div className="space-y-6">
         <div>
           <h3 className="text-xl font-bold mb-4">Default Search</h3>
@@ -28,6 +26,5 @@ export function SearchExamples() {
           <Search buttonText="Find" onSearch={handleSearch} />
         </div>
       </div>
-    </section>
   )
 }

@@ -67,8 +67,21 @@ export const Primary: Story = {
     const button = canvas.getByRole('button', { name: /primary button/i })
     
     // Test primary variant styling
-    await expect(button).toHaveClass('bg-blue-60', 'text-white')
+    await expect(button).toHaveClass('bg-blue-60v', 'text-white')
     await expect(button).not.toHaveClass('border')
+  },
+}
+
+export const Base: Story = {
+  args: {
+    variant: 'base',
+    children: 'Base Button',
+  },
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button')
+    
+    // Test base variant has border
+    await expect(button).toHaveClass('bg-gray-50', 'text-white')
   },
 }
 
@@ -81,8 +94,22 @@ export const Secondary: Story = {
     const button = canvas.getByRole('button')
     
     // Test secondary variant has border
-    await expect(button).toHaveClass('border-2', 'border-blue-60')
-    await expect(button).toHaveClass('text-blue-60', 'bg-transparent')
+    await expect(button).toHaveClass('bg-red-50', 'text-white')
+
+  },
+}
+
+export const AccentCool: Story = {
+
+  args: {
+    variant: 'accent-cool',
+    children: 'Accent Button',
+  },
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button')
+    
+    // Test accent cool variant has blue styling
+    await expect(button).toHaveClass('bg-cyan-30', 'text-black')
   },
 }
 

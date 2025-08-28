@@ -3,18 +3,33 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded font-bold leading-none transition-colors focus-visible:outline focus:outline focus:outline-4 focus:outline-offset-4 focus-visible:outline-4 focus-visible:outline-offset-4 disabled:pointer-events-none disabled:opacity-50",
+  cn(
+    // Base layout and appearance
+    "relative rounded font-bold font-source-sans leading-none cursor-pointer",
+
+    // Focus states
+    "focus:outline focus:outline-4 focus:outline-offset-4 focus:outline-blue-40v",
+    "focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-40v",
+
+    // Disabled states
+    "aria-disabled:cursor-not-allowed aria-disabled:bg-gray-20 aria-disabled:text-gray-70",
+    "disabled:cursor-not-allowed disabled:bg-gray-20 disabled:text-gray-70"
+  ),
   {
     variants: {
       variant: {
-        primary: "text-white bg-blue-60 hover:bg-blue-warm-70 active:bg-blue-warm-80 focus:outline-blue-40 focus-visible:outline-blue-40",
-        secondary: "text-blue-60 bg-transparent border-2 border-blue-60 hover:bg-blue-60 hover:text-white active:bg-blue-warm-70 focus:outline-blue-40 focus-visible:outline-blue-40",
-        outline: "text-gray-80 bg-transparent border border-gray-60 hover:bg-gray-5 active:bg-gray-10 focus:outline-gray-60 focus-visible:outline-gray-60",
-        success: "text-white bg-green-60 hover:bg-green-70 active:bg-green-80 focus:outline-green-40 focus-visible:outline-green-40",
-        warning: "text-white bg-orange-60 hover:bg-orange-70 active:bg-orange-80 focus:outline-orange-40 focus-visible:outline-orange-40",
-        danger: "text-white bg-red-60 hover:bg-red-warm-70 active:bg-red-warm-80 focus:outline-red-40 focus-visible:outline-red-40",
-        ghost: "text-gray-80 hover:bg-gray-5 active:bg-gray-10 focus:outline-gray-60 focus-visible:outline-gray-60",
-        link: "text-blue-60 underline-offset-4 hover:underline hover:text-blue-warm-70 focus:outline-blue-40 focus-visible:outline-blue-40"
+        primary: "text-white bg-blue-60v hover:bg-blue-warm-70v active:bg-blue-warm-80v",
+        base: "text-white bg-gray-50 hover:bg-gray-60 active:bg-gray-80",
+        secondary: "text-white bg-red-50 hover:bg-red-60v active:bg-red-70v",
+        'accent-cool': "text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v",
+        outline: "text-gray-80v bg-transparent border border-gray-60v hover:bg-gray-5v active:bg-gray-10v",
+        info: "text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v",
+        success: "text-white bg-green-60v hover:bg-green-70v active:bg-green-80v",
+        warning: "text-white bg-orange-60v hover:bg-orange-70v active:bg-orange-80v",
+        error: "text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v",
+        danger: "text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v",
+        ghost: "text-gray-80v hover:bg-gray-5v active:bg-gray-10v",
+        link: "text-blue-60v underline-offset-4 hover:underline hover:text-blue-warm-70v"
       },
       size: {
         sm: "px-3 py-2 text-sm",
