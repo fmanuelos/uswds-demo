@@ -1,6 +1,6 @@
 "use client"
 
-import { Footer } from "@/components/ui/footer"
+import { Footer } from "@/components/blocks/Footer/Footer"
 
 export function FooterComponent() {
   const handleNewsletterSignup = (email: string) => {

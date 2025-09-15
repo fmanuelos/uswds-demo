@@ -1,6 +1,6 @@
 "use client"
 
-import { Header } from "@/components/ui/header"
+import { Header } from "@/components/blocks/Header/Header"
 
 export function HeaderComponent() {
   const handleSearch = (value: string) => {
@@ -19,7 +19,8 @@ export function HeaderComponent() {
             children: [
               { label: "Web Design", href: "#" },
               { label: "Development", href: "#" },
-              { label: "Consulting", href: "#" }
+              { label: "Consulting", href: "#" },
+              { label: "Design", href: "#" }
             ]
           },
           { label: "About", href: "#", isActive: true },

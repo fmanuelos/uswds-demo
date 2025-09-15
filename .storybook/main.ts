@@ -1,4 +1,5 @@
-import type { StorybookConfig } from "@storybook/nextjs-vite";
+import type { StorybookConfig } from "@storybook/react-vite";
+import { resolve } from "path";
 
 const config: StorybookConfig = {
   "stories": [
@@ -13,8 +14,17 @@ const config: StorybookConfig = {
     "@storybook/addon-vitest"
   ],
   "framework": {
-    "name": "@storybook/nextjs-vite",
+    "name": "@storybook/react-vite",
     "options": {}
+  },
+  "viteFinal": async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "@": resolve(__dirname, "../src"),
+      };
+    }
+    return config;
   },
   "staticDirs": [
     "../public"
