@@ -48,7 +48,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { SearchExamples } from "@/components/search-component";
-import { SelectExamples } from "@/components/select-examples";
+// import { SelectExamples } from "@/components/select-examples";
 import { HeaderComponent } from "@/components/header-component";
 import { FooterComponent } from "@/components/footer-component";
 import { InPageNavigation } from "@/components/ui/in-page-navigation";
@@ -1386,7 +1386,7 @@ export default function Home() {
           {/* Select */}
           <section id="select" className="mb-12 scroll-mt-16 tablet:scroll-mt-25 desktop:scroll-mt-25">
             <h2 className="text-3xl font-bold mb-6 font-merriweather">Select</h2>
-            <SelectExamples />
+            {/* <SelectExamples /> */}
           </section>
 
           <section id="lists" className="space-x-12 flex mb-12 scroll-mt-16 tablet:scroll-mt-25 desktop:scroll-mt-25">
