@@ -42,6 +42,71 @@ const NavigationDropdown: React.FC<{
   isMobile?: boolean
 }> = ({ item, isMobile = false }) => {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [focusedIndex, setFocusedIndex] = React.useState(-1)
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  const dropdownRef = React.useRef<HTMLDivElement>(null)
+
+  // Keyboard navigation handler
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!item.children) return
+
+    switch (e.key) {
+      case 'Enter':
+      case ' ':
+        e.preventDefault()
+        if (!isOpen) {
+          setIsOpen(true)
+          setFocusedIndex(0)
+        } else if (focusedIndex >= 0) {
+          // Navigate to focused item
+          const focusedItem = item.children[focusedIndex]
+          if (focusedItem) {
+            window.location.href = focusedItem.href
+          }
+        }
+        break
+      case 'ArrowDown':
+        e.preventDefault()
+        if (!isOpen) {
+          setIsOpen(true)
+          setFocusedIndex(0)
+        } else if (item.children) {
+          setFocusedIndex(prev => 
+            prev < item.children!.length - 1 ? prev + 1 : 0
+          )
+        }
+        break
+      case 'ArrowUp':
+        e.preventDefault()
+        if (!isOpen) {
+          setIsOpen(true)
+          setFocusedIndex(item.children ? item.children.length - 1 : 0)
+        } else if (item.children) {
+          setFocusedIndex(prev => 
+            prev > 0 ? prev - 1 : item.children!.length - 1
+          )
+        }
+        break
+      case 'Escape':
+        e.preventDefault()
+        setIsOpen(false)
+        setFocusedIndex(-1)
+        buttonRef.current?.focus()
+        break
+      case 'Tab':
+        if (isOpen) {
+          setIsOpen(false)
+          setFocusedIndex(-1)
+        }
+        break
+    }
+  }
+
+  // Close dropdown and reset focus
+  const closeDropdown = () => {
+    setIsOpen(false)
+    setFocusedIndex(-1)
+  }
 
   if (!item.children) {
     return (
@@ -65,11 +130,14 @@ const NavigationDropdown: React.FC<{
     return (
       <div className="border-t border-t-gray-10">
         <button
+          ref={buttonRef}
           onClick={() => setIsOpen(!isOpen)}
+          onKeyDown={handleKeyDown}
           className={cn(
             "text-left group relative flex items-center justify-between w-full py-3 pl-4 leading-none hover:bg-gray-5 focus:z-10 focus:outline focus:outline-4 focus:outline-blue-40 gap-3",
             item.isActive && "font-bold after:block after:absolute after:bg-blue-60 after:inset-y-1 after:left-0 after:w-1 after:rounded-full"
           )}
+          aria-expanded={isOpen}
         >
           <span className={cn(
             "text-gray-60 group-hover:text-blue-60",
@@ -90,7 +158,11 @@ const NavigationDropdown: React.FC<{
               <li key={index} className="border-t border-t-gray-10">
                 <a
                   href={child.href}
-                  className="block py-2 pl-8 pr-4 text-gray-60 hover:text-blue-60 hover:bg-gray-5 focus:outline focus:outline-4 focus:outline-blue-40"
+                  className={cn(
+                    "block py-2 pl-8 pr-4 text-gray-60 hover:text-blue-60 hover:bg-gray-5 focus:outline focus:outline-4 focus:outline-blue-40",
+                    focusedIndex === index && "bg-gray-5 text-blue-60"
+                  )}
+                  onClick={closeDropdown}
                 >
                   {child.label}
                 </a>
@@ -105,8 +177,10 @@ const NavigationDropdown: React.FC<{
   return (
     <div className="relative">
       <button
+        ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        onBlur={() => setTimeout(() => setIsOpen(false), 150)}
+        onKeyDown={handleKeyDown}
+        onBlur={() => setTimeout(() => closeDropdown(), 150)}
         className={cn(
           "relative flex items-center gap-1 group p-4 font-bold text-gray-cool-60 focus:outline focus:outline-4 focus:outline-blue-40",
           isOpen && "bg-blue-warm-80 text-white",
@@ -114,6 +188,7 @@ const NavigationDropdown: React.FC<{
           isOpen && "after:hidden"
         )}
         aria-expanded={isOpen}
+        aria-haspopup="menu"
       >
         <span>{item.label}</span>
         <div aria-hidden="true" className="hidden lg:inline-flex">
@@ -124,13 +199,21 @@ const NavigationDropdown: React.FC<{
         </div>
       </button>
       {isOpen && (
-        <div className="absolute outline-none z-10 bg-blue-warm-80 py-2 w-60 leading-snug">
+        <div 
+          ref={dropdownRef}
+          className="absolute outline-none z-10 bg-blue-warm-80 py-2 w-60 leading-snug"
+          role="menu"
+        >
           {item.children.map((child, index) => (
             <a
               key={index}
               href={child.href}
-              className="flex text-white py-2 px-4 hover:underline focus:outline focus:outline-4 focus:-outline-offset-4 focus:outline-blue-40"
-              onClick={() => setIsOpen(false)}
+              role="menuitem"
+              className={cn(
+                "flex text-white py-2 px-4 hover:underline focus:outline focus:outline-4 focus:-outline-offset-4 focus:outline-blue-40",
+                focusedIndex === index && "underline bg-blue-warm-70"
+              )}
+              onClick={closeDropdown}
             >
               {child.label}
             </a>
@@ -282,13 +365,15 @@ const Header = React.forwardRef<HTMLElement, HeaderProps>(
               </Dialog>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex ml-auto">
-              <DesktopNavigation navigation={navigation} onSearch={onSearch} />
-            </div>
+            {/* Desktop Navigation - only show for default variant */}
+            {variant !== "extended" && (
+              <div className="hidden lg:flex ml-auto">
+                <DesktopNavigation navigation={navigation} onSearch={onSearch} />
+              </div>
+            )}
           </div>
 
-          {/* Extended variant additional navigation */}
+          {/* Extended variant navigation */}
           {variant === "extended" && (
             <div className="hidden lg:block border-t border-t-gray-cool-10">
               <DesktopNavigation navigation={navigation} onSearch={onSearch} />

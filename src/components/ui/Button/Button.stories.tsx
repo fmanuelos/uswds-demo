@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn } from '@storybook/test'
+import { expect, fn, within } from '@storybook/test'
 import { Button } from './Button'
 
 const meta = {
@@ -45,8 +45,9 @@ export const Default: Story = {
   args: {
     children: 'Button',
   },
-  play: async ({ canvas, userEvent }) => {
-    const button = canvas.getByRole('button', { name: /button/i })
+  play: async ({ canvasElement, userEvent }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button', { name: /button/i })
 
     await userEvent.click(button)
     
@@ -63,8 +64,9 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Primary Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button', { name: /primary button/i })
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button', { name: /primary button/i })
     
     // Test primary variant styling
     await expect(button).toHaveClass('bg-blue-60v', 'text-white')
@@ -77,8 +79,9 @@ export const Base: Story = {
     variant: 'base',
     children: 'Base Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test base variant has border
     await expect(button).toHaveClass('bg-gray-50', 'text-white')
@@ -90,8 +93,9 @@ export const Secondary: Story = {
     variant: 'secondary',
     children: 'Secondary Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test secondary variant has border
     await expect(button).toHaveClass('bg-red-50', 'text-white')
@@ -105,8 +109,9 @@ export const AccentCool: Story = {
     variant: 'accent-cool',
     children: 'Accent Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test accent cool variant has blue styling
     await expect(button).toHaveClass('bg-cyan-30', 'text-black')
@@ -125,8 +130,9 @@ export const Success: Story = {
     variant: 'success',
     children: 'Success Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test success variant has green styling
     await expect(button).toHaveClass('bg-green-60', 'text-white')
@@ -145,8 +151,9 @@ export const Danger: Story = {
     variant: 'danger',
     children: 'Danger Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test danger variant has red styling
     await expect(button).toHaveClass('bg-red-60', 'text-white')
@@ -173,8 +180,9 @@ export const Small: Story = {
     size: 'sm',
     children: 'Small Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test small size classes
     await expect(button).toHaveClass('px-3', 'py-2', 'text-sm')
@@ -186,8 +194,9 @@ export const Large: Story = {
     size: 'lg',
     children: 'Large Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test large size classes
     await expect(button).toHaveClass('px-6', 'py-4', 'text-lg')
@@ -212,8 +221,9 @@ export const Icon: Story = {
       <span className="icon-[material-symbols--search]" />
     </Button>
   ),
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button', { name: /search/i })
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button', { name: /search/i })
     
     // Test icon size classes
     await expect(button).toHaveClass('size-9')
@@ -234,8 +244,9 @@ export const Interactive: Story = {
     children: 'Click Me!',
     onClick: fn(),
   },
-  play: async ({ canvas, userEvent, args }) => {
-    const button = canvas.getByRole('button', { name: /click me!/i })
+  play: async ({ canvasElement, userEvent, args }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button', { name: /click me!/i })
     
     // Verify button is in the document
     await expect(button).toBeInTheDocument()
@@ -253,8 +264,9 @@ export const KeyboardNavigation: Story = {
   args: {
     children: 'Keyboard Test',
   },
-  play: async ({ canvas, userEvent }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement, userEvent }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test keyboard navigation
     await userEvent.tab()
@@ -285,15 +297,16 @@ export const AccessibilityTest: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button', { name: /custom accessible label/i })
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button', { name: /custom accessible label/i })
     
     // Test accessibility attributes
     await expect(button).toHaveAttribute('aria-label', 'Custom accessible label')
     await expect(button).toHaveAttribute('aria-describedby', 'button-description')
     
     // Test description element exists
-    const description = canvas.getByText('This button performs a custom action')
+    const description = screen.getByText('This button performs a custom action')
     await expect(description).toBeInTheDocument()
   },
 }
@@ -304,8 +317,9 @@ export const Disabled: Story = {
     disabled: true,
     children: 'Disabled Button',
   },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole('button')
+  play: async ({ canvasElement }) => {
+    const screen = within(canvasElement)
+    const button = screen.getByRole('button')
     
     // Test disabled state
     await expect(button).toBeDisabled()
@@ -327,16 +341,17 @@ export const AllVariants: Story = {
       <Button variant="link">Link</Button>
     </div>
   ),
-  play: async ({ canvas, userEvent }) => {
+  play: async ({ canvasElement, userEvent }) => {
+    const screen = within(canvasElement)
     // Get all variant buttons
-    const primaryButton = canvas.getByRole('button', { name: /^primary$/i })
-    const secondaryButton = canvas.getByRole('button', { name: /^secondary$/i })
-    const outlineButton = canvas.getByRole('button', { name: /^outline$/i })
-    const successButton = canvas.getByRole('button', { name: /^success$/i })
-    const warningButton = canvas.getByRole('button', { name: /^warning$/i })
-    const dangerButton = canvas.getByRole('button', { name: /^danger$/i })
-    const ghostButton = canvas.getByRole('button', { name: /^ghost$/i })
-    const linkButton = canvas.getByRole('button', { name: /^link$/i })
+    const primaryButton = screen.getByRole('button', { name: /^primary$/i })
+    const secondaryButton = screen.getByRole('button', { name: /^secondary$/i })
+    const outlineButton = screen.getByRole('button', { name: /^outline$/i })
+    const successButton = screen.getByRole('button', { name: /^success$/i })
+    const warningButton = screen.getByRole('button', { name: /^warning$/i })
+    const dangerButton = screen.getByRole('button', { name: /^danger$/i })
+    const ghostButton = screen.getByRole('button', { name: /^ghost$/i })
+    const linkButton = screen.getByRole('button', { name: /^link$/i })
     
     // Verify all buttons exist
     await expect(primaryButton).toBeInTheDocument()
@@ -390,13 +405,14 @@ export const AllSizes: Story = {
       </Button>
     </div>
   ),
-  play: async ({ canvas, userEvent }) => {
+  play: async ({ canvasElement, userEvent }) => {
+    const screen = within(canvasElement)
     // Get all size buttons
-    const smallButton = canvas.getByRole('button', { name: /^small$/i })
-    const defaultButton = canvas.getByRole('button', { name: /^default$/i })
-    const largeButton = canvas.getByRole('button', { name: /^large$/i })
-    const xlButton = canvas.getByRole('button', { name: /^extra large$/i })
-    const iconButton = canvas.getByRole('button', { name: /icon button/i })
+    const smallButton = screen.getByRole('button', { name: /^small$/i })
+    const defaultButton = screen.getByRole('button', { name: /^default$/i })
+    const largeButton = screen.getByRole('button', { name: /^large$/i })
+    const xlButton = screen.getByRole('button', { name: /^extra large$/i })
+    const iconButton = screen.getByRole('button', { name: /icon button/i })
     
     // Test that all sizes are clickable
     await userEvent.click(smallButton)
