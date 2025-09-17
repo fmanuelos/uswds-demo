@@ -7,6 +7,7 @@
 @import "@fontsource/merriweather/400.css";
 @import "@fontsource/merriweather/700.css";
 @import "@fontsource/merriweather/900.css";
+@import "@fontsource/poppins";
 
 @import "tailwindcss";
 
@@ -52,6 +53,7 @@
   --font-family-helvetica: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
   --font-family-tahoma: "Tahoma", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-verdana: "Verdana", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-poppins: "Poppins", sans-serif;
 
   /* Colors */
   --color-transparent: 'transparent';
@@ -595,6 +597,11 @@
 .font-verdana {
   --font-normalization: 0.99;
   font-family: var(--font-family-verdana);
+}
+
+.font-poppins {
+  --font-normalization: 1.0;
+  font-family: var(--font-family-poppins);
 }
 
 /* Custom variants */

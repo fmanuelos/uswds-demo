@@ -16,6 +16,7 @@
     "@fontsource-variable/roboto-mono": "^5.2.6",
     "@fontsource-variable/source-sans-3": "^5.2.8",
     "@fontsource/merriweather": "^5.2.9",
+    "@fontsource/poppins": "^5.2.7",
     "@iconify-json/fa6-brands": "^1.2.6",
     "@iconify-json/material-symbols": "^1.2.30",
     "@iconify/tailwind4": "^1.0.6",
