@@ -1,6 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { Icon } from "./Icon/Icon"
 
 const alertVariants = cva(
   "relative w-full py-4 pl-12 pr-4 @desktop:px-16 max-w-5xl mx-auto @container",
@@ -31,14 +32,14 @@ const Alert = React.forwardRef<
   const getIcon = () => {
     switch (variant) {
       case 'success':
-        return 'icon-[material-symbols--check-circle]'
+        return 'check_circle'
       case 'warning':
-        return 'icon-[material-symbols--warning]'
+        return 'warning'
       case 'danger':
       case 'emergency':
-        return 'icon-[material-symbols--error]'
+        return 'error'
       default:
-        return 'icon-[material-symbols--info]'
+        return 'info'
     }
   }
 
@@ -51,7 +52,7 @@ const Alert = React.forwardRef<
     >
       {showIcon && (
         <div className="absolute left-2 @desktop:left-6 top-3">
-          <div className={cn(getIcon(), "size-8")} />
+          <Icon icon={getIcon()} className="size-8" />
         </div>
       )}
       {props.children}

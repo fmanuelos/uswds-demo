@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { Icon } from "./Icon/Icon";
 
 const searchInputVariants = cva(
   cn(
@@ -123,7 +124,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
               {...restButtonProps} // Spread without className
             >
               {iconOnly ? (
-                <div className="icon-[material-symbols--search] size-6" />
+                <Icon icon="search" size="sm" className="size-6" />
               ) : (
                 buttonText
               )}

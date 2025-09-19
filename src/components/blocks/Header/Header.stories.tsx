@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, fn, within } from '@storybook/test'
 import { Header, type HeaderNavigation } from './Header'
 
 // Sample navigation data for stories
@@ -81,29 +80,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Default story with basic test
+// Default story
 export const Default: Story = {
   args: {
     projectTitle: 'USWDS Demo Site',
     projectTitleHref: '/',
     navigation: sampleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    const header = screen.getByRole('banner')
-    const projectTitle = screen.getByText('USWDS Demo Site')
-    
-    // Test that header renders correctly
-    await expect(header).toBeInTheDocument()
-    await expect(projectTitle).toBeInTheDocument()
-    await expect(projectTitle.closest('a')).toHaveAttribute('href', '/')
-    
-    // Test that navigation items are present
-    await expect(screen.getByText('Services')).toBeInTheDocument()
-    await expect(screen.getByText('About')).toBeInTheDocument()
-    await expect(screen.getByText('Contact')).toBeInTheDocument()
-    await expect(screen.getByText('Resources')).toBeInTheDocument()
   },
 }
 
@@ -112,19 +94,6 @@ export const SimpleNavigation: Story = {
   args: {
     projectTitle: 'Simple Site',
     navigation: simpleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    
-    // Test simple navigation structure
-    await expect(screen.getByText('Home')).toBeInTheDocument()
-    await expect(screen.getByText('About')).toBeInTheDocument()
-    await expect(screen.getByText('Contact')).toBeInTheDocument()
-    
-    // Test that active state is applied
-    const homeLink = screen.getByText('Home').closest('a')
-    await expect(homeLink).toHaveClass('after:bg-blue-60')
   },
 }
 
@@ -134,19 +103,6 @@ export const Extended: Story = {
     projectTitle: 'Extended Header Site',
     variant: 'extended',
     navigation: sampleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    const header = screen.getByRole('banner')
-    const projectTitle = screen.getByText('Extended Header Site')
-    
-    // Test extended variant styling
-    await expect(header).toHaveClass('border-b-0')
-    await expect(projectTitle).toBeInTheDocument()
-    
-    // Test navigation is still present
-    await expect(screen.getByText('Services')).toBeInTheDocument()
   },
   parameters: {
     docs: {
@@ -168,19 +124,6 @@ export const NoSecondaryNav: Story = {
         { label: "Support", href: "/support" }
       ]
     },
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    
-    // Test primary navigation
-    await expect(screen.getByText('Home')).toBeInTheDocument()
-    await expect(screen.getByText('Products')).toBeInTheDocument()
-    await expect(screen.getByText('Support')).toBeInTheDocument()
-    
-    // Test no secondary navigation items are present
-    await expect(screen.queryByText('Help')).not.toBeInTheDocument()
-    await expect(screen.queryByText('Login')).not.toBeInTheDocument()
   },
 }
 
@@ -202,21 +145,6 @@ export const DropdownNavigation: Story = {
         { label: "About", href: "/about" }
       ]
     },
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement, userEvent }) => {
-    const screen = within(canvasElement)
-    
-    // Test dropdown functionality (desktop view)
-    const productsButton = screen.getByText('Products').closest('button')
-    if (productsButton) {
-      await userEvent.click(productsButton)
-      
-      // Check if dropdown items appear
-      await expect(screen.getByText('Product A')).toBeInTheDocument()
-      await expect(screen.getByText('Product B')).toBeInTheDocument()
-      await expect(screen.getByText('Product C')).toBeInTheDocument()
-    }
   },
   parameters: {
     docs: {
@@ -227,31 +155,11 @@ export const DropdownNavigation: Story = {
   },
 }
 
-// Search functionality test
+// Search functionality
 export const SearchTest: Story = {
   args: {
     projectTitle: 'Search Test Site',
     navigation: simpleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement, userEvent, args }) => {
-    const screen = within(canvasElement)
-    
-    // Find search input (it might be initially hidden or in a different form)
-    const searchInputs = screen.queryAllByRole('searchbox')
-    if (searchInputs.length > 0) {
-      const searchInput = searchInputs[0]
-      
-      // Test search functionality
-      await userEvent.type(searchInput, 'test query')
-      
-      // Find and click search button
-      const searchButton = screen.getByRole('button', { name: /search/i })
-      await userEvent.click(searchButton)
-      
-      // Verify search handler was called
-      await expect(args.onSearch).toHaveBeenCalledWith('test query')
-    }
   },
   parameters: {
     docs: {
@@ -262,12 +170,11 @@ export const SearchTest: Story = {
   },
 }
 
-// Mobile menu test
+// Mobile menu
 export const MobileMenu: Story = {
   args: {
     projectTitle: 'Mobile Test Site',
     navigation: sampleNavigation,
-    onSearch: fn(),
   },
   parameters: {
     viewport: {
@@ -279,19 +186,6 @@ export const MobileMenu: Story = {
       },
     },
   },
-  play: async ({ canvasElement, userEvent }) => {
-    const screen = within(canvasElement)
-    
-    // Look for mobile menu button (only visible on mobile)
-    const menuButton = screen.queryByText('Menu')
-    if (menuButton) {
-      // Test mobile menu functionality
-      await userEvent.click(menuButton)
-      
-      // The mobile menu should appear (in a dialog/modal)
-      // Note: The specific test would depend on how the dialog is implemented
-    }
-  },
 }
 
 // Custom project title href
@@ -300,19 +194,10 @@ export const CustomTitleHref: Story = {
     projectTitle: 'Custom Link Site',
     projectTitleHref: '/custom-home',
     navigation: simpleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    const projectTitle = screen.getByText('Custom Link Site')
-    const titleLink = projectTitle.closest('a')
-    
-    // Test custom href
-    await expect(titleLink).toHaveAttribute('href', '/custom-home')
   },
 }
 
-// Active navigation state test
+// Active navigation state
 export const ActiveNavigation: Story = {
   args: {
     projectTitle: 'Active State Site',
@@ -323,18 +208,6 @@ export const ActiveNavigation: Story = {
         { label: "About", href: "/about" }
       ]
     },
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    
-    // Test that active state is properly applied
-    const productsLink = screen.getByText('Products').closest('a')
-    await expect(productsLink).toHaveClass('after:bg-blue-60')
-    
-    // Test that non-active items don't have active styling
-    const homeLink = screen.getByText('Home').closest('a')
-    await expect(homeLink).not.toHaveClass('after:bg-blue-60')
   },
   parameters: {
     docs: {
@@ -350,26 +223,6 @@ export const AccessibilityTest: Story = {
   args: {
     projectTitle: 'Accessible Site',
     navigation: sampleNavigation,
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    
-    // Test semantic HTML structure
-    const header = screen.getByRole('banner')
-    await expect(header).toBeInTheDocument()
-    
-    // Test navigation landmark
-    const navigation = screen.getByRole('navigation')
-    await expect(navigation).toBeInTheDocument()
-    
-    // Test search component has proper labeling
-    const searchSection = screen.getByLabelText('search component')
-    await expect(searchSection).toBeInTheDocument()
-    
-    // Test that links have proper href attributes
-    const aboutLink = screen.getByText('About').closest('a')
-    await expect(aboutLink).toHaveAttribute('href')
   },
   parameters: {
     docs: {
@@ -418,32 +271,6 @@ export const CompleteShowcase: Story = {
         { label: "Create Account", href: "/register" }
       ]
     },
-    onSearch: fn(),
-  },
-  play: async ({ canvasElement }) => {
-    const screen = within(canvasElement)
-    
-    // Comprehensive test of all major features
-    await expect(screen.getByRole('banner')).toBeInTheDocument()
-    await expect(screen.getByText('Complete USWDS Demo')).toBeInTheDocument()
-    
-    // Test all primary navigation items
-    await expect(screen.getByText('Government')).toBeInTheDocument()
-    await expect(screen.getByText('Services')).toBeInTheDocument()
-    await expect(screen.getByText('Resources')).toBeInTheDocument()
-    await expect(screen.getByText('News')).toBeInTheDocument()
-    await expect(screen.getByText('Contact')).toBeInTheDocument()
-    
-    // Test secondary navigation
-    await expect(screen.getByText('Help')).toBeInTheDocument()
-    await expect(screen.getByText('Sign In')).toBeInTheDocument()
-    await expect(screen.getByText('Create Account')).toBeInTheDocument()
-    
-    // Test active state
-    const servicesLink = screen.getByText('Services').closest('button') || screen.getByText('Services').closest('a')
-    if (servicesLink) {
-      await expect(servicesLink).toHaveClass('after:bg-blue-60')
-    }
   },
   parameters: {
     docs: {

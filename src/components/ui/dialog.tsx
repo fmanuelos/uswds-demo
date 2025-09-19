@@ -3,6 +3,7 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cn } from "@/lib/utils"
+import { Icon } from "./Icon/Icon"
 
 const Dialog = DialogPrimitive.Root
 
@@ -43,7 +44,7 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close className="absolute top-0 right-0 p-1 text-gray-50 bg-transparent rounded hover:text-gray-90 active:text-gray-90 focus:outline focus:outline-4 focus:outline-offset-4 focus:outline-blue-40 data-[state=open]:bg-transparent data-[state=open]:text-gray-50">
-        <div className="icon-[material-symbols--close] size-8 mt-0.5 mr-0.5 align-middle" />
+        <Icon icon="close" className="size-8 mt-0.5 mr-0.5 align-middle" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

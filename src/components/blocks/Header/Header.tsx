@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button/Button"
 import { Search } from "@/components/ui/search"
 import { Dialog, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog"
+import { Icon } from "@/components/ui/Icon/Icon"
 
 // Types for navigation structure
 export interface NavigationItem {
@@ -146,10 +147,11 @@ const NavigationDropdown: React.FC<{
             {item.label}
           </span>
           <span className="h-full flex items-center">
-            <span className={cn(
-              "size-5",
-              isOpen ? "icon-[material-symbols--remove]" : "icon-[material-symbols--add]"
-            )} />
+            <Icon 
+              icon={isOpen ? "remove" : "add"} 
+              size="sm" 
+              className="size-5" 
+            />
           </span>
         </button>
         {isOpen && (
@@ -192,10 +194,11 @@ const NavigationDropdown: React.FC<{
       >
         <span>{item.label}</span>
         <div aria-hidden="true" className="hidden lg:inline-flex">
-          <span className={cn(
-            "align-middle size-4",
-            isOpen ? "icon-[material-symbols--keyboard-arrow-up]" : "icon-[material-symbols--keyboard-arrow-down]"
-          )} />
+          <Icon 
+            icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"} 
+            size="xs" 
+            className="align-middle size-4" 
+          />
         </div>
       </button>
       {isOpen && (
@@ -261,7 +264,7 @@ const MobileNavigation: React.FC<{
 }> = ({ navigation, onSearch }) => (
   <div className="flex flex-col gap-6 pt-16 pb-4 px-4 bg-white w-60 fixed right-0 inset-y-0 overflow-auto">
     <DialogClose className="absolute top-0 right-0 size-12 flex items-center justify-center text-black bg-transparent focus:outline focus:outline-4 focus:-outline-offset-4 focus:outline-blue-40" aria-label="Close">
-      <div className="icon-[material-symbols--close] size-6" />
+      <Icon icon="close" size="sm" className="size-6" />
     </DialogClose>
 
     <ul className="flex flex-col">

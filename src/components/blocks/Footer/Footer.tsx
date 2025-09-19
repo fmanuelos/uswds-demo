@@ -4,6 +4,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button/Button"
+import { Icon } from "@/components/ui/Icon/Icon"
 
 // Types for footer structure
 export interface FooterLink {
@@ -86,10 +87,11 @@ const FooterAccordion: React.FC<{
                 className="group flex items-center w-full p-4 bg-gray-5 font-bold focus:outline focus:outline-4 focus:-outline-offset-4 focus:outline-blue-40 cursor-pointer text-left gap-2"
                 aria-expanded={isOpen}
               >
-                <div className={cn(
-                  "size-6",
-                  isOpen ? "icon-[material-symbols--expand-more]" : "icon-[material-symbols--chevron-right]"
-                )} />
+                <Icon 
+                  icon={isOpen ? "expand_more" : "arrow_forward"} 
+                  size="sm" 
+                  className="size-6" 
+                />
                 {topic.title}
               </button>
             </h4>

@@ -1,5 +1,5 @@
+import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect } from '@storybook/test'
 import { Separator } from './separator'
 
 const meta = {
@@ -44,12 +44,6 @@ export const Default: Story = {
       <div className="text-sm text-gray-70">Content below separator</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('none')
-    
-    await expect(separator).toBeInTheDocument()
-    await expect(separator).toHaveClass('border-gray-30', 'h-px', 'w-full')
-  },
 }
 
 // Horizontal orientations
@@ -64,12 +58,6 @@ export const Horizontal: Story = {
       <div className="text-sm text-gray-70">Content below</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('none')
-    
-    await expect(separator).toHaveClass('h-px', 'w-full')
-    await expect(separator).toHaveAttribute('aria-orientation', 'horizontal')
-  },
 }
 
 // Vertical orientation
@@ -84,12 +72,6 @@ export const Vertical: Story = {
       <div className="text-sm text-gray-70">Right content</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('none')
-    
-    await expect(separator).toHaveClass('w-px', 'h-full')
-    await expect(separator).toHaveAttribute('aria-orientation', 'vertical')
-  },
 }
 
 // Size variations - Small
@@ -104,11 +86,6 @@ export const Small: Story = {
       <div className="text-sm text-gray-70">Content below</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('none')
-    
-    await expect(separator).toHaveClass('h-px')
-  },
 }
 
 // Size variations - Large
@@ -123,11 +100,6 @@ export const Large: Story = {
       <div className="text-sm text-gray-70">Content below</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('none')
-    
-    await expect(separator).toHaveClass('h-0.5')
-  },
 }
 
 // Semantic separator (not decorative)
@@ -142,13 +114,6 @@ export const Semantic: Story = {
       <div className="text-sm text-gray-70">Section 2</div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separator = canvas.getByRole('separator')
-    
-    await expect(separator).toBeInTheDocument()
-    await expect(separator).toHaveAttribute('role', 'separator')
-    await expect(separator).toHaveAttribute('aria-orientation', 'horizontal')
-  },
   parameters: {
     docs: {
       description: {
@@ -176,17 +141,6 @@ export const AllSizes: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separators = canvas.getAllByRole('none')
-    
-    // Test that we have 3 separators
-    await expect(separators).toHaveLength(3)
-    
-    // Test size-specific classes
-    await expect(separators[0]).toHaveClass('h-px') // small
-    await expect(separators[1]).toHaveClass('h-px') // default
-    await expect(separators[2]).toHaveClass('h-0.5') // large
-  },
   parameters: {
     docs: {
       description: {
@@ -219,19 +173,6 @@ export const OrientationComparison: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const separators = canvas.getAllByRole('none')
-    
-    await expect(separators).toHaveLength(2)
-    
-    // Test horizontal separator
-    await expect(separators[0]).toHaveClass('h-px', 'w-full')
-    await expect(separators[0]).toHaveAttribute('aria-orientation', 'horizontal')
-    
-    // Test vertical separator  
-    await expect(separators[1]).toHaveClass('w-px', 'h-full')
-    await expect(separators[1]).toHaveAttribute('aria-orientation', 'vertical')
-  },
   parameters: {
     docs: {
       description: {

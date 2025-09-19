@@ -86,7 +86,6 @@ src/
 ## 🧪 Testing Strategy
 
 - **Unit Tests** - Component logic and props with Vitest
-- **Interaction Tests** - User interactions in Storybook with `@storybook/test`
 - **Accessibility Tests** - Automated a11y testing with `@storybook/addon-a11y`
 - **Visual Regression** - Story-based visual testing support
 
@@ -136,7 +135,6 @@ This project follows USWDS standards for:
 2. Add TypeScript interfaces and variants using `class-variance-authority`
 3. Create comprehensive `.stories.tsx` file with:
    - All variants and states
-   - Interaction tests using `@storybook/test`
    - Accessibility tests
    - Documentation
 4. Add unit tests if needed

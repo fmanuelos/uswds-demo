@@ -3,6 +3,7 @@
 import * as React from "react"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import { cn } from "@/lib/utils"
+import { Icon } from "./Icon/Icon"
 
 const Accordion = AccordionPrimitive.Root
 
@@ -33,7 +34,16 @@ const AccordionTrigger = React.forwardRef<
     >
       {children}
       <div className="h-full flex items-center ml-auto shrink-0">
-        <div className="size-6 icon-[material-symbols--add] group-aria-expanded:size-6 group-aria-expanded:icon-[material-symbols--remove]" />
+        <Icon 
+          icon="add" 
+          size="sm" 
+          className="size-6 group-aria-expanded:hidden" 
+        />
+        <Icon 
+          icon="remove" 
+          size="sm" 
+          className="size-6 hidden group-aria-expanded:block" 
+        />
       </div>
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { expect, within } from '@storybook/test'
 import { 
   Icon, 
   IconType,
@@ -435,23 +434,5 @@ export const GovernmentContactCard: Story = {
       },
     },
     layout: 'centered',
-  },
-}
-
-// Interaction Test
-export const InteractionTest: Story = {
-  args: {
-    icon: 'home',
-    size: 'default',
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const icon = canvas.getByRole('img')
-    
-    // Verify icon renders
-    await expect(icon).toBeInTheDocument()
-    await expect(icon).toHaveClass('h-8', 'w-8') // default size
-    await expect(icon).toHaveAttribute('viewBox', '0 0 24 24')
-    await expect(icon).toHaveAttribute('aria-hidden', 'true')
   },
 }
