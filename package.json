@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
+    "registry:build": "shadcn build",
+    "registry:dev": "shadcn build --watch",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -50,6 +52,7 @@
     "eslint-plugin-storybook": "^9.1.1",
     "jsdom": "^26.1.0",
     "storybook": "^9.1.1",
+    "shadcn": "canary",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^3.2.4"

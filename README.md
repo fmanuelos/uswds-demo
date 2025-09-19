@@ -2,6 +2,8 @@
 
 A comprehensive UI component library built with **React**, **TypeScript**, and **Storybook**, following the [U.S. Web Design System (USWDS)](https://designsystem.digital.gov/) guidelines. This project demonstrates modern, accessible, and government-compliant web components.
 
+🎯 **Now available as a shadcn-compatible registry!** Install individual components directly into your projects. See [REGISTRY_USAGE.md](./REGISTRY_USAGE.md) for details.
+
 ## 🚀 Quick Start
 
 ### Development Server
@@ -13,6 +15,16 @@ npm run dev
 
 # Alternative: explicit storybook command
 npm run storybook
+```
+
+### Registry Build
+
+```bash
+# Build component registry for sharing
+npm run registry:build
+
+# Watch for changes and rebuild registry
+npm run registry:dev
 ```
 
 ### Testing
@@ -41,6 +53,7 @@ npm run build
 ## 📖 Documentation
 
 - **Storybook UI**: [http://localhost:6006](http://localhost:6006) - Interactive component documentation
+- **Registry Guide**: See [REGISTRY_USAGE.md](./REGISTRY_USAGE.md) for using components as a registry
 - **Setup Guide**: See [STORYBOOK_GUIDE.md](./STORYBOOK_GUIDE.md) for detailed Storybook usage
 
 ## 🏗️ Project Structure

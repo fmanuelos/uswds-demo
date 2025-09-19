@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:component",
+  "title": "Badge",
+  "description": "USWDS-compliant badge component for status indicators and labels with proper color contrast and accessibility.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/badge.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst badgeVariants = cva(\n  \"inline-flex items-center rounded px-2.5 py-0.5 text-xs font-bold font-public-sans transition-colors focus:outline-none focus:ring-2 focus:ring-blue-40 focus:ring-offset-2\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-blue-10 text-blue-80 hover:bg-blue-20\",\n        secondary: \"bg-gray-10 text-gray-80 hover:bg-gray-20\",\n        success: \"bg-green-10 text-green-80 hover:bg-green-20\",\n        warning: \"bg-orange-10 text-orange-80 hover:bg-orange-20\",\n        danger: \"bg-red-10 text-red-80 hover:bg-red-20\",\n        outline: \"text-gray-80 border border-gray-60 hover:bg-gray-5\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nexport interface BadgeProps\n  extends React.HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof badgeVariants> {}\n\nfunction Badge({ className, variant, ...props }: BadgeProps) {\n  return (\n    <div className={cn(badgeVariants({ variant }), className)} {...props} />\n  )\n}\n\nexport { Badge, badgeVariants } ",
+      "type": "registry:component"
+    }
+  ]
+}

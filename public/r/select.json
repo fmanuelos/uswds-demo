@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select",
+  "type": "registry:component",
+  "title": "Select",
+  "description": "USWDS-compliant select dropdown component with keyboard navigation and proper accessibility.",
+  "dependencies": [
+    "clsx"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst selectVariants = cva(\n  cn(\n    // Base styling\n    \"flex w-full max-w-lg appearance-none items-center\",\n    \"font-public-sans text-base leading-tight\",\n    // Size and spacing\n    \"h-10 px-3 py-2\",\n    // Background and border\n    \"bg-white border border-gray-60 rounded-none\",\n    // Focus states\n    \"focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-blue-40\",\n    // Disabled states\n    \"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-20 disabled:text-gray-70\",\n  ),\n  {\n    variants: {\n      size: {\n        default: \"h-10 px-3 py-2\",\n      }\n    },\n    defaultVariants: {\n      size: \"default\"\n    }\n  }\n)\n\nexport interface SelectProps\n  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, \"size\">,\n    VariantProps<typeof selectVariants> {}\n\nconst Select = React.forwardRef<HTMLSelectElement, SelectProps>(\n  ({ className, size, ...props }, ref) => {\n    return (\n      <select\n        className={cn(selectVariants({ size }), className)}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\n\nSelect.displayName = \"Select\"\n\nexport { Select, selectVariants }",
+      "type": "registry:component"
+    }
+  ]
+}

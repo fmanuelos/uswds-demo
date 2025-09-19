@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "table",
+  "type": "registry:component",
+  "title": "Table",
+  "description": "USWDS-compliant table component with proper semantic markup and accessibility features.",
+  "dependencies": [
+    "clsx"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/table.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/lib/utils\"\n\nconst Table = React.forwardRef<\n  HTMLTableElement,\n  React.HTMLAttributes<HTMLTableElement>\n>(({ className, ...props }, ref) => (\n  <div className=\"relative w-full overflow-auto\">\n    <table\n      ref={ref}\n      className={cn(\"border-separate border-spacing-0 w-full font-public-sans\", className)}\n      {...props}\n    />\n  </div>\n))\nTable.displayName = \"Table\"\n\nconst TableHeader = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <thead \n    ref={ref} \n    className={cn(\n      \"[&_tr_th]:bg-gray-10 [&_tr_th]:text-left [&_tr_th]:border [&_tr_th]:border-black [&_tr_th:not(:first-child)]:border-l-0 [&_tr_th]:px-4 [&_tr_th]:py-2\",\n      className\n    )} \n    {...props} \n  />\n))\nTableHeader.displayName = \"TableHeader\"\n\n\n\ninterface TableBodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {\n  striped?: boolean\n}\n\nconst TableBody = React.forwardRef<\n  HTMLTableSectionElement,\n  TableBodyProps\n>(({ className, striped, ...props }, ref) => (\n  <tbody\n    ref={ref}\n    className={cn(\n      \"[&_tr_td]:text-left [&_tr_td]:border [&_tr_td]:border-black [&_tr_td:not(:first-child)]:border-l-0 [&_tr_td]:border-t-0 [&_tr_td]:px-4 [&_tr_td]:py-2\",\n      striped \n        ? \"[&_tr:nth-child(even)_td]:bg-gray-5 [&_tr:nth-child(odd)_td]:bg-white\"\n        : \"[&_tr_td]:bg-white\",\n      className\n    )}\n    {...props}\n  />\n))\nTableBody.displayName = \"TableBody\"\n\nconst TableFooter = React.forwardRef<\n  HTMLTableSectionElement,\n  React.HTMLAttributes<HTMLTableSectionElement>\n>(({ className, ...props }, ref) => (\n  <tfoot\n    ref={ref}\n    className={cn(\n      \"border-t border-gray-30 bg-gray-5 font-bold [&>tr]:last:border-b-0\",\n      className\n    )}\n    {...props}\n  />\n))\nTableFooter.displayName = \"TableFooter\"\n\nconst TableRow = React.forwardRef<\n  HTMLTableRowElement,\n  React.HTMLAttributes<HTMLTableRowElement>\n>(({ className, ...props }, ref) => (\n  <tr\n    ref={ref}\n    className={cn(\"\", className)}\n    {...props}\n  />\n))\nTableRow.displayName = \"TableRow\"\n\nconst TableHead = React.forwardRef<\n  HTMLTableCellElement,\n  React.ThHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <th\n    ref={ref}\n    className={cn(\"\", className)}\n    {...props}\n  />\n))\nTableHead.displayName = \"TableHead\"\n\nconst TableCell = React.forwardRef<\n  HTMLTableCellElement,\n  React.TdHTMLAttributes<HTMLTableCellElement>\n>(({ className, ...props }, ref) => (\n  <td\n    ref={ref}\n    className={cn(\"\", className)}\n    {...props}\n  />\n))\nTableCell.displayName = \"TableCell\"\n\nconst TableCaption = React.forwardRef<\n  HTMLTableCaptionElement,\n  React.HTMLAttributes<HTMLTableCaptionElement>\n>(({ className, ...props }, ref) => (\n  <caption\n    ref={ref}\n    className={cn(\"mb-3 text-left font-bold\", className)}\n    {...props}\n  />\n))\nTableCaption.displayName = \"TableCaption\"\n\nexport {\n  Table,\n  TableHeader,\n  TableBody,\n  TableFooter,\n  TableHead,\n  TableRow,\n  TableCell,\n  TableCaption,\n} ",
+      "type": "registry:component"
+    }
+  ]
+}

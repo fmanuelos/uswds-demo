@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:component",
+  "title": "Checkbox",
+  "description": "USWDS-compliant checkbox component with proper accessibility and form integration.",
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "clsx"
+  ],
+  "registryDependencies": [
+    "icon"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\nimport { cn } from \"@/lib/utils\"\n\nconst Checkbox = React.forwardRef<\n  React.ComponentRef<typeof CheckboxPrimitive.Root>,\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\n>(({ className, ...props }, ref) => (\n  <CheckboxPrimitive.Root\n    ref={ref}\n    className={cn(\n      \"peer size-6 shrink-0 rounded-sm border-2 border-gray-90 ring-offset-background focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-blue-40 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-blue-60 data-[state=checked]:text-white data-[state=checked]:border-blue-60 focus:outline focus:outline-4 focus:outline-offset-4 focus:outline-offset-2 focus:outline-blue-40 disabled:border-gray-50 disabled:data-[state=checked]:bg-gray-50\",\n      className\n    )}\n    {...props}\n  >\n    <CheckboxPrimitive.Indicator className={cn(\"flex items-center justify-center text-current\")}>\n      <svg \n        className=\"size-3\" \n        xmlns=\"http://www.w3.org/2000/svg\" \n        width=\"65\" \n        height=\"50\" \n        viewBox=\"0 0 65 50\"\n      >\n        <path \n          fill=\"currentColor\" \n          fillRule=\"evenodd\" \n          d=\"M63.268 7.063l-5.616-5.61C56.882.685 55.946.3 54.845.3s-2.038.385-2.808 1.155L24.951 28.552 12.81 16.385c-.77-.77-1.707-1.155-2.808-1.155-1.1 0-2.037.385-2.807 1.154l-5.616 5.61C.81 22.764.425 23.7.425 24.8s.385 2.035 1.155 2.805l14.947 14.93 5.616 5.61c.77.77 1.706 1.154 2.807 1.154s2.038-.384 2.808-1.154l5.616-5.61 29.894-29.86c.77-.77 1.157-1.707 1.157-2.805 0-1.101-.385-2.036-1.156-2.805l-.001-.002z\"\n        />\n      </svg>\n    </CheckboxPrimitive.Indicator>\n  </CheckboxPrimitive.Root>\n))\nCheckbox.displayName = CheckboxPrimitive.Root.displayName\n\nexport { Checkbox } ",
+      "type": "registry:component"
+    }
+  ]
+}

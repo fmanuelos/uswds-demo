@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:component",
+  "title": "Accordion",
+  "description": "USWDS-compliant accordion component with keyboard navigation and proper ARIA states.",
+  "dependencies": [
+    "@radix-ui/react-accordion",
+    "clsx"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\"\nimport { cn } from \"@/lib/utils\"\nimport { Icon } from \"./Icon/Icon\"\n\nconst Accordion = AccordionPrimitive.Root\n\nconst AccordionItem = React.forwardRef<\n  React.ComponentRef<typeof AccordionPrimitive.Item>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>\n>(({ className, ...props }, ref) => (\n  <AccordionPrimitive.Item\n    ref={ref}\n    className={cn(\"\", className)}\n    {...props}\n  />\n))\nAccordionItem.displayName = \"AccordionItem\"\n\nconst AccordionTrigger = React.forwardRef<\n  React.ComponentRef<typeof AccordionPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Header className=\"flex\">\n    <AccordionPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer text-left gap-3 font-public-sans\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <div className=\"h-full flex items-center ml-auto shrink-0\">\n        <Icon \n          icon=\"add\" \n          size=\"sm\" \n          className=\"size-6 group-aria-expanded:hidden\" \n        />\n        <Icon \n          icon=\"remove\" \n          size=\"sm\" \n          className=\"size-6 hidden group-aria-expanded:block\" \n        />\n      </div>\n    </AccordionPrimitive.Trigger>\n  </AccordionPrimitive.Header>\n))\nAccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName\n\nconst AccordionContent = React.forwardRef<\n  React.ComponentRef<typeof AccordionPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\n>(({ className, children, ...props }, ref) => (\n  <AccordionPrimitive.Content\n    ref={ref}\n    className=\"overflow-hidden\"\n    {...props}\n  >\n    <div className={cn(\"py-6 px-4 font-public-sans\", className)}>\n      {children}\n    </div>\n  </AccordionPrimitive.Content>\n))\n\nAccordionContent.displayName = AccordionPrimitive.Content.displayName\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }",
+      "type": "registry:component"
+    }
+  ]
+}

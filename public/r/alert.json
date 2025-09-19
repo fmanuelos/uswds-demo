@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:component",
+  "title": "Alert",
+  "description": "USWDS-compliant alert component with variants for default, success, warning, danger, info, and emergency states. Includes proper ARIA roles and icon integration.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx"
+  ],
+  "registryDependencies": [
+    "icon"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/alert.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\nimport { Icon } from \"./Icon/Icon\"\n\nconst alertVariants = cva(\n  \"relative w-full py-4 pl-12 pr-4 @desktop:px-16 max-w-5xl mx-auto @container\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-cyan-5 border-l-8 border-l-cyan-30 text-gray-90\",\n        success: \"bg-green-cool-5 border-l-8 border-l-green-cool-40 text-gray-90\",\n        warning: \"bg-yellow-5 border-l-8 border-l-gold-20 text-gray-90\",\n        danger: \"bg-red-warm-10 border-l-8 border-l-red-warm-50 text-gray-90\",\n        info: \"bg-cyan-5 border-l-8 border-l-cyan-30 text-gray-90\",\n        emergency: \"bg-red-warm-60v border-l-8 border-l-red-warm-60 text-white\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  }\n)\n\nconst Alert = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants> & {\n    role?: \"alert\" | \"status\"\n    showIcon?: boolean\n  }\n>(({ className, variant, role = \"alert\", showIcon = true, ...props }, ref) => {\n  const getIcon = () => {\n    switch (variant) {\n      case 'success':\n        return 'check_circle'\n      case 'warning':\n        return 'warning'\n      case 'danger':\n      case 'emergency':\n        return 'error'\n      default:\n        return 'info'\n    }\n  }\n\n  return (\n    <div\n      ref={ref}\n      role={role}\n      className={cn(alertVariants({ variant }), className)}\n      {...props}\n    >\n      {showIcon && (\n        <div className=\"absolute left-2 @desktop:left-6 top-3\">\n          <Icon icon={getIcon()} className=\"size-8\" />\n        </div>\n      )}\n      {props.children}\n    </div>\n  )\n})\nAlert.displayName = \"Alert\"\n\nconst AlertTitle = React.forwardRef<\n  HTMLHeadingElement,\n  React.HTMLAttributes<HTMLHeadingElement>\n>(({ className, ...props }, ref) => (\n  <h4\n    ref={ref}\n    className={cn(\"text-2xl font-bold mb-2 leading-none font-public-sans\", className)}\n    {...props}\n  />\n))\nAlertTitle.displayName = \"AlertTitle\"\n\nconst AlertDescription = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div\n    ref={ref}\n    className={cn(\"leading-normal font-public-sans [&_a]:text-blue-60v [&_a]:underline\", className)}\n    {...props}\n  />\n))\nAlertDescription.displayName = \"AlertDescription\"\n\nexport { Alert, AlertTitle, AlertDescription }",
+      "type": "registry:component"
+    }
+  ]
+}

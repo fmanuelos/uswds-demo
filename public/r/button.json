@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:component",
+  "title": "Button",
+  "description": "USWDS-compliant button component with 8+ variants including primary, secondary, outline, success, warning, danger, ghost, and link styles. Fully accessible with WCAG 2.1 AA compliance.",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/Button/Button.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/lib/utils\"\n\nconst buttonVariants = cva(\n  cn(\n    // Base layout and appearance\n    \"relative rounded font-bold font-source-sans leading-none cursor-pointer\",\n\n    // Focus states\n    \"focus:outline focus:outline-4 focus:outline-offset-4 focus:outline-blue-40v\",\n    \"focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-40v\",\n\n    // Disabled states\n    \"aria-disabled:cursor-not-allowed aria-disabled:bg-gray-20 aria-disabled:text-gray-70\",\n    \"disabled:cursor-not-allowed disabled:bg-gray-20 disabled:text-gray-70\"\n  ),\n  {\n    variants: {\n      variant: {\n        primary: \"text-white bg-blue-60v hover:bg-blue-warm-70v active:bg-blue-warm-80v\",\n        base: \"text-white bg-gray-50 hover:bg-gray-60 active:bg-gray-80\",\n        secondary: \"text-white bg-red-50 hover:bg-red-60v active:bg-red-70v\",\n        'accent-cool': \"text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v\",\n        outline: \"text-gray-80v bg-transparent border border-gray-60v hover:bg-gray-5v active:bg-gray-10v\",\n        info: \"text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v\",\n        success: \"text-white bg-green-60v hover:bg-green-70v active:bg-green-80v\",\n        warning: \"text-white bg-orange-60v hover:bg-orange-70v active:bg-orange-80v\",\n        error: \"text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v\",\n        danger: \"text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v\",\n        ghost: \"text-gray-80v hover:bg-gray-5v active:bg-gray-10v\",\n        link: \"text-blue-60v underline-offset-4 hover:underline hover:text-blue-warm-70v\"\n      },\n      size: {\n        sm: \"px-3 py-2 text-sm\",\n        default: \"px-5 py-3\",\n        lg: \"px-6 py-4 text-lg\",\n        xl: \"px-8 py-5 text-xl\",\n        icon: \"size-9\",\n      }\n    },\n    defaultVariants: {\n      variant: \"primary\",\n      size: \"default\"\n    }\n  }\n)\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean  \n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    )\n  }\n)\nButton.displayName = \"Button\"\n\nexport { Button, buttonVariants } ",
+      "type": "registry:component"
+    }
+  ]
+}
