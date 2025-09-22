@@ -2,7 +2,7 @@ name: Build & Deploy (shadcn + storybook)
 
 on:
   push:
-    branches: [ "nciws" ]
+    branches: [ "main" ]
   pull_request:
 
 permissions:
@@ -57,7 +57,7 @@ jobs:
           path: site
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/nciws'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
