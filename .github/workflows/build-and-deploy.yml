@@ -2,7 +2,7 @@ name: Build & Deploy (shadcn + Storybook)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "nciws" ]
   pull_request:
 
 permissions:
