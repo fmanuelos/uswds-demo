@@ -42,38 +42,14 @@ jobs:
       # Prepare one Pages artifact that includes both:
       # - /registry  -> your shadcn JSONs
       # - /storybook -> Storybook static site
-      # - README.md  -> your documentation
       - name: Assemble site artifact
         run: |
           rm -rf site
           mkdir -p site/registry site/storybook
+          # Copy Storybook static build
+          cp -R storybook-static/* site/
           # Copy your JSON registry (adjust if your output is elsewhere)
           cp -R registry/* site/registry/
-          # Copy Storybook static build
-          cp -R storybook-static/* site/storybook/
-          # Copy README.md to site
-          cp README.md site/README.md
-          # Create simple index.html for the site
-          cat > site/index.html << 'EOF'
-            <!doctype html>
-              <html lang="en">
-              <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>USWDS Demo - Component Library</title>
-              </head>
-              <body>
-                <h1>USWDS Demo - Component Library</h1>
-                <nav>
-                  <ul>
-                    <li><a href="/${GITHUB_REPOSITORY#*/}/storybook/">📚 View Component Library (Storybook)</a></li>
-                    <li><a href="/${GITHUB_REPOSITORY#*/}/registry/">📦 Component Registry (JSON)</a></li>
-                    <li><a href="/${GITHUB_REPOSITORY#*/}/README.md">📖 Documentation (README)</a></li>
-                  </ul>
-                </nav>
-              </body>
-            </html>
-          EOF
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
