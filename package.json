@@ -4,15 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "npm run shadcn:build & npm run storybook:build",
+    "build": "npm run shadcn:build && npm run storybook:build",
     "storybook:build": "storybook build -o storybook-static",
     "storybook:dev": "storybook dev -p 6006",
     "shadcn:build": "shadcn build --output registry/",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest --watch",
-    "ci:install": "npm ci"
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.2.6",

@@ -29,7 +29,7 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm run ci:install
+        run: npm ci
 
       # Optional — only if you actually have a shadcn build step
       - name: Build shadcn registry
@@ -47,7 +47,7 @@ jobs:
           rm -rf site
           mkdir -p site/registry site/storybook
           # Copy your JSON registry (adjust if your output is elsewhere)
-          cp -R registry/* site/registry/ || true
+          cp -R registry/* site/registry/
           # Copy Storybook static build
           cp -R storybook-static/* site/storybook/
           # Optional: simple index.html redirect to Storybook (or build your own landing page)
