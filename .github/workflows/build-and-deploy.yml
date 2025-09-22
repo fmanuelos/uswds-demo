@@ -33,7 +33,7 @@ jobs:
 
       # Optional — only if you actually have a shadcn build step
       - name: Build shadcn registry
-        run: npm run shadcn:build
+        run: npm run registry:build
         continue-on-error: false
 
       - name: Build Storybook
