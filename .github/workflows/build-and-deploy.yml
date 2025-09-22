@@ -1,4 +1,4 @@
-name: Build & Deploy (shadcn + Storybook)
+name: Build & Deploy (shadcn + storybook)
 
 on:
   push:
@@ -42,6 +42,7 @@ jobs:
       # Prepare one Pages artifact that includes both:
       # - /registry  -> your shadcn JSONs
       # - /storybook -> Storybook static site
+      # - README.md  -> your documentation
       - name: Assemble site artifact
         run: |
           rm -rf site
@@ -50,20 +51,8 @@ jobs:
           cp -R registry/* site/registry/
           # Copy Storybook static build
           cp -R storybook-static/* site/storybook/
-          # Optional: simple index.html redirect to Storybook (or build your own landing page)
-          cat > site/index.html << 'EOF'
-            <!doctype html>
-              <html lang="en">
-              <head>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>NCIWS</title>
-              </head>
-              <body>
-                <h1>Hello, world!</h1>
-              </body>
-            </html>
-          EOF
+          # Copy README to site
+          cp README.md site/README.md
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
