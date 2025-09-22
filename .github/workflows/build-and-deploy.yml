@@ -1,0 +1,75 @@
+name: Build & Deploy (shadcn + Storybook)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+  pages: write          # needed for GitHub Pages deploy
+  id-token: write       # needed for GitHub Pages deploy
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm run ci:install
+
+      # Optional — only if you actually have a shadcn build step
+      - name: Build shadcn registry
+        run: npm run shadcn:build
+        continue-on-error: false
+
+      - name: Build Storybook
+        run: npm run storybook:build
+
+      # Prepare one Pages artifact that includes both:
+      # - /registry  -> your shadcn JSONs
+      # - /storybook -> Storybook static site
+      - name: Assemble site artifact
+        run: |
+          rm -rf site
+          mkdir -p site/registry site/storybook
+          # Copy your JSON registry (adjust if your output is elsewhere)
+          cp -R registry/* site/registry/ || true
+          # Copy Storybook static build
+          cp -R storybook-static/* site/storybook/
+          # Optional: simple index.html redirect to Storybook (or build your own landing page)
+          cat > site/index.html << 'EOF'
+          <!doctype html>
+          <meta http-equiv="refresh" content="0;url=/storybook/">
+          <link rel="canonical" href="/storybook/">
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

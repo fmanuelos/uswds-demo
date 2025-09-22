@@ -11,7 +11,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "ci:install": "npm ci"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.2.6",
