@@ -52,9 +52,17 @@ jobs:
           cp -R storybook-static/* site/storybook/
           # Optional: simple index.html redirect to Storybook (or build your own landing page)
           cat > site/index.html << 'EOF'
-          <!doctype html>
-          <meta http-equiv="refresh" content="0;url=/storybook/">
-          <link rel="canonical" href="/storybook/">
+            <!doctype html>
+              <html lang="en">
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>NCIWS</title>
+              </head>
+              <body>
+                <h1>Hello, world!</h1>
+              </body>
+            </html>
           EOF
 
       - name: Upload Pages artifact
