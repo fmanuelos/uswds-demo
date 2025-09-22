@@ -1,4 +1,4 @@
-name: Build & Deploy (shadcn + Storybook)
+name: Build & Deploy (shadcn + storybook)
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm run ci:install
+        run: npm ci
 
       # Optional — only if you actually have a shadcn build step
       - name: Build shadcn registry
-        run: npm run shadcn:build
-        continue-on-error: false
+        run: npm run registry:build
+        continue-on-error: true
 
       - name: Build Storybook
         run: npm run storybook:build
@@ -46,16 +46,10 @@ jobs:
         run: |
           rm -rf site
           mkdir -p site/registry site/storybook
-          # Copy your JSON registry (adjust if your output is elsewhere)
-          cp -R registry/* site/registry/ || true
           # Copy Storybook static build
-          cp -R storybook-static/* site/storybook/
-          # Optional: simple index.html redirect to Storybook (or build your own landing page)
-          cat > site/index.html << 'EOF'
-          <!doctype html>
-          <meta http-equiv="refresh" content="0;url=/storybook/">
-          <link rel="canonical" href="/storybook/">
-          EOF
+          cp -R storybook-static/* site/
+          # Copy your JSON registry (adjust if your output is elsewhere)
+          cp -R registry site/ 2>/dev/null || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
