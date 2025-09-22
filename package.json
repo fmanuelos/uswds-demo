@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build",
-    "registry:build": "shadcn build",
-    "registry:dev": "shadcn build --watch",
+    "build": "npm run shadcn:build & npm run storybook:build",
+    "storybook:build": "storybook build -o storybook-static",
+    "storybook:dev": "storybook dev -p 6006",
+    "shadcn:build": "shadcn build --output registry/",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",

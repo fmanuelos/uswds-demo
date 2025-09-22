@@ -40,8 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+#storybook
 *storybook.log
 storybook-static
+
+#shadcn
+registry
 
 # playwright
 .playwright*
