@@ -49,7 +49,7 @@ jobs:
           # Copy Storybook static build
           cp -R storybook-static/* site/
           # Copy your JSON registry (adjust if your output is elsewhere)
-          cp -R registry/* site/registry/
+          cp -R registry site/ 2>/dev/null || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
