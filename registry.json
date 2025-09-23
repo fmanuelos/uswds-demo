@@ -12,7 +12,8 @@
       "files": [
         {
           "path": "src/components/ui/Button/Button.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "src/components/ui/button.tsx"
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
@@ -40,7 +41,8 @@
       "files": [
         {
           "path": "src/components/ui/Icon/Icon.tsx",
-          "type": "registry:component"
+          "type": "registry:component",
+          "target": "src/components/ui/icon.tsx"
         }
       ],
       "dependencies": ["clsx"],
@@ -235,8 +237,9 @@
       "description": "USWDS-compliant table component with proper semantic markup and accessibility features.",
       "files": [
         {
-          "path": "src/components/ui/table.tsx",
-          "type": "registry:component"
+          "path": "src/components/ui/Table/Table.tsx",
+          "type": "registry:component",
+          "target": "src/components/ui/table.tsx"
         }
       ],
       "dependencies": ["clsx"],
