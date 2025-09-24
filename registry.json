@@ -26,8 +26,9 @@
       "description": "USWDS-compliant alert component with variants for default, success, warning, danger, info, and emergency states. Includes proper ARIA roles and icon integration.",
       "files": [
         {
-          "path": "src/components/ui/alert.tsx",
-          "type": "registry:component"
+          "path": "src/components/ui/Alert/Alert.tsx",
+          "type": "registry:component",
+          "target": "src/components/ui/alert.tsx"
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
