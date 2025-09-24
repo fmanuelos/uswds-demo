@@ -4,16 +4,16 @@ import { cn } from "@/lib/utils"
 import { Icon } from "@/components/ui/Icon/Icon"
 
 const alertVariants = cva(
-  "relative p-4 border-l-8 font-public-sans",
+  "relative p-4 border-l-8 font-public-sans [&_a]:underline",
   {
     variants: {
       variant: {
-        default: "bg-cyan-5 border-l-cyan-30 text-gray-90",
-        success: "bg-green-cool-5 border-l-green-cool-40v text-gray-90",
-        warning: "bg-yellow-5 border-l-gold-20v text-gray-90",
-        error: "bg-red-warm-10 border-l-red-warm-50v text-gray-90",
-        info: "bg-cyan-5 border-l-cyan-30v text-gray-90",
-        emergency: "bg-red-warm-60v border-l-red-warm-60 text-white",
+        default: "bg-cyan-5 border-l-cyan-30 text-gray-90 [&_a]:text-blue-60v",
+        success: "bg-green-cool-5 border-l-green-cool-40v text-gray-90 [&_a]:text-blue-60v",
+        warning: "bg-yellow-5 border-l-gold-20v text-gray-90 [&_a]:text-blue-60v",
+        error: "bg-red-warm-10 border-l-red-warm-50v text-gray-90 [&_a]:text-blue-60v",
+        info: "bg-cyan-5 border-l-cyan-30v text-gray-90 [&_a]:text-blue-60v",
+        emergency: "bg-red-warm-60v border-l-red-warm-60v text-white [&_a]:!text-gray-10",
       },
       hasIcon: {
         true: "px-16",
@@ -55,7 +55,7 @@ const Alert = React.forwardRef<
       {...props}
     >
       {icon && (
-        <div className="absolute left-2 @desktop:left-6 top-3">
+        <div className="absolute left-6 top-3">
           <Icon icon={getIcon()} className="size-8" />
         </div>
       )}
@@ -83,7 +83,7 @@ const AlertDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("leading-normal font-public-sans [&_a]:text-blue-60v [&_a]:underline", className)}
+    className={cn("leading-normal font-public-sans", className)}
     {...props}
   />
 ))
