@@ -40,16 +40,16 @@ jobs:
         run: npm run storybook:build
 
       # Prepare one Pages artifact that includes both:
-      # - /registry  -> your shadcn JSONs
-      # - /storybook -> Storybook static site
+      # - /r  -> your shadcn registry JSONs
+      # - /   -> Storybook static site (root)
       - name: Assemble site artifact
         run: |
           rm -rf site
-          mkdir -p site/registry site/storybook
+          mkdir -p site/r
           # Copy Storybook static build
           cp -R storybook-static/* site/
-          # Copy your JSON registry (adjust if your output is elsewhere)
-          cp -R registry site/ 2>/dev/null || true
+          # Copy your JSON registry files to site/r
+          cp registry/*.json site/r/ 2>/dev/null || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

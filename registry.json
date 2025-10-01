@@ -33,7 +33,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "icon",
@@ -131,7 +131,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-checkbox", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "accordion",
@@ -257,7 +257,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/button.json", "https://fmanuelos.github.io/uswds-demo/registry/search.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/button.json", "https://fmanuelos.github.io/uswds-demo/r/search.json"]
     },
     {
       "name": "footer",
