@@ -14,23 +14,37 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'An accessible accordion component built with Radix UI, following USWDS design guidelines.',
+        component: 'An accessible accordion component following USWDS design guidelines. Supports borderless and bordered variants with single or multiple selection modes.',
       },
     },
   },
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'select' },
+      options: ['borderless', 'bordered'],
+      description: 'Visual style variant of the accordion',
+      defaultValue: 'borderless',
+    },
+    type: {
+      control: { type: 'select' },
+      options: ['single', 'multiple'],
+      description: 'Selection mode - single allows one item open, multiple allows many',
+      defaultValue: 'single',
+    },
+  },
 } satisfies Meta<typeof Accordion>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SingleItem: Story = {
+export const Borderless: Story = {
   args: {
+    variant: 'borderless',
     type: 'single',
-    collapsible: true,
   },
-  render: () => (
-    <Accordion type="single" collapsible className="w-[600px]">
+  render: (args) => (
+    <Accordion variant={args.variant} type={args.type} className="w-[800px]">
       <AccordionItem value="item-1">
         <AccordionTrigger>What is the U.S. Web Design System?</AccordionTrigger>
         <AccordionContent>
@@ -39,24 +53,39 @@ export const SingleItem: Story = {
           government websites backed by user research and modern best practices.
         </AccordionContent>
       </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>How does USWDS help my project?</AccordionTrigger>
+        <AccordionContent>
+          USWDS provides tested, accessible components that comply with Section 508 
+          and WCAG 2.1 AA standards, saving development time and ensuring government 
+          website compliance.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Can I use USWDS with React?</AccordionTrigger>
+        <AccordionContent>
+          Yes! This component library demonstrates how to implement USWDS patterns 
+          using React, TypeScript, and modern component architecture.
+        </AccordionContent>
+      </AccordionItem>
     </Accordion>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'A single accordion item that can be expanded and collapsed.',
+        story: 'Borderless accordion with gray background (default variant). Only one item can be open at a time.',
       },
     },
   },
 }
 
-export const MultipleItems: Story = {
+export const Bordered: Story = {
   args: {
+    variant: 'bordered',
     type: 'single',
-    collapsible: true,
   },
-  render: () => (
-    <Accordion type="single" collapsible className="w-[600px]">
+  render: (args) => (
+    <Accordion variant={args.variant} type={args.type} className="w-[800px]">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -84,7 +113,43 @@ export const MultipleItems: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Multiple accordion items where only one can be open at a time.',
+        story: 'Bordered accordion with white background and visible borders. Best for cleaner, more structured layouts.',
+      },
+    },
+  },
+}
+
+export const MultipleSelection: Story = {
+  args: {
+    variant: 'borderless',
+    type: 'multiple',
+  },
+  render: (args) => (
+    <Accordion variant={args.variant} type={args.type} className="w-[800px]">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Keyboard Shortcuts</AccordionTrigger>
+        <AccordionContent>
+          Use Tab to navigate between items, Enter or Space to toggle, and Escape to close.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Screen Reader Support</AccordionTrigger>
+        <AccordionContent>
+          All components include proper ARIA labels and announce state changes to screen readers.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Color Contrast</AccordionTrigger>
+        <AccordionContent>
+          USWDS color palette ensures WCAG 2.1 AA compliant contrast ratios for all text and interactive elements.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Multiple selection mode allows multiple accordion items to be open simultaneously.',
       },
     },
   },
