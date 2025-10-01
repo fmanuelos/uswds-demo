@@ -6,25 +6,18 @@ A comprehensive UI component library built with **React**, **TypeScript**, and *
 
 ## 🚀 Quick Start
 
-### Development Server
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 # Start Storybook development server
 npm run dev
 # Opens http://localhost:6006
-
-# Alternative: explicit storybook command
-npm run storybook
-```
-
-### Registry Build
-
-```bash
-# Build component registry for sharing
-npm run registry:build
-
-# Watch for changes and rebuild registry
-npm run registry:dev
 ```
 
 ### Testing
@@ -33,21 +26,24 @@ npm run registry:dev
 # Run all tests
 npm test
 
-# Run unit tests only
-npm run test:unit
-
-# Run storybook interaction tests
-npm run test:storybook
-
-# Watch mode for specific component
+# Watch mode for development
 npm run test:watch
+
+# Run a specific component test
+npm run test -- src/test/icon.test.tsx
+
+# Run Storybook interaction tests
+npm run test:storybook
 ```
 
-### Production Build
+### Building
 
 ```bash
 # Build Storybook for production
 npm run build
+
+# Build component registry for sharing
+npm run registry:build
 ```
 
 ## 📖 Documentation
@@ -61,32 +57,69 @@ npm run build
 ```
 src/
 ├── components/
-│   ├── blocks/           # Complex layout components
-│   │   └── header/       # Header with navigation & keyboard support
-│   └── ui/              # Basic UI components
-│       ├── Button/       # Button with 8 variants + stories
-│       ├── Input/        # Form inputs + stories
-│       ├── Select/       # Select dropdown + stories
-│       └── Badge/        # Status badges + stories
+│   ├── ui/                    # Basic UI components
+│   │   ├── accordion.tsx      # Expandable content panels
+│   │   ├── alert.tsx          # Status notifications
+│   │   ├── badge.tsx          # Status indicators
+│   │   ├── button.tsx         # 8 button variants
+│   │   ├── card.tsx           # Content containers
+│   │   ├── checkbox.tsx       # Form checkboxes
+│   │   ├── dialog.tsx         # Modal dialogs
+│   │   ├── form.tsx           # Form components
+│   │   ├── icon.tsx           # SVG icon system
+│   │   ├── input.tsx          # Text inputs
+│   │   ├── label.tsx          # Form labels
+│   │   ├── pagination.tsx     # Page navigation
+│   │   ├── radio-group.tsx    # Radio button groups
+│   │   ├── search.tsx         # Search inputs
+│   │   ├── select.tsx         # Dropdown selects
+│   │   ├── separator.tsx      # Visual dividers
+│   │   └── table.tsx          # Data tables
+│   └── blocks/                # Complex layout components
+│       ├── footer.tsx         # Site footer
+│       ├── header.tsx         # Navigation header
+│       └── in-page-navigation.tsx  # Section navigation
+├── stories/                   # Storybook documentation
 ├── styles/
-│   └── globals.css      # USWDS-compliant global styles
-└── stories/             # Storybook configuration & guides
+│   └── globals.css           # USWDS-compliant styles
+├── test/                      # Unit tests
+└── lib/
+    └── utils.ts              # Utility functions
 ```
 
 ## 🎨 Components Overview
 
-### UI Components (`/ui`)
-- **Button** - 8 variants (primary, secondary, outline, success, warning, danger, ghost, link)
-- **Input** - Form inputs with accessibility features
-- **Select** - Dropdown selectors with proper labeling  
-- **Badge** - Status and informational badges
+### UI Components
 
-### Block Components (`/blocks`)
-- **Header** - Complete navigation header with:
-  - Desktop & mobile responsive design
-  - Dropdown menus with keyboard navigation
-  - Search functionality
-  - WCAG-compliant accessibility
+#### Form Components
+- **Button** - 8 variants (primary, secondary, outline, success, warning, danger, ghost, link)
+- **Input** - Text inputs with validation and accessibility
+- **Select** - Dropdown selectors with keyboard navigation
+- **Checkbox** - Accessible checkbox inputs
+- **Radio Group** - Radio button groups with proper ARIA
+- **Label** - Form labels with proper associations
+- **Search** - Search input with icon and submit button
+
+#### Display Components
+- **Alert** - Status notifications (info, success, warning, error)
+- **Badge** - Status indicators and labels
+- **Card** - Content containers with header/footer
+- **Icon** - SVG icon system with USWDS icons
+- **Separator** - Visual dividers and section breaks
+- **Table** - Data tables with sorting and styling
+
+#### Interactive Components
+- **Accordion** - Expandable/collapsible content panels
+- **Dialog** - Modal dialogs and popups
+- **Pagination** - Page navigation controls
+
+#### Layout Components
+- **Form** - Form wrapper with proper structure
+
+### Block Components (3 Complex Components)
+- **Header** - Full navigation header with dropdown menus, search, and mobile support
+- **Footer** - Site footer with multi-column layout
+- **In-Page Navigation** - Sticky section navigation for long pages
 
 ## ♿ Accessibility Features
 
