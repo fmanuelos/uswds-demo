@@ -3,9 +3,6 @@
   "name": "uswds-components",
   "homepage": "https://fmanuelos.github.io/uswds-demo",
   "description": "USWDS-compliant React components with full accessibility and government design standards",
-  "registry": {
-    "@uswds-local": "http://localhost:3001/registry/{name}.json"
-  },
   "items": [
     {
       "name": "button",

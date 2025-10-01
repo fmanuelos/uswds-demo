@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Select } from './select'
-import { Label } from './label'
+import { Select } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
 
 const meta = {
   title: 'UI/Select',
