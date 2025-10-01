@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from './Button'
-import { Icon as UswdsIcon } from '../Icon/Icon'
+import { Button } from '../button'
+import { Icon as UswdsIcon } from '../icon'
 
 const meta = {
   title: 'UI/Button',

@@ -3,8 +3,8 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/Button/Button"
-import { Icon } from "@/components/ui/Icon/Icon"
+import { Button } from "@/components/ui/button"
+import { Icon } from "@/components/ui/icon"
 
 // Types for footer structure
 export interface FooterLink {

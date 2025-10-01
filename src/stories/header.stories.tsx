@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Header, type HeaderNavigation } from './Header'
+import { Header, type HeaderNavigation } from '@/components/blocks/header'
 
 // Sample navigation data for stories
 const sampleNavigation: HeaderNavigation = {

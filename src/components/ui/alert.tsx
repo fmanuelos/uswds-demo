@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Icon } from "@/components/ui/Icon/Icon"
+import { Icon } from "@/components/ui/icon"
 
 const alertVariants = cva(
   "relative p-4 border-l-8 font-public-sans [&_a]:underline",

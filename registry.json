@@ -1,8 +1,11 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "uswds-components",
-  "homepage": "https://github.com/your-org/uswds-demo",
+  "homepage": "https://fmanuelos.github.io/uswds-demo",
   "description": "USWDS-compliant React components with full accessibility and government design standards",
+  "registry": {
+    "@uswds-local": "http://localhost:3001/registry/{name}.json"
+  },
   "items": [
     {
       "name": "button",
@@ -11,9 +14,8 @@
       "description": "USWDS-compliant button component with 8+ variants including primary, secondary, outline, success, warning, danger, ghost, and link styles. Fully accessible with WCAG 2.1 AA compliance.",
       "files": [
         {
-          "path": "src/components/ui/Button/Button.tsx",
-          "type": "registry:component",
-          "target": "src/components/ui/button.tsx"
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:component"
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
@@ -26,13 +28,12 @@
       "description": "USWDS-compliant alert component with variants for default, success, warning, danger, info, and emergency states. Includes proper ARIA roles and icon integration.",
       "files": [
         {
-          "path": "src/components/ui/Alert/Alert.tsx",
-          "type": "registry:component",
-          "target": "src/components/ui/alert.tsx"
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:component"
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": ["icon"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/icon.json"]
     },
     {
       "name": "icon",
@@ -41,9 +42,8 @@
       "description": "USWDS-compliant icon component with Material Icons integration and proper accessibility features.",
       "files": [
         {
-          "path": "src/components/ui/Icon/Icon.tsx",
-          "type": "registry:component",
-          "target": "src/components/ui/icon.tsx"
+          "path": "src/components/ui/icon.tsx",
+          "type": "registry:component"
         }
       ],
       "dependencies": ["clsx"],
@@ -131,7 +131,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-checkbox", "clsx"],
-      "registryDependencies": ["icon"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/icon.json"]
     },
     {
       "name": "accordion",
@@ -238,9 +238,8 @@
       "description": "USWDS-compliant table component with proper semantic markup and accessibility features.",
       "files": [
         {
-          "path": "src/components/ui/Table/Table.tsx",
-          "type": "registry:component",
-          "target": "src/components/ui/table.tsx"
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:component"
         }
       ],
       "dependencies": ["clsx"],
@@ -253,12 +252,12 @@
       "description": "USWDS-compliant header block with navigation, search, and responsive design. Includes keyboard navigation and accessibility features.",
       "files": [
         {
-          "path": "src/components/blocks/Header/Header.tsx",
+          "path": "src/components/blocks/header.tsx",
           "type": "registry:component"
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["button", "search"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/registry/button.json", "https://fmanuelos.github.io/uswds-demo/registry/search.json"]
     },
     {
       "name": "footer",
@@ -267,7 +266,7 @@
       "description": "USWDS-compliant footer block with navigation links and proper semantic structure.",
       "files": [
         {
-          "path": "src/components/blocks/Footer/Footer.tsx",
+          "path": "src/components/blocks/footer.tsx",
           "type": "registry:component"
         }
       ],
