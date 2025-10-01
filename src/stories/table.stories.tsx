@@ -8,7 +8,7 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from './Table'
+} from '@/components/ui/table'
 
 const meta = {
   title: 'UI/Table',

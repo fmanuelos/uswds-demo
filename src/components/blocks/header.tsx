@@ -3,10 +3,10 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/Button/Button"
+import { Button } from "@/components/ui/button"
 import { Search } from "@/components/ui/search"
 import { Dialog, DialogContent, DialogTrigger, DialogClose } from "@/components/ui/dialog"
-import { Icon } from "@/components/ui/Icon/Icon"
+import { Icon } from "@/components/ui/icon"
 
 // Types for navigation structure
 export interface NavigationItem {

@@ -18,7 +18,7 @@ import {
   BackpackIcon, BathtubIcon, BeddingIcon, CampaignIcon, CampingIcon, CheckroomIcon, CleanHandsIcon, ClothesIcon,
   // Legacy aliases
   UserIcon, DocumentIcon, CalendarIcon
-} from './Icon'
+} from '@/components/ui/icon'
 
 const meta: Meta<typeof Icon> = {
   title: 'UI/Icon',
