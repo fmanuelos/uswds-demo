@@ -42,32 +42,60 @@ Our primary goal is to build a robust, maintainable, accessible, and USWDS-compl
 uswds-demo/
 ├── src/
 │   ├── components/
-│   │   ├── ui/                    # Basic UI components
-│   │   │   ├── Button/
-│   │   │   │   ├── Button.tsx
-│   │   │   │   ├── Button.stories.tsx
-│   │   │   │   ├── Button.test.tsx
-│   │   │   │   └── index.ts
-│   │   │   ├── Input/
-│   │   │   ├── Select/
-│   │   │   └── Badge/
-│   │   └── blocks/               # Complex layout components
-│   │       ├── Header/
-│   │       └── Footer/
+│   │   ├── ui/                         # 17 Basic UI components (flat structure)
+│   │   │   ├── accordion.tsx           # Expandable content panels
+│   │   │   ├── alert.tsx               # Status notifications
+│   │   │   ├── badge.tsx               # Status indicators
+│   │   │   ├── button.tsx              # Button with 8 variants
+│   │   │   ├── card.tsx                # Content containers
+│   │   │   ├── checkbox.tsx            # Form checkboxes
+│   │   │   ├── dialog.tsx              # Modal dialogs
+│   │   │   ├── form.tsx                # Form components
+│   │   │   ├── icon.tsx                # SVG icon system
+│   │   │   ├── input.tsx               # Text inputs
+│   │   │   ├── label.tsx               # Form labels
+│   │   │   ├── pagination.tsx          # Page navigation
+│   │   │   ├── radio-group.tsx         # Radio button groups
+│   │   │   ├── search.tsx              # Search inputs
+│   │   │   ├── select.tsx              # Dropdown selects
+│   │   │   ├── separator.tsx           # Visual dividers
+│   │   │   └── table.tsx               # Data tables
+│   │   └── blocks/                     # Complex layout components
+│   │       ├── footer.tsx              # Site footer
+│   │       ├── header.tsx              # Navigation header
+│   │       └── in-page-navigation.tsx  # Section navigation
 │   ├── lib/
-│   │   ├── utils.ts              # Utility functions, cn helper
-│   │   └── constants.ts          # USWDS design tokens
+│   │   └── utils.ts                    # Utility functions, cn helper
 │   ├── styles/
-│   │   └── globals.css           # USWDS-compliant global styles
-│   ├── stories/                  # Storybook configuration
-│   └── test/
-│       └── setup.ts              # Test setup
-├── public/                       # Static assets
-├── .storybook/                   # Storybook configuration
+│   │   └── globals.css                 # USWDS-compliant global styles
+│   ├── stories/                        # Storybook stories (separate from components)
+│   │   ├── accordion.stories.tsx
+│   │   ├── alert.stories.tsx
+│   │   ├── badge.stories.tsx
+│   │   ├── button.stories.tsx
+│   │   ├── header.stories.tsx
+│   │   ├── icon.stories.tsx
+│   │   ├── input.stories.tsx
+│   │   ├── select.stories.tsx
+│   │   ├── separator.stories.tsx
+│   │   ├── table.stories.tsx
+│   │   └── Welcome.mdx
+│   └── test/                           # Unit tests (separate from components)
+│       ├── button.test.tsx
+│       ├── icon.test.tsx
+│       ├── table.test.tsx
+│       └── setup.ts
+├── .storybook/                         # Storybook configuration
+├── registry.json                       # Component registry manifest
 ├── tailwind.config.ts
 ├── vitest.config.ts
+├── README.md
+├── REGISTRY_USAGE.md                   # Component registry documentation
+├── STORYBOOK_GUIDE.md                  # Storybook usage guide
 └── package.json
 ```
+
+**Note:** This project uses a **flat file structure** for components, stories, and tests in separate directories, rather than colocating them. This makes it easier to manage the component registry and ensures clean separation of concerns.
 
 ## Component Development Guidelines:
 
