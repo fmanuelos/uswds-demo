@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Icon } from "./Icon/Icon";
+import { Icon } from "./icon";
 
 const searchInputVariants = cva(
   cn(

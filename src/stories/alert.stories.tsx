@@ -1,5 +1,6 @@
+import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Alert, AlertTitle, AlertDescription } from './alert'
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
 const meta = {
   title: 'UI/Alert',
@@ -16,10 +17,10 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'success', 'warning', 'danger', 'info', 'emergency'],
+      options: ['default', 'success', 'warning', 'error', 'info', 'emergency'],
       description: 'The visual style variant of the alert',
     },
-    showIcon: {
+    icon: {
       control: 'boolean',
       description: 'Whether to show the status icon',
       defaultValue: true,
@@ -38,7 +39,7 @@ type Story = StoryObj<typeof meta>
 // Default story
 export const Default: Story = {
   args: {
-    children: 'This is a default alert message.',
+    children: 'Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing elit, sed do eiusmod.',
   },
 }
 
@@ -51,7 +52,7 @@ export const Success: Story = {
     <Alert {...args}>
       <AlertTitle>Success!</AlertTitle>
       <AlertDescription>
-        Your form has been submitted successfully.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -65,7 +66,7 @@ export const Warning: Story = {
     <Alert {...args}>
       <AlertTitle>Warning</AlertTitle>
       <AlertDescription>
-        Please review your information before proceeding.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -73,13 +74,13 @@ export const Warning: Story = {
 
 export const Danger: Story = {
   args: {
-    variant: 'danger',
+    variant: 'error',
   },
   render: (args) => (
     <Alert {...args}>
       <AlertTitle>Error</AlertTitle>
       <AlertDescription>
-        There was an error processing your request. Please try again.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -93,7 +94,7 @@ export const Info: Story = {
     <Alert {...args}>
       <AlertTitle>Information</AlertTitle>
       <AlertDescription>
-        This is some important information you should know.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -107,7 +108,7 @@ export const Emergency: Story = {
     <Alert {...args}>
       <AlertTitle>Emergency Alert</AlertTitle>
       <AlertDescription>
-        This is an emergency alert requiring immediate attention.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -117,13 +118,13 @@ export const Emergency: Story = {
 export const WithoutIcon: Story = {
   args: {
     variant: 'success',
-    showIcon: false,
+    icon: false,
   },
   render: (args) => (
     <Alert {...args}>
       <AlertTitle>Success (No Icon)</AlertTitle>
       <AlertDescription>
-        This alert displays without an icon.
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing <a href="#">consectetur adipiscing</a> elit, sed do eiusmod.</p>
       </AlertDescription>
     </Alert>
   ),
@@ -137,55 +138,11 @@ export const SimpleText: Story = {
   },
 }
 
-// All Variants showcase
-export const AllVariants: Story = {
-  render: () => (
-    <div className="space-y-4 w-full max-w-4xl">
-      <Alert variant="default">
-        <AlertTitle>Default Alert</AlertTitle>
-        <AlertDescription>This is a default alert message.</AlertDescription>
-      </Alert>
-      
-      <Alert variant="success">
-        <AlertTitle>Success Alert</AlertTitle>
-        <AlertDescription>This is a success alert message.</AlertDescription>
-      </Alert>
-      
-      <Alert variant="warning">
-        <AlertTitle>Warning Alert</AlertTitle>
-        <AlertDescription>This is a warning alert message.</AlertDescription>
-      </Alert>
-      
-      <Alert variant="danger">
-        <AlertTitle>Danger Alert</AlertTitle>
-        <AlertDescription>This is a danger alert message.</AlertDescription>
-      </Alert>
-      
-      <Alert variant="info">
-        <AlertTitle>Info Alert</AlertTitle>
-        <AlertDescription>This is an info alert message.</AlertDescription>
-      </Alert>
-      
-      <Alert variant="emergency">
-        <AlertTitle>Emergency Alert</AlertTitle>
-        <AlertDescription>This is an emergency alert message.</AlertDescription>
-      </Alert>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All available alert variants displayed together.',
-      },
-    },
-  },
-}
-
 // Real-world examples
 export const FormValidation: Story = {
   render: () => (
     <div className="space-y-4 w-full max-w-2xl">
-      <Alert variant="danger">
+      <Alert variant="error">
         <AlertTitle>Form Validation Error</AlertTitle>
         <AlertDescription>
           Please correct the following errors:

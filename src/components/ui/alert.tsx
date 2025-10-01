@@ -1,19 +1,23 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Icon } from "./Icon/Icon"
+import { Icon } from "@/components/ui/icon"
 
 const alertVariants = cva(
-  "relative w-full py-4 pl-12 pr-4 @desktop:px-16 max-w-5xl mx-auto @container",
+  "relative p-4 border-l-8 font-public-sans [&_a]:underline",
   {
     variants: {
       variant: {
-        default: "bg-cyan-5 border-l-8 border-l-cyan-30 text-gray-90",
-        success: "bg-green-cool-5 border-l-8 border-l-green-cool-40 text-gray-90",
-        warning: "bg-yellow-5 border-l-8 border-l-gold-20 text-gray-90",
-        danger: "bg-red-warm-10 border-l-8 border-l-red-warm-50 text-gray-90",
-        info: "bg-cyan-5 border-l-8 border-l-cyan-30 text-gray-90",
-        emergency: "bg-red-warm-60v border-l-8 border-l-red-warm-60 text-white",
+        default: "bg-cyan-5 border-l-cyan-30 text-gray-90 [&_a]:text-blue-60v",
+        success: "bg-green-cool-5 border-l-green-cool-40v text-gray-90 [&_a]:text-blue-60v",
+        warning: "bg-yellow-5 border-l-gold-20v text-gray-90 [&_a]:text-blue-60v",
+        error: "bg-red-warm-10 border-l-red-warm-50v text-gray-90 [&_a]:text-blue-60v",
+        info: "bg-cyan-5 border-l-cyan-30v text-gray-90 [&_a]:text-blue-60v",
+        emergency: "bg-red-warm-60v border-l-red-warm-60v text-white [&_a]:!text-gray-10",
+      },
+      hasIcon: {
+        true: "px-16",
+        false: "",
       },
     },
     defaultVariants: {
@@ -26,16 +30,16 @@ const Alert = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants> & {
     role?: "alert" | "status"
-    showIcon?: boolean
+    icon?: boolean
   }
->(({ className, variant, role = "alert", showIcon = true, ...props }, ref) => {
+>(({ className, variant, role = "alert", icon = true, ...props }, ref) => {
   const getIcon = () => {
     switch (variant) {
       case 'success':
         return 'check_circle'
       case 'warning':
         return 'warning'
-      case 'danger':
+      case 'error':
       case 'emergency':
         return 'error'
       default:
@@ -47,11 +51,11 @@ const Alert = React.forwardRef<
     <div
       ref={ref}
       role={role}
-      className={cn(alertVariants({ variant }), className)}
+      className={cn(alertVariants({ variant, hasIcon: icon }), className)}
       {...props}
     >
-      {showIcon && (
-        <div className="absolute left-2 @desktop:left-6 top-3">
+      {icon && (
+        <div className="absolute left-6 top-3">
           <Icon icon={getIcon()} className="size-8" />
         </div>
       )}
@@ -77,9 +81,9 @@ const AlertDescription = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
+  <p
     ref={ref}
-    className={cn("leading-normal font-public-sans [&_a]:text-blue-60v [&_a]:underline", className)}
+    className={cn("leading-normal font-public-sans", className)}
     {...props}
   />
 ))
