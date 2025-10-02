@@ -81,7 +81,7 @@ const AlertDescription = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <p
+  <div
     ref={ref}
     className={cn("leading-normal font-public-sans", className)}
     {...props}

@@ -5,8 +5,8 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Icon } from "@/components/ui/icon"
 
-// Main Accordion variants
-const accordionVariants = cva("m-0 mt-4 p-0 w-full text-md leading-4 list-none text-black font-source-sans", {
+// Main Accordion variants - using space-y-2 for spacing between items
+const accordionVariants = cva("space-y-2", {
   variants: {
     variant: {
       borderless: "",
@@ -19,7 +19,7 @@ const accordionVariants = cva("m-0 mt-4 p-0 w-full text-md leading-4 list-none t
 })
 
 // AccordionItem variants
-const accordionItemVariants = cva("mt-2", {
+const accordionItemVariants = cva("", {
   variants: {
     variant: {
       borderless: "",
@@ -31,9 +31,9 @@ const accordionItemVariants = cva("mt-2", {
   },
 })
 
-// AccordionTrigger variants
+// AccordionTrigger variants - matches USWDS Tailwind reference
 const accordionTriggerVariants = cva(
-  "relative w-full xs:w-full py-4 pl-5 pr-14 text-black text-left font-bold font-source-sans bg-gray-5 hover:bg-gray-10 active:bg-gray-10 focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer",
+  "group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer text-left gap-3",
   {
     variants: {
       variant: {
@@ -47,12 +47,12 @@ const accordionTriggerVariants = cva(
   }
 )
 
-// AccordionContent variants
-const accordionContentVariants = cva("mb-4 p-4 overflow-hidden", {
+// AccordionContent variants - matches USWDS Tailwind reference
+const accordionContentVariants = cva("py-6 px-4 [&[hidden]]:p-0", {
   variants: {
     variant: {
-      borderless: "border-none",
-      bordered: "border-l-[0.25rem] border-l-gray-5 border-b-[0.25rem] border-b-gray-5 border-r-[0.25rem] border-r-gray-5",
+      borderless: "",
+      bordered: "border-b-4 border-x-4 border-gray-5",
     },
   },
   defaultVariants: {
@@ -172,7 +172,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
     const isOpen = openItems.includes(value)
 
     return (
-      <h4 className="m-0">
+      <h4 className="relative m-0">
         <button
           ref={ref}
           type="button"
@@ -183,13 +183,13 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
           {...props}
         >
           {children}
-          <span className="absolute top-3 right-4 w-6 h-6">
+          <div className="h-full flex items-center ml-auto shrink-0">
             {isOpen ? (
               <Icon icon="remove" size="sm" className="size-6" />
             ) : (
               <Icon icon="add" size="sm" className="size-6" />
             )}
-          </span>
+          </div>
         </button>
       </h4>
     )
