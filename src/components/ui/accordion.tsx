@@ -1,53 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Icon } from "@/components/ui/icon"
 
-// Main Accordion variants - using space-y-2 for spacing between items
-const accordionVariants = cva("space-y-2", {
-  variants: {
-    variant: {
-      borderless: "",
-      bordered: "",
-    },
-  },
-  defaultVariants: {
-    variant: "borderless",
-  },
-})
+// AccordionTrigger - ONLY component with actual variant differences
+const accordionTriggerStyles = "group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer text-left gap-3"
 
-// AccordionItem variants
-const accordionItemVariants = cva("", {
-  variants: {
-    variant: {
-      borderless: "",
-      bordered: "",
-    },
-  },
-  defaultVariants: {
-    variant: "borderless",
-  },
-})
-
-// AccordionTrigger variants - matches USWDS Tailwind reference
-const accordionTriggerVariants = cva(
-  "group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer text-left gap-3",
-  {
-    variants: {
-      variant: {
-        borderless: "",
-        bordered: "",
-      },
-    },
-    defaultVariants: {
-      variant: "borderless",
-    },
-  }
-)
-
-// AccordionContent variants - matches USWDS Tailwind reference
+// AccordionContent - ONLY component with actual variant differences
 const accordionContentVariants = cva("py-6 px-4 [&[hidden]]:p-0", {
   variants: {
     variant: {
@@ -77,7 +38,7 @@ const useAccordion = () => {
   return context
 }
 
-// New Context for AccordionItem to pass value to children
+// Context for AccordionItem to pass value to children
 type AccordionItemContextValue = {
   value: string
 }
@@ -92,11 +53,11 @@ const useAccordionItem = () => {
   return context
 }
 
-type AccordionProps = React.HTMLAttributes<HTMLDivElement> & 
-  VariantProps<typeof accordionVariants> & {
-    type?: "single" | "multiple"
-    defaultValue?: string | string[]
-  }
+type AccordionProps = React.HTMLAttributes<HTMLDivElement> & {
+  variant?: "borderless" | "bordered"
+  type?: "single" | "multiple"
+  defaultValue?: string | string[]
+}
 
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
   ({ variant = "borderless", className, children, type = "single", defaultValue, ...props }, ref) => {
@@ -127,7 +88,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
       <AccordionContext.Provider value={{ variant: variant || "borderless", openItems, toggleItem, multiselectable }}>
         <div
           ref={ref}
-          className={cn(accordionVariants({ variant }), className)}
+          className={cn("space-y-2", className)}
           {...props}
         >
           {children}
@@ -144,13 +105,11 @@ type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className, value, children, ...props }, ref) => {
-    const { variant } = useAccordion()
-    
     return (
       <AccordionItemContext.Provider value={{ value }}>
         <div
           ref={ref}
-          className={cn(accordionItemVariants({ variant }), className)}
+          className={className}
           data-value={value}
           {...props}
         >
@@ -166,7 +125,7 @@ type AccordionTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   ({ className, children, ...props }, ref) => {
-    const { variant, openItems, toggleItem } = useAccordion()
+    const { openItems, toggleItem } = useAccordion()
     const { value } = useAccordionItem()
 
     const isOpen = openItems.includes(value)
@@ -178,7 +137,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
           type="button"
           aria-expanded={isOpen}
           aria-controls={`accordion-content-${value}`}
-          className={cn(accordionTriggerVariants({ variant }), className)}
+          className={cn(accordionTriggerStyles, className)}
           onClick={() => toggleItem(value)}
           {...props}
         >

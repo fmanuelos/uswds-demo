@@ -124,9 +124,23 @@ Button.displayName = 'Button';
 ```
 
 ### Styling with CVA:
+
+**When to Use CVA:**
+- ✅ Component has **2+ variants** with **actual style differences**
+- ✅ Need type-safe variant combinations (e.g., size × variant)
+- ✅ Component accepts variant props directly
+
+**When NOT to Use CVA:**
+- ❌ All variants are empty strings (`""`)
+- ❌ Only one static style (use plain string instead)
+- ❌ Variant comes from context (not props)
+- ❌ Only 1-2 simple variants (manual types may be clearer)
+
+#### Example: Using CVA (Multiple Real Variants)
 ```tsx
 import { cva, type VariantProps } from 'class-variance-authority';
 
+// ✅ GOOD: Real style differences across variants
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2',
   {
@@ -148,6 +162,56 @@ const buttonVariants = cva(
     },
   }
 );
+
+// ✅ Use VariantProps to extract types automatically
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & 
+  VariantProps<typeof buttonVariants>
+```
+
+#### Example: Plain String (No Variants)
+```tsx
+// ✅ GOOD: Single style, no variants needed
+const accordionTriggerStyles = "group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold"
+
+type AccordionTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement>
+
+const AccordionTrigger = ({ className, ...props }: AccordionTriggerProps) => (
+  <button className={cn(accordionTriggerStyles, className)} {...props} />
+)
+```
+
+#### Example: CVA Only Where Needed
+```tsx
+// ✅ GOOD: Only use CVA for components with real variant differences
+const accordionContentVariants = cva("py-6 px-4", {
+  variants: {
+    variant: {
+      borderless: "",
+      bordered: "border-b-4 border-x-4 border-gray-5",  // Real difference!
+    },
+  },
+})
+
+// ❌ BAD: Empty variants are unnecessary
+const accordionItemVariants = cva("", {
+  variants: {
+    variant: { borderless: "", bordered: "" },  // All empty!
+  },
+})
+```
+
+**Decision Tree:**
+```
+Do you have a CVA definition?
+├─ NO → ❌ Don't use VariantProps, use manual types
+│
+└─ YES → Does your component accept variant props?
+    ├─ NO (variant from context) → ❌ Don't use VariantProps
+    │
+    └─ YES → Do variants have actual style differences?
+        ├─ NO (all empty strings) → ❌ Remove CVA, use plain strings
+        │
+        └─ YES → ✅ USE CVA + VariantProps!
 ```
 
 ### Storybook Story Structure:
@@ -257,8 +321,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 * **Default Parameter Values:** Instead of defaultProps
 * **JSDoc Comments:** Document all exported components and functions
 * **CN Utility:** Always use for className merging
+* **CVA Usage:** Only use CVA when you have real variant differences. Prefer plain strings for single styles or empty variants
+* **VariantProps Usage:** Only use when component accepts variant props AND uses CVA with real style differences
 * **Performance:** Use React.memo judiciously, keep dependencies minimal
 * **Bundle Size:** Tree-shakeable exports, minimal dependencies
+* **Code Simplicity:** Choose the simplest solution that works. Don't add complexity (CVA, VariantProps) unless it provides real value
 
 ## Error Handling:
 
