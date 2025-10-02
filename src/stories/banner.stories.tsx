@@ -1,6 +1,5 @@
-import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Banner, BannerHeader, BannerFlag, BannerTrigger, BannerContent } from '@/components/ui/banner'
+import { Banner } from '@/components/ui/banner'
 
 const meta = {
   title: 'Components/Banner',
@@ -30,15 +29,6 @@ export const Default: Story = {
     variant: 'gov',
     defaultOpen: false,
   },
-  render: (args) => (
-    <Banner {...args}>
-      <BannerHeader>
-        <BannerFlag />
-        <BannerTrigger />
-      </BannerHeader>
-      <BannerContent />
-    </Banner>
-  ),
 }
 
 export const Gov: Story = {
@@ -46,15 +36,6 @@ export const Gov: Story = {
     variant: 'gov',
     defaultOpen: false,
   },
-  render: (args) => (
-    <Banner {...args}>
-      <BannerHeader>
-        <BannerFlag />
-        <BannerTrigger />
-      </BannerHeader>
-      <BannerContent />
-    </Banner>
-  ),
 }
 
 export const Mil: Story = {
@@ -62,15 +43,6 @@ export const Mil: Story = {
     variant: 'mil',
     defaultOpen: false,
   },
-  render: (args) => (
-    <Banner {...args}>
-      <BannerHeader>
-        <BannerFlag />
-        <BannerTrigger />
-      </BannerHeader>
-      <BannerContent />
-    </Banner>
-  ),
 }
 
 export const DefaultOpen: Story = {
@@ -78,29 +50,4 @@ export const DefaultOpen: Story = {
     variant: 'gov',
     defaultOpen: true,
   },
-  render: (args) => (
-    <Banner {...args}>
-      <BannerHeader>
-        <BannerFlag />
-        <BannerTrigger />
-      </BannerHeader>
-      <BannerContent />
-    </Banner>
-  ),
-}
-
-export const CustomTriggerText: Story = {
-  args: {
-    variant: 'gov',
-    defaultOpen: false,
-  },
-  render: (args) => (
-    <Banner {...args}>
-      <BannerHeader>
-        <BannerFlag />
-        <BannerTrigger>Click to learn more</BannerTrigger>
-      </BannerHeader>
-      <BannerContent />
-    </Banner>
-  ),
 }
