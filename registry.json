@@ -75,6 +75,20 @@
       "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:component",
+      "title": "Breadcrumb",
+      "description": "USWDS-compliant breadcrumb navigation component showing the location of the current page in the site structure. Includes responsive behavior with mobile-optimized display and proper ARIA attributes for accessibility.",
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+    },
+    {
       "name": "input",
       "type": "registry:component",
       "title": "Input",
