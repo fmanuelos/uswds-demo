@@ -27,7 +27,7 @@ const Banner = React.forwardRef<HTMLElement, BannerProps>(
         ref={ref}
         aria-label="Official website of the United States government"
         data-open={isOpen || undefined}
-        className={cn("bg-gray-5", "group", className)}
+        className={cn("bg-gray-5 group", className)}
         {...props}
       >
         {/* Header */}
