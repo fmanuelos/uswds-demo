@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Banner } from '@/components/ui/banner'
 
 const meta = {
-  title: 'Components/Banner',
+  title: 'UI/Banner',
   component: Banner,
   parameters: {
     layout: 'fullscreen',
