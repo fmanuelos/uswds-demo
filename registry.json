@@ -16,7 +16,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "alert",
@@ -30,7 +30,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "icon",
@@ -44,7 +44,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "badge",
@@ -58,7 +58,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "banner",
@@ -72,7 +72,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "breadcrumb",
@@ -86,7 +86,7 @@
         }
       ],
       "dependencies": ["class-variance-authority", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "input",
@@ -100,7 +100,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "label",
@@ -114,7 +114,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-label", "class-variance-authority", "clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "select",
@@ -128,7 +128,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "separator",
@@ -142,7 +142,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "checkbox",
@@ -156,7 +156,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-checkbox", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "accordion",
@@ -169,8 +169,8 @@
           "type": "registry:component"
         }
       ],
-      "dependencies": ["@radix-ui/react-accordion", "clsx"],
-      "registryDependencies": []
+      "dependencies": ["clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "card",
@@ -184,7 +184,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "dialog",
@@ -198,7 +198,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-dialog", "clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "form",
@@ -212,7 +212,7 @@
         }
       ],
       "dependencies": ["react-hook-form", "clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "pagination",
@@ -226,7 +226,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "radio-group",
@@ -240,7 +240,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "search",
@@ -254,7 +254,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "table",
@@ -268,7 +268,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "header",
@@ -282,7 +282,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/button.json", "https://fmanuelos.github.io/uswds-demo/r/search.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/button.json", "https://fmanuelos.github.io/uswds-demo/r/search.json"]
     },
     {
       "name": "footer",
@@ -296,7 +296,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": []
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
       "name": "in-page-navigation",
@@ -310,7 +310,149 @@
         }
       ],
       "dependencies": ["clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utility Functions",
+      "description": "Shared utility functions for class name merging and conditional styling used across USWDS components.",
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "dependencies": ["clsx", "tailwind-merge"],
       "registryDependencies": []
+    },
+    {
+      "name": "fonts",
+      "type": "registry:style",
+      "title": "USWDS Fonts",
+      "description": "Self-hosted variable fonts optimized for USWDS including Public Sans, Source Sans 3, Open Sans, Roboto Mono, Merriweather, and Poppins. Latin subset only, WOFF2 format for optimal performance (~1MB total).",
+      "files": [
+        {
+          "path": "src/styles/fonts.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "public/fonts/public-sans/public-sans.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/public-sans/public-sans.woff2"
+        },
+        {
+          "path": "public/fonts/public-sans/public-sans-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/public-sans/public-sans-italic.woff2"
+        },
+        {
+          "path": "public/fonts/source-sans-3/source-sans-3.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/source-sans-3/source-sans-3.woff2"
+        },
+        {
+          "path": "public/fonts/source-sans-3/source-sans-3-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/source-sans-3/source-sans-3-italic.woff2"
+        },
+        {
+          "path": "public/fonts/open-sans/open-sans.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/open-sans/open-sans.woff2"
+        },
+        {
+          "path": "public/fonts/open-sans/open-sans-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/open-sans/open-sans-italic.woff2"
+        },
+        {
+          "path": "public/fonts/roboto-mono/roboto-mono.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/roboto-mono/roboto-mono.woff2"
+        },
+        {
+          "path": "public/fonts/roboto-mono/roboto-mono-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/roboto-mono/roboto-mono-italic.woff2"
+        },
+        {
+          "path": "public/fonts/merriweather/merriweather.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/merriweather/merriweather.woff2"
+        },
+        {
+          "path": "public/fonts/merriweather/merriweather-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/merriweather/merriweather-italic.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-300.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-300.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-400.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-400.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-500.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-500.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-600.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-600.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-700.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-700.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-300-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-300-italic.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-400-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-400-italic.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-500-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-500-italic.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-600-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-600-italic.woff2"
+        },
+        {
+          "path": "public/fonts/poppins/poppins-700-italic.woff2",
+          "type": "registry:file",
+          "target": "public/fonts/poppins/poppins-700-italic.woff2"
+        }
+      ],
+      "dependencies": [],
+      "registryDependencies": []
+    },
+    {
+      "name": "uswds-styles",
+      "type": "registry:style",
+      "title": "USWDS Global Styles",
+      "description": "Complete USWDS design system styles including Tailwind CSS v4 configuration, color tokens, typography system, and spacing. Government-compliant design tokens for accessible federal websites with Section 508 compliance.",
+      "files": [
+        {
+          "path": "src/styles/globals.css",
+          "type": "registry:style"
+        }
+      ],
+      "dependencies": ["tailwindcss"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/fonts.json"]
     }
   ]
 }
