@@ -71,7 +71,7 @@ const PaginationPrevious = ({
       className={cn("pr-2 mr-3 inline-flex items-center text-blue-60 hover:underline hover:text-blue-warm-70 focus:underline focus:text-blue-warm-70 focus:outline focus:outline-4 focus:outline-blue-40 border-0", className)}
       {...props}
     >
-      <Icon icon="arrow_back" size="xs" className="align-middle size-4" aria-hidden="true" />
+      <Icon icon="navigate_before" size="xs" className="align-middle size-4" aria-hidden="true" />
       Previous
     </PaginationLink>
   </PaginationItem>
@@ -89,7 +89,7 @@ const PaginationNext = ({
       {...props}
     >
       Next
-      <Icon icon="arrow_forward" size="xs" className="align-middle size-4" aria-hidden="true" />
+      <Icon icon="navigate_next" size="xs" className="align-middle size-4" aria-hidden="true" />
     </PaginationLink>
   </PaginationItem>
 )

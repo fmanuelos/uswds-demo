@@ -19,6 +19,20 @@
       "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
+      "name": "button-group",
+      "type": "registry:component",
+      "title": "Button Group",
+      "description": "USWDS-compliant button group component with default and segmented variants. Supports multiple color schemes including blue, red, cyan, orange, gray, and outline styles. Fully accessible with WCAG 2.1 AA compliance.",
+      "files": [
+        {
+          "path": "src/components/ui/button-group.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
       "name": "alert",
       "type": "registry:component", 
       "title": "Alert",
