@@ -1,8 +1,8 @@
 import * as React from 'react'
 import type { Meta, StoryObj } from "@storybook/react"
-import { ArrowLeftIcon, ArchiveIcon, MailCheckIcon, ClockIcon, TrashIcon, PlusIcon, MinusIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
+import { Icon } from "@/components/ui/icon"
 
 const meta = {
   title: "UI/ButtonGroup",
@@ -31,13 +31,13 @@ export const Vertical: Story = {
   render: () => (
     <ButtonGroup orientation="vertical" className="h-fit">
       <Button variant="outline" size="icon">
-        <PlusIcon />
+        <Icon icon="add" />
       </Button>
       <Button variant="outline" size="icon">
-        <MinusIcon />
+        <Icon icon="remove" />
       </Button>
       <Button variant="outline" size="icon">
-        <TrashIcon />
+        <Icon icon="delete" />
       </Button>
     </ButtonGroup>
   ),
@@ -83,26 +83,26 @@ export const MixedVariants: Story = {
 //     <ButtonGroup>
 //       <ButtonGroup>
 //         <Button variant="outline" size="icon" aria-label="Go Back">
-//           <ArrowLeftIcon />
+//           <Icon icon="arrow_back" />
 //         </Button>
 //       </ButtonGroup>
 //       <ButtonGroup>
 //         <Button variant="outline">
-//           <ArchiveIcon /> Archive
+//           <Icon icon="archive" /> Archive
 //         </Button>
 //         <Button variant="outline">Report</Button>
 //       </ButtonGroup>
 //       <ButtonGroup>
 //         <Button variant="outline">
-//           <ClockIcon /> Snooze
+//           <Icon icon="schedule" /> Snooze
 //         </Button>
 //         <Button variant="outline">
-//           <MailCheckIcon /> Mark as Read
+//           <Icon icon="check" /> Mark as Read
 //         </Button>
 //       </ButtonGroup>
 //       <ButtonGroup>
 //         <Button variant="secondary" size="icon">
-//           <TrashIcon />
+//           <Icon icon="delete" />
 //         </Button>
 //       </ButtonGroup>
 //     </ButtonGroup>
