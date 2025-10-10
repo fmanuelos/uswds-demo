@@ -30,9 +30,58 @@ npx shadcn@latest init
 
 Follow the prompts to configure your project with TypeScript and Tailwind CSS.
 
-### 2. Install Individual Components
+### 2. Configure Components Registry (Optional)
 
-Add components one by one using our registry URL:
+For easier component installation, create a `components.json` file in your project root. This allows you to install components without specifying the full registry URL each time.
+
+```json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/styles/globals.css",
+    "baseColor": "slate",
+    "cssVariables": false,
+    "prefix": ""
+  },
+  "iconLibrary": "none",
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "blocks": "@/components/blocks",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {
+    "@uswds-demo": "https://fmanuelos.github.io/uswds-demo/r/{name}.json"
+  }
+}
+```
+
+**Benefits of using `components.json`:**
+- Install components with short commands: `npx shadcn@latest add @uswds-demo/button`
+- Automatic path resolution and dependency management
+- Consistent configuration across your project
+
+### 3. Install Individual Components
+
+**Option A: With `components.json` configured**
+
+Install components using short names:
+
+```bash
+npx shadcn@latest add @uswds-demo/button
+npx shadcn@latest add @uswds-demo/input
+npx shadcn@latest add @uswds-demo/dialog
+```
+
+**Option B: Without `components.json`**
+
+Install components using the full registry URL:
 
 ```bash
 npx shadcn@latest add https://fmanuelos.github.io/uswds-demo/r/button.json
@@ -40,7 +89,7 @@ npx shadcn@latest add https://fmanuelos.github.io/uswds-demo/r/input.json
 npx shadcn@latest add https://fmanuelos.github.io/uswds-demo/r/dialog.json
 ```
 
-### 3. Install Required Dependencies
+### 4. Install Required Dependencies
 
 Some components require additional dependencies:
 
