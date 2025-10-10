@@ -1,8 +1,8 @@
-name: Build & Deploy (shadcn + storybook)
+name: Build & Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
   pull_request:
 
 permissions:
