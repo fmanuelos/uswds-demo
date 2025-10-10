@@ -184,7 +184,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "card",
@@ -212,7 +212,7 @@
         }
       ],
       "dependencies": ["@radix-ui/react-dialog", "clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "form",
@@ -240,7 +240,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "radio-group",
@@ -268,7 +268,7 @@
         }
       ],
       "dependencies": ["clsx"],
-      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
       "name": "table",
@@ -455,7 +455,7 @@
       "registryDependencies": []
     },
     {
-      "name": "uswds-styles",
+      "name": "styles",
       "type": "registry:style",
       "title": "USWDS Global Styles",
       "description": "Complete USWDS design system styles including Tailwind CSS v4 configuration, color tokens, typography system, and spacing. Government-compliant design tokens for accessible federal websites with Section 508 compliance.",
