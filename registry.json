@@ -348,121 +348,124 @@
       "files": [
         {
           "path": "src/styles/fonts.css",
-          "type": "registry:style"
+          "type": "registry:style",
+          "target": "~/src/app/fonts.css"
+
         },
         {
           "path": "public/fonts/public-sans/public-sans.woff2",
           "type": "registry:file",
-          "target": "public/fonts/public-sans/public-sans.woff2"
+          "target": "~/public/fonts/public-sans/public-sans.woff2"
         },
         {
           "path": "public/fonts/public-sans/public-sans-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/public-sans/public-sans-italic.woff2"
+          "target": "~/public/fonts/public-sans/public-sans-italic.woff2"
         },
         {
           "path": "public/fonts/source-sans-3/source-sans-3.woff2",
           "type": "registry:file",
-          "target": "public/fonts/source-sans-3/source-sans-3.woff2"
+          "target": "~/public/fonts/source-sans-3/source-sans-3.woff2"
         },
         {
           "path": "public/fonts/source-sans-3/source-sans-3-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/source-sans-3/source-sans-3-italic.woff2"
+          "target": "~/public/fonts/source-sans-3/source-sans-3-italic.woff2"
         },
         {
           "path": "public/fonts/open-sans/open-sans.woff2",
           "type": "registry:file",
-          "target": "public/fonts/open-sans/open-sans.woff2"
+          "target": "~/public/fonts/open-sans/open-sans.woff2"
         },
         {
           "path": "public/fonts/open-sans/open-sans-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/open-sans/open-sans-italic.woff2"
+          "target": "~/public/fonts/open-sans/open-sans-italic.woff2"
         },
         {
           "path": "public/fonts/roboto-mono/roboto-mono.woff2",
           "type": "registry:file",
-          "target": "public/fonts/roboto-mono/roboto-mono.woff2"
+          "target": "~/public/fonts/roboto-mono/roboto-mono.woff2"
         },
         {
           "path": "public/fonts/roboto-mono/roboto-mono-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/roboto-mono/roboto-mono-italic.woff2"
+          "target": "~/public/fonts/roboto-mono/roboto-mono-italic.woff2"
         },
         {
           "path": "public/fonts/merriweather/merriweather.woff2",
           "type": "registry:file",
-          "target": "public/fonts/merriweather/merriweather.woff2"
+          "target": "~/public/fonts/merriweather/merriweather.woff2"
         },
         {
           "path": "public/fonts/merriweather/merriweather-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/merriweather/merriweather-italic.woff2"
+          "target": "~/public/fonts/merriweather/merriweather-italic.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-300.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-300.woff2"
+          "target": "~/public/fonts/poppins/poppins-300.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-400.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-400.woff2"
+          "target": "~/public/fonts/poppins/poppins-400.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-500.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-500.woff2"
+          "target": "~/public/fonts/poppins/poppins-500.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-600.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-600.woff2"
+          "target": "~/public/fonts/poppins/poppins-600.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-700.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-700.woff2"
+          "target": "~/public/fonts/poppins/poppins-700.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-300-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-300-italic.woff2"
+          "target": "~/public/fonts/poppins/poppins-300-italic.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-400-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-400-italic.woff2"
+          "target": "~/public/fonts/poppins/poppins-400-italic.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-500-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-500-italic.woff2"
+          "target": "~/public/fonts/poppins/poppins-500-italic.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-600-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-600-italic.woff2"
+          "target": "~/public/fonts/poppins/poppins-600-italic.woff2"
         },
         {
           "path": "public/fonts/poppins/poppins-700-italic.woff2",
           "type": "registry:file",
-          "target": "public/fonts/poppins/poppins-700-italic.woff2"
+          "target": "~/public/fonts/poppins/poppins-700-italic.woff2"
         }
       ],
       "dependencies": [],
       "registryDependencies": []
     },
     {
-      "name": "styles",
+      "name": "nextjs-styles",
       "type": "registry:style",
       "title": "USWDS Global Styles",
       "description": "Complete USWDS design system styles including Tailwind CSS v4 configuration, color tokens, typography system, and spacing. Government-compliant design tokens for accessible federal websites with Section 508 compliance.",
       "files": [
         {
           "path": "src/styles/globals.css",
-          "type": "registry:style"
+          "type": "registry:style",
+          "target": "~/src/app/globals.css"
         }
       ],
       "dependencies": ["tailwindcss"],
