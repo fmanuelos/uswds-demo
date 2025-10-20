@@ -56,11 +56,6 @@ const meta: Meta<typeof Icon> = {
       options: ['xs', 'sm', 'default', 'lg', 'xl', '2xl'],
       description: 'Size of the icon',
     },
-    variant: {
-      control: { type: 'select' },
-      options: ['default', 'outlined'],
-      description: 'Visual variant of the icon',
-    },
     className: {
       control: 'text',
       description: 'Additional CSS classes',
@@ -82,13 +77,6 @@ export const WithCustomSize: Story = {
   args: {
     icon: 'search',
     size: 'xl',
-  },
-}
-
-export const OutlinedVariant: Story = {
-  args: {
-    icon: 'person',
-    variant: 'outlined',
   },
 }
 
@@ -353,37 +341,6 @@ export const AllSizes: Story = {
     docs: {
       description: {
         story: 'Icon sizes from XS (16px) to 2XL (64px), optimized for government interfaces.',
-      },
-    },
-  },
-}
-
-// Variant Showcase
-export const Variants: Story = {
-  render: () => (
-    <div className="flex gap-8 p-6">
-      <div className="flex flex-col items-center gap-4">
-        <h4 className="font-semibold text-gray-800">Default (Filled)</h4>
-        <div className="flex gap-4">
-          <PersonIcon size="xl" variant="default" className="text-blue-60" />
-          <SecurityIcon size="xl" variant="default" className="text-green-60" />
-          <SettingsIcon size="xl" variant="default" className="text-purple-60" />
-        </div>
-      </div>
-      <div className="flex flex-col items-center gap-4">
-        <h4 className="font-semibold text-gray-800">Outlined</h4>
-        <div className="flex gap-4">
-          <PersonIcon size="xl" variant="outlined" className="text-blue-60" />
-          <SecurityIcon size="xl" variant="outlined" className="text-green-60" />
-          <SettingsIcon size="xl" variant="outlined" className="text-purple-60" />
-        </div>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Available icon variants: default (filled) and outlined.',
       },
     },
   },

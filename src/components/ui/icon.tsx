@@ -15,14 +15,9 @@ const iconVariants = cva(
         xl: "h-12 w-12",
         "2xl": "h-16 w-16"
       },
-      variant: {
-        default: "stroke-none fill-current",
-        outlined: "stroke-current fill-none stroke-2"
-      }
     },
     defaultVariants: {
       size: "default",
-      variant: "default"
     }
   }
 );
@@ -1725,11 +1720,11 @@ const iconPaths: Record<IconType, React.ReactNode> = {
 
 // Main Icon component
 const Icon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ className, size, variant, icon, ...props }, ref) => {
+  ({ className, size, icon, ...props }, ref) => {
     return (
       <svg
         ref={ref}
-        className={cn(iconVariants({ size, variant }), className)}
+        className={cn("stroke-none fill-current", iconVariants({ size }), className)}
         viewBox="0 0 24 24"
         role="img"
         aria-hidden="true"
