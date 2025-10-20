@@ -285,6 +285,20 @@
       "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
+      "name": "tooltip",
+      "type": "registry:component",
+      "title": "Tooltip",
+      "description": "A USWDS-compliant tooltip component that displays a short descriptive message when a user hovers or focuses on an element. Supports four positions (top, right, bottom, left) and is fully accessible with WCAG 2.1 AA compliance.",
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
       "name": "header",
       "type": "registry:block",
       "title": "Header",
