@@ -455,12 +455,12 @@ const iconPaths: Record<IconType, React.ReactNode> = {
   ),
   expand_less: (
     <>
-      <path d="m18 15-6-6-6 6"></path>
+      <path d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
     </>
   ),
   expand_more: (
     <>
-      <path d="m7 10 5 5 5-5z"></path>
+      <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
     </>
   ),
   first_page: (
