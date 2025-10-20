@@ -25,6 +25,41 @@ Our primary goal is to build a robust, maintainable, accessible, and USWDS-compl
 * **React:** Version 19+. Functional components with hooks only.
 * **TypeScript:** Strict mode enabled. Default to using `type` over `interface`.
 * **Storybook:** Version 9.1+. Primary development environment.
+
+## TypeScript Type Declarations:
+
+**Default to `type` over `interface`** - Use `type` aliases as the default choice for component props and most type declarations.
+
+### When to Use `type`:
+- ✅ **Component props** that simply forward HTML attributes (e.g., `type InputProps = React.InputHTMLAttributes<HTMLInputElement>`)
+- ✅ **Simple type aliases** without need for extension
+- ✅ **Union types** or complex type operations
+- ✅ **Direct type assignments** where inheritance isn't needed
+- ✅ **Performance-critical** code (type aliases compile faster)
+
+### When to Use `interface`:
+- ✅ **Extensible APIs** that need to be extended by other types
+- ✅ **Declaration merging** requirements
+- ✅ **Adding custom properties** to base HTML attributes (e.g., `variant`, `size` props)
+- ✅ **Complex component APIs** with multiple optional properties
+
+### Examples:
+
+```tsx
+// ✅ GOOD: Simple forwarding - use type
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>
+
+// ✅ GOOD: Adding custom props - use interface
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
+}
+
+// ✅ GOOD: Union types - use type
+type Status = 'loading' | 'success' | 'error'
+```
+
+**Decision Rule:** Start with `type` for simple cases. Only use `interface` when you need extensibility or are adding custom properties beyond the base HTML attributes.
 * **State Management:**
   * **Local Component State:** React Hooks (`useState`, `useReducer`)
   * **Form State:** **`react-hook-form`** for form components
