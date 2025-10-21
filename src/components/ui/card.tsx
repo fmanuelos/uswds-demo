@@ -81,31 +81,6 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardHeader.displayName = "CardHeader";
 
-// Card title with USWDS typography
-const CardTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h2
-    ref={ref}
-    className={cn(
-      "font-bold font-merriweather text-lg",
-      className
-    )}
-    {...props}
-  />
-));
-CardTitle.displayName = "CardTitle";
-
-// Card description with USWDS typography
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("font-public-sans", className)} {...props} />
-));
-CardDescription.displayName = "CardDescription";
-
 // Card content with USWDS styling
 const CardContent = React.forwardRef<
   HTMLDivElement,
@@ -170,8 +145,6 @@ export {
   CardItem,
   CardHeader,
   CardFooter,
-  CardTitle,
-  CardDescription,
   CardContent,
   CardMedia,
 };
