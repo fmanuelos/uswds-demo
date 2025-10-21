@@ -45,7 +45,7 @@ export const Default: Story = {
 // With Label
 export const WithLabel: Story = {
   render: (args) => (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div className="grid w-full max-w-sm items-center">
       <Label htmlFor="input-with-label">Name</Label>
       <Input id="input-with-label" placeholder="Enter your name" {...args} />
     </div>
@@ -66,7 +66,7 @@ export const Email: Story = {
     placeholder: 'Enter your email',
   },
   render: (args) => (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div className="grid w-full max-w-sm items-center">
       <Label htmlFor="email-input">Email Address</Label>
       <Input id="email-input" {...args} />
     </div>
@@ -80,7 +80,7 @@ export const Password: Story = {
     placeholder: 'Enter your password',
   },
   render: (args) => (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div className="grid w-full max-w-sm items-center">
       <Label htmlFor="password-input">Password</Label>
       <Input id="password-input" {...args} />
     </div>
@@ -94,7 +94,7 @@ export const Search: Story = {
     placeholder: 'Search...',
   },
   render: (args) => (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div className="grid w-full max-w-sm items-center">
       <Label htmlFor="search-input">Search</Label>
       <Input id="search-input" {...args} />
     </div>
@@ -116,7 +116,7 @@ export const WithDefaultValue: Story = {
     defaultValue: 'Default value',
   },
   render: (args) => (
-    <div className="grid w-full max-w-sm items-center gap-2">
+    <div className="grid w-full max-w-sm items-center">
       <Label htmlFor="default-value-input">Name</Label>
       <Input id="default-value-input" {...args} />
     </div>
@@ -127,22 +127,22 @@ export const WithDefaultValue: Story = {
 export const FormExample: Story = {
   render: () => (
     <form className="space-y-4 w-full max-w-md">
-      <div className="grid w-full items-center gap-2">
+      <div className="grid w-full items-center">
         <Label htmlFor="first-name">First Name</Label>
         <Input id="first-name" placeholder="Enter your first name" />
       </div>
       
-      <div className="grid w-full items-center gap-2">
+      <div className="grid w-full items-center">
         <Label htmlFor="last-name">Last Name</Label>
         <Input id="last-name" placeholder="Enter your last name" />
       </div>
       
-      <div className="grid w-full items-center gap-2">
+      <div className="grid w-full items-center">
         <Label htmlFor="email">Email</Label>
         <Input id="email" type="email" placeholder="Enter your email" />
       </div>
       
-      <div className="grid w-full items-center gap-2">
+      <div className="grid w-full items-center">
         <Label htmlFor="phone">Phone</Label>
         <Input id="phone" type="tel" placeholder="(555) 123-4567" />
       </div>
