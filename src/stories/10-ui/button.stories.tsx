@@ -161,20 +161,6 @@ export const Icon: Story = {
   },
 }
 
-// Interactive story
-export const Interactive: Story = {
-  args: {
-    children: 'Click Me!',
-  },
-}
-
-// Keyboard navigation story
-export const KeyboardNavigation: Story = {
-  args: {
-    children: 'Keyboard Test',
-  },
-}
-
 // Accessibility story
 export const AccessibilityTest: Story = {
   args: {
