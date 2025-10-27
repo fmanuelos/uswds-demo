@@ -154,3 +154,44 @@ export const MultipleSelection: Story = {
     },
   },
 }
+
+export const BorderlessWithCustomIcons: Story = {
+  args: {
+    variant: 'borderless',
+    type: 'single',
+  },
+  render: (args) => (
+    <Accordion variant={args.variant} type={args.type} className="w-[800px]">
+      <AccordionItem value="item-1">
+        <AccordionTrigger openIcon="expand_less" closedIcon="expand_more">What is the U.S. Web Design System?</AccordionTrigger>
+        <AccordionContent>
+          The U.S. Web Design System (USWDS) is a toolkit of principles, guidance, 
+          and code to help government teams design and build accessible, mobile-friendly 
+          government websites backed by user research and modern best practices.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger openIcon="arrow_drop_up" closedIcon="arrow_drop_down">How does USWDS help my project?</AccordionTrigger>
+        <AccordionContent>
+          USWDS provides tested, accessible components that comply with Section 508 
+          and WCAG 2.1 AA standards, saving development time and ensuring government 
+          website compliance.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger openIcon="arrow_upward" closedIcon="arrow_downward">Can I use USWDS with React?</AccordionTrigger>
+        <AccordionContent>
+          Yes! This component library demonstrates how to implement USWDS patterns 
+          using React, TypeScript, and modern component architecture.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Icons can be selected from the Icon component. The openIcon and closedIcon props are used to set the icons for the accordion trigger.',
+      },
+    },
+  },
+}

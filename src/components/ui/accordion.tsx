@@ -3,7 +3,7 @@
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { Icon } from "@/components/ui/icon"
+import { Icon, IconType } from "@/components/ui/icon"
 
 // AccordionTrigger - ONLY component with actual variant differences
 const accordionTriggerStyles = "group flex items-center w-full py-4 px-5 bg-gray-5 hover:bg-gray-10 font-bold focus:outline focus:outline-4 focus:outline-blue-40v cursor-pointer text-left gap-3"
@@ -85,7 +85,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     }, [multiselectable])
 
     return (
-      <AccordionContext.Provider value={{ variant: variant || "borderless", openItems, toggleItem, multiselectable }}>
+      <AccordionContext.Provider value={{ variant, openItems, toggleItem, multiselectable }}>
         <div
           ref={ref}
           className={cn("space-y-2", className)}
@@ -121,10 +121,13 @@ const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
 )
 AccordionItem.displayName = "AccordionItem"
 
-type AccordionTriggerProps = React.ButtonHTMLAttributes<HTMLButtonElement>
-
+type AccordionTriggerProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
+& {
+  openIcon?: IconType
+  closedIcon?: IconType
+})
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, openIcon = "remove", closedIcon = "add", ...props }, ref) => {
     const { openItems, toggleItem } = useAccordion()
     const { value } = useAccordionItem()
 
@@ -144,9 +147,9 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
           {children}
           <div className="h-full flex items-center ml-auto shrink-0">
             {isOpen ? (
-              <Icon icon="remove" size="sm" className="size-6" />
+              <Icon icon={openIcon} size="sm" className="size-6" />
             ) : (
-              <Icon icon="add" size="sm" className="size-6" />
+              <Icon icon={closedIcon} size="sm" className="size-6" />
             )}
           </div>
         </button>
