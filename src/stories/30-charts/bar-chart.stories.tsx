@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   LabelList,
   XAxis,
   YAxis,
@@ -108,16 +109,16 @@ export const Default: Story = {
   },
 };
 
-// Bar chart with labels
-export const Labels: Story = {
+// Horizontal bar chart
+export const Horizontal: Story = {
   render: (args) => (
     <Card className="max-w-5xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
-          Bar Chart - Labels
+          Bar Chart - Horizontal
         </h2>
         <p className="text-sm text-muted-foreground">
-          A simple bar chart example with labels
+          Comparing desktop visitors over 6 months
         </p>
       </CardHeader>
       <CardContent>
@@ -126,7 +127,7 @@ export const Labels: Story = {
             {
               desktop: {
                 label: "Desktop",
-                color: "var(--color-cyan-30v)", // var(--color-cyan-30v)
+                color: "var(--color-blue-60v)", // var(--color-blue-60v)
               },
             } as ChartConfig
           }
@@ -142,33 +143,31 @@ export const Labels: Story = {
               { month: "May", desktop: 209 },
               { month: "June", desktop: 214 },
             ]}
+            layout="vertical"
+            margin={{
+              left: -20,
+            }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
+            <YAxis
               dataKey="month"
+              type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
             />
+            <XAxis type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground"
-                fontSize={12}
-              />
-            </Bar>
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Horizontal layout for easier label reading
         </div>
       </CardFooter>
     </Card>
@@ -177,7 +176,7 @@ export const Labels: Story = {
     docs: {
       description: {
         story:
-          "A basic bar chart showing desktop visitors over 6 months with labels on each bar.",
+          "Horizontal bar chart useful when category labels are long or when comparing values is the primary goal.",
       },
     },
   },
@@ -253,16 +252,16 @@ export const Multiple: Story = {
   },
 };
 
-// Horizontal bar chart
-export const Horizontal: Story = {
+// Multi-series bar chart
+export const Stacked: Story = {
   render: (args) => (
     <Card className="max-w-5xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
-          Bar Chart - Horizontal
+          Bar Chart - Stacked
         </h2>
         <p className="text-sm text-muted-foreground">
-          Comparing desktop visitors over 6 months
+          Stacked bar chart comparing desktop and mobile visitors
         </p>
       </CardHeader>
       <CardContent>
@@ -272,6 +271,164 @@ export const Horizontal: Story = {
               desktop: {
                 label: "Desktop",
                 color: "var(--color-blue-60v)", // var(--color-blue-60v)
+              },
+              mobile: {
+                label: "Mobile",
+                color: "var(--color-cyan-30v)", // var(--color-cyan-30v)
+              },
+            } as ChartConfig
+          }
+        >
+          <BarChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186, mobile: 80 },
+              { month: "February", desktop: 305, mobile: 200 },
+              { month: "March", desktop: 237, mobile: 120 },
+              { month: "April", desktop: 73, mobile: 190 },
+              { month: "May", desktop: 209, mobile: 130 },
+              { month: "June", desktop: 214, mobile: 140 },
+            ]}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+            <ChartLegend content={<ChartLegendContent />} />
+            <Bar
+              dataKey="desktop"
+              stackId="a"
+              fill="var(--color-desktop)"
+              radius={[0, 0, 4, 4]}
+            />
+            <Bar
+              dataKey="mobile"
+              stackId="a"
+              fill="var(--color-mobile)"
+              radius={[4, 4, 0, 0]}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Comparing desktop and mobile visitors
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Bar chart comparing multiple data series side by side.",
+      },
+    },
+  },
+};
+
+// Bar chart with labels
+export const Labels: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Labels
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          A simple bar chart example with labels
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-cyan-30v)", // var(--color-cyan-30v)
+              },
+            } as ChartConfig
+          }
+        >
+          <BarChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186 },
+              { month: "February", desktop: 305 },
+              { month: "March", desktop: 237 },
+              { month: "April", desktop: 73 },
+              { month: "May", desktop: 209 },
+              { month: "June", desktop: 214 },
+            ]}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4}>
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A basic bar chart showing desktop visitors over 6 months with labels on each bar.",
+      },
+    },
+  },
+};
+
+// Horizontal bar chart
+export const CustomLabels: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Custom Labels
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          A basic bar chart example with custom labels
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-blue-60v)", // var(--color-blue-60v)
+              },
+              label: {
+                color: "var(--color-gray-10)",
               },
             } as ChartConfig
           }
@@ -289,7 +446,7 @@ export const Horizontal: Story = {
             ]}
             layout="vertical"
             margin={{
-              left: -20,
+              right: 16,
             }}
           >
             <YAxis
@@ -299,19 +456,35 @@ export const Horizontal: Story = {
               tickMargin={10}
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 3)}
+              hide
             />
             <XAxis type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5}>
+              <LabelList
+                dataKey="month"
+                position="insideLeft"
+                offset={8}
+                className="fill-(--color-label)"
+                fontSize={12}
+              />
+              <LabelList
+                dataKey="desktop"
+                position="right"
+                offset={8}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="text-muted-foreground leading-none">
-          Horizontal layout for easier label reading
+          A basic bar chart example with custom labels
         </div>
       </CardFooter>
     </Card>
@@ -321,6 +494,189 @@ export const Horizontal: Story = {
       description: {
         story:
           "Horizontal bar chart useful when category labels are long or when comparing values is the primary goal.",
+      },
+    },
+  },
+};
+
+// Mixed bar chart with different colors
+export const Mixed: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Mixed
+        </h2>
+        <p className="text-sm text-muted-foreground">January - June 2024</p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              visitors: {
+                label: "Visitors",
+              },
+              chrome: {
+                label: "Chrome",
+                color: "var(--color-blue-60v)",
+              },
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
+              },
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
+              },
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-50v)",
+              },
+              other: {
+                label: "Other",
+                color: "var(--color-gray-50)",
+              },
+            } as ChartConfig
+          }
+        >
+          <BarChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+              { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+              { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+              { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+              { browser: "other", visitors: 90, fill: "var(--color-other)" },
+            ]}
+            layout="vertical"
+            margin={{
+              left: 0,
+            }}
+          >
+            <YAxis
+              dataKey="browser"
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+            />
+            <XAxis dataKey="visitors" type="number" hide />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar dataKey="visitors" layout="vertical" radius={5} />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Horizontal bar chart with mixed colors - each bar has its own unique USWDS color based on the category.",
+      },
+    },
+  },
+};
+
+// Format month abbreviation
+const formatMonthTick = (value: string) => value.slice(0, 3);
+
+// Negative bar chart
+export const Negative: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Negative
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          January - June 2024
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              visitors: {
+                label: "Visitors",
+              },
+            } as ChartConfig
+          }
+        >
+          <BarChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", visitors: 186 },
+              { month: "February", visitors: 205 },
+              { month: "March", visitors: -207 },
+              { month: "April", visitors: 173 },
+              { month: "May", visitors: -209 },
+              { month: "June", visitors: 214 },
+            ]}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel hideIndicator />}
+            />
+            <Bar dataKey="visitors">
+              <LabelList
+                position="top"
+                dataKey="month"
+                fillOpacity={1}
+                fontSize={12}
+                // formatter={(value) => value.slice(0, 3)}
+              />
+              {[
+                { month: "January", visitors: 186 },
+                { month: "February", visitors: 205 },
+                { month: "March", visitors: -207 },
+                { month: "April", visitors: 173 },
+                { month: "May", visitors: -209 },
+                { month: "June", visitors: 214 },
+              ].map((item) => (
+                <Cell
+                  key={item.month}
+                  fill={
+                    item.visitors > 0
+                      ? "var(--color-blue-60v)"
+                      : "var(--color-cyan-30v)"
+                  }
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing positive and negative values with different colors
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Bar chart with positive and negative values - positive bars are blue, negative bars are red.",
       },
     },
   },

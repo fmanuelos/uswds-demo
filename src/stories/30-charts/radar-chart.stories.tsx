@@ -10,6 +10,8 @@ import {
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/charts/chart";
@@ -209,8 +211,8 @@ export const LinesOnly: Story = {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <PolarAngleAxis dataKey="category" />
-            <PolarGrid />
+            <PolarAngleAxis dataKey="month" />
+            <PolarGrid radialLines={false}/>
             <Radar
               dataKey="desktop"
               fill="var(--color-desktop)"
@@ -224,6 +226,83 @@ export const LinesOnly: Story = {
               fillOpacity={0}
               stroke="var(--color-mobile)"
               strokeWidth={2}
+            />
+          </RadarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Outline only view for cleaner visualization
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Radar chart with lines only (no fill), useful for comparing multiple series or cleaner presentation.",
+      },
+    },
+  },
+};
+
+
+// Radar chart - Multiple
+export const Multiple: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Radar Chart - Multiple
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Performance metrics with outline only
+        </p>
+      </CardHeader>
+      <CardContent className="pb-0">
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-blue-60v)",
+              },
+              mobile: {
+                label: "Mobile",
+                color: "var(--color-cyan-30v)",
+              },
+            } as ChartConfig
+          }
+          className="mx-auto aspect-square max-h-[500px]"
+        >
+          <RadarChart
+            {...args}
+            data={[
+              { month: "January", desktop: 186, mobile: 80 },
+              { month: "February", desktop: 305, mobile: 200 },
+              { month: "March", desktop: 237, mobile: 120 },
+              { month: "April", desktop: 73, mobile: 190 },
+              { month: "May", desktop: 209, mobile: 130 },
+              { month: "June", desktop: 214, mobile: 140 },
+            ]}
+          >
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <ChartLegend content={<ChartLegendContent />} />
+            <PolarAngleAxis dataKey="month" />
+            <PolarGrid />
+            <Radar
+              dataKey="desktop"
+              fill="var(--color-desktop)"
+              fillOpacity={0.6}
+            />
+            <Radar
+              dataKey="mobile"
+              fill="var(--color-mobile)"
+              fillOpacity={0.9}
             />
           </RadarChart>
         </ChartContainer>
