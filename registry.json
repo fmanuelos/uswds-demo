@@ -271,6 +271,34 @@
       "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
     },
     {
+      "name": "autocomplete",
+      "type": "registry:component",
+      "title": "Autocomplete",
+      "description": "USWDS-compliant autocomplete component providing users with search suggestions in real time. Based on the NCI Design System with full keyboard navigation, accessibility features, and configurable options including minimum character count, highlighting, and async search support.",
+      "files": [
+        {
+          "path": "src/components/ui/autocomplete.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+    },
+    {
+      "name": "chart",
+      "type": "registry:component",
+      "title": "Chart Foundation",
+      "description": "Base chart components with USWDS styling including ChartContainer, ChartTooltip, and ChartLegend. Provides the foundation for all chart types with government-compliant theming and accessibility features.",
+      "files": [
+        {
+          "path": "src/components/charts/chart.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
       "name": "table",
       "type": "registry:component",
       "title": "Table",
