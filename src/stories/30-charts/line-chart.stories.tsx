@@ -1,13 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  LabelList,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -19,19 +12,17 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
 } from "@/components/charts/chart";
 
 const meta = {
-  title: "Charts/Bar Chart",
-  component: BarChart,
+  title: "Charts/Line Chart",
+  component: LineChart,
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          "Bar charts are used to compare values across categories. Built with Recharts and follows USWDS design guidelines with proper accessibility features.",
+          "Line charts display trends and changes over time or categories. Built with Recharts and follows USWDS design guidelines with proper accessibility features.",
       },
     },
   },
@@ -41,16 +32,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-BarChart.displayName = "BarChart";
+LineChart.displayName = "LineChart";
 
-// Default bar chart
+// Format month abbreviation
+const formatMonthTick = (value: string) => value.slice(0, 3);
+
+// Default line chart with smooth curve
 export const Default: Story = {
   render: (args) => (
     <Card className="max-w-5xl">
       <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">Bar Chart</h2>
+        <h2 className="font-bold font-merriweather text-lg">Line Chart</h2>
         <p className="text-sm text-muted-foreground">
-          A simple bar chart example
+          Monthly visitor trend with smooth curve
         </p>
       </CardHeader>
       <CardContent>
@@ -59,111 +53,44 @@ export const Default: Story = {
             {
               desktop: {
                 label: "Desktop",
-                color: "var(--color-blue-60v)", // var(--color-blue-60v)
+                color: "var(--color-blue-60v)",
               },
             } as ChartConfig
           }
         >
-          <BarChart
+          <LineChart
             {...args}
             accessibilityLayer
             data={[
               { month: "January", desktop: 186 },
               { month: "February", desktop: 305 },
               { month: "March", desktop: 237 },
-              { month: "April", desktop: 73 },
+              { month: "April", desktop: 173 },
               { month: "May", desktop: 209 },
               { month: "June", desktop: 214 },
             ]}
+            margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
               tickLine={false}
-              tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: "A basic bar chart showing desktop visitors over 6 months.",
-      },
-    },
-  },
-};
-
-// Bar chart with labels
-export const Labels: Story = {
-  render: (args) => (
-    <Card className="max-w-5xl">
-      <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">
-          Bar Chart - Labels
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          A simple bar chart example with labels
-        </p>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer
-          config={
-            {
-              desktop: {
-                label: "Desktop",
-                color: "var(--color-cyan-30v)", // var(--color-cyan-30v)
-              },
-            } as ChartConfig
-          }
-        >
-          <BarChart
-            {...args}
-            accessibilityLayer
-            data={[
-              { month: "January", desktop: 186 },
-              { month: "February", desktop: 305 },
-              { month: "March", desktop: 237 },
-              { month: "April", desktop: 73 },
-              { month: "May", desktop: 209 },
-              { month: "June", desktop: 214 },
-            ]}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+            <Line
+              dataKey="desktop"
+              type="monotone"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={false}
             />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground"
-                fontSize={12}
-              />
-            </Bar>
-          </BarChart>
+          </LineChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
@@ -177,22 +104,22 @@ export const Labels: Story = {
     docs: {
       description: {
         story:
-          "A basic bar chart showing desktop visitors over 6 months with labels on each bar.",
+          "A basic line chart with smooth (monotone) curve showing desktop visitors over time.",
       },
     },
   },
 };
 
-// Multi-series bar chart
-export const Multiple: Story = {
+// Linear line chart
+export const Linear: Story = {
   render: (args) => (
     <Card className="max-w-5xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
-          Bar Chart - Multiple
+          Line Chart - Linear
         </h2>
         <p className="text-sm text-muted-foreground">
-          Comparing desktop and mobile visitors
+          Monthly visitor trend with linear interpolation
         </p>
       </CardHeader>
       <CardContent>
@@ -201,117 +128,212 @@ export const Multiple: Story = {
             {
               desktop: {
                 label: "Desktop",
-                color: "var(--color-blue-60v)", // var(--color-blue-60v)
-              },
-              mobile: {
-                label: "Mobile",
-                color: "var(--color-cyan-30v)", // var(--color-cyan-30v)
+                color: "var(--color-cyan-30v)",
               },
             } as ChartConfig
           }
         >
-          <BarChart
+          <LineChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186 },
+              { month: "February", desktop: 305 },
+              { month: "March", desktop: 237 },
+              { month: "April", desktop: 173 },
+              { month: "May", desktop: 209 },
+              { month: "June", desktop: 214 },
+            ]}
+            margin={{ left: 12, right: 12 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Line
+              dataKey="desktop"
+              type="linear"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Linear interpolation connects data points with straight lines
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Line chart with linear interpolation, connecting data points with straight lines and visible dots.",
+      },
+    },
+  },
+};
+
+// Step line chart
+export const Step: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Line Chart - Step
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Monthly visitor trend with step interpolation
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-green-cool-50v)",
+              },
+            } as ChartConfig
+          }
+        >
+          <LineChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186 },
+              { month: "February", desktop: 305 },
+              { month: "March", desktop: 237 },
+              { month: "April", desktop: 173 },
+              { month: "May", desktop: 209 },
+              { month: "June", desktop: 214 },
+            ]}
+            margin={{ left: 12, right: 12 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Line
+              dataKey="desktop"
+              type="step"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Step interpolation creates a staircase effect between data points
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Line chart with step interpolation, useful for showing discrete changes or states over time.",
+      },
+    },
+  },
+};
+
+// Multiple line chart
+export const Multiple: Story = {
+  render: (args) => (
+    <Card className="max-w-5xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Line Chart - Multiple
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Comparing desktop and mobile visitor trends
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-blue-60v)",
+              },
+              mobile: {
+                label: "Mobile",
+                color: "var(--color-cyan-30v)",
+              },
+            } as ChartConfig
+          }
+        >
+          <LineChart
             {...args}
             accessibilityLayer
             data={[
               { month: "January", desktop: 186, mobile: 80 },
               { month: "February", desktop: 305, mobile: 200 },
               { month: "March", desktop: 237, mobile: 120 },
-              { month: "April", desktop: 73, mobile: 190 },
+              { month: "April", desktop: 173, mobile: 190 },
               { month: "May", desktop: 209, mobile: 130 },
               { month: "June", desktop: 214, mobile: 140 },
             ]}
+            margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="month"
               tickLine={false}
-              tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
             />
             <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
-          </BarChart>
+            <Line
+              dataKey="desktop"
+              type="monotone"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              dataKey="mobile"
+              type="monotone"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="text-muted-foreground leading-none">
-          Comparing desktop and mobile visitors
-        </div>
-      </CardFooter>
-    </Card>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: "Bar chart comparing multiple data series side by side.",
-      },
-    },
-  },
-};
-
-// Horizontal bar chart
-export const Horizontal: Story = {
-  render: (args) => (
-    <Card className="max-w-5xl">
-      <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">
-          Bar Chart - Horizontal
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          Comparing desktop visitors over 6 months
-        </p>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer
-          config={
-            {
-              desktop: {
-                label: "Desktop",
-                color: "var(--color-blue-60v)", // var(--color-blue-60v)
-              },
-            } as ChartConfig
-          }
-        >
-          <BarChart
-            {...args}
-            accessibilityLayer
-            data={[
-              { month: "January", desktop: 186 },
-              { month: "February", desktop: 305 },
-              { month: "March", desktop: 237 },
-              { month: "April", desktop: 73 },
-              { month: "May", desktop: 209 },
-              { month: "June", desktop: 214 },
-            ]}
-            layout="vertical"
-            margin={{
-              left: -20,
-            }}
-          >
-            <YAxis
-              dataKey="month"
-              type="category"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <XAxis type="number" hide />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="text-muted-foreground leading-none">
-          Horizontal layout for easier label reading
+          Comparing desktop and mobile visitor trends over 6 months
         </div>
       </CardFooter>
     </Card>
@@ -320,7 +342,7 @@ export const Horizontal: Story = {
     docs: {
       description: {
         story:
-          "Horizontal bar chart useful when category labels are long or when comparing values is the primary goal.",
+          "Multiple line chart showing two data series for comparing trends between desktop and mobile visitors.",
       },
     },
   },

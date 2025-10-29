@@ -81,9 +81,21 @@ export const Default: Story = {
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={[
-                { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-                { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-                { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+                {
+                  browser: "chrome",
+                  visitors: 275,
+                  fill: "var(--color-chrome)",
+                },
+                {
+                  browser: "safari",
+                  visitors: 200,
+                  fill: "var(--color-safari)",
+                },
+                {
+                  browser: "firefox",
+                  visitors: 187,
+                  fill: "var(--color-firefox)",
+                },
                 { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
                 { browser: "other", visitors: 90, fill: "var(--color-other)" },
               ]}
@@ -153,11 +165,27 @@ export const Donut: Story = {
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={[
-                { department: "operations", amount: 450000, fill: "var(--color-operations)" },
-                { department: "marketing", amount: 300000, fill: "var(--color-marketing)" },
-                { department: "development", amount: 650000, fill: "var(--color-development)" },
+                {
+                  department: "operations",
+                  amount: 450000,
+                  fill: "var(--color-operations)",
+                },
+                {
+                  department: "marketing",
+                  amount: 300000,
+                  fill: "var(--color-marketing)",
+                },
+                {
+                  department: "development",
+                  amount: 650000,
+                  fill: "var(--color-development)",
+                },
                 { department: "hr", amount: 200000, fill: "var(--color-hr)" },
-                { department: "admin", amount: 150000, fill: "var(--color-admin)" },
+                {
+                  department: "admin",
+                  amount: 150000,
+                  fill: "var(--color-admin)",
+                },
               ]}
               dataKey="amount"
               nameKey="department"
@@ -178,7 +206,8 @@ export const Donut: Story = {
   parameters: {
     docs: {
       description: {
-        story: "A donut chart (pie chart with inner radius) showing budget allocation.",
+        story:
+          "A donut chart (pie chart with inner radius) showing budget allocation.",
       },
     },
   },
@@ -224,8 +253,16 @@ export const WithLabel: Story = {
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={[
-                { status: "completed", count: 45, fill: "var(--color-completed)" },
-                { status: "inProgress", count: 32, fill: "var(--color-inProgress)" },
+                {
+                  status: "completed",
+                  count: 45,
+                  fill: "var(--color-completed)",
+                },
+                {
+                  status: "inProgress",
+                  count: 32,
+                  fill: "var(--color-inProgress)",
+                },
                 { status: "pending", count: 18, fill: "var(--color-pending)" },
                 { status: "blocked", count: 5, fill: "var(--color-blocked)" },
               ]}
@@ -250,7 +287,8 @@ export const WithLabel: Story = {
   parameters: {
     docs: {
       description: {
-        story: "A pie chart with percentage labels showing project status breakdown.",
+        story:
+          "A pie chart with percentage labels showing project status breakdown.",
       },
     },
   },
