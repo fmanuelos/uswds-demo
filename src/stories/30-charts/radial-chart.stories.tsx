@@ -78,7 +78,7 @@ export const Default: Story = {
               },
             } as ChartConfig
           }
-          className="mx-auto aspect-square max-h-[500px]"
+          className="mx-auto aspect-square max-h-[350px]"
         >
           <RadialBarChart
             {...args}
@@ -93,8 +93,8 @@ export const Default: Story = {
               { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
               { browser: "other", visitors: 90, fill: "var(--color-other)" },
             ]}
-            innerRadius={100}
-            outerRadius={200}
+            innerRadius={40}
+            outerRadius={120}
           >
             <ChartTooltip
               cursor={false}
@@ -160,7 +160,7 @@ export const WithLabel: Story = {
               },
             } as ChartConfig
           }
-          className="mx-auto aspect-square max-h-[500px]"
+          className="mx-auto aspect-square max-h-[350px]"
         >
           <RadialBarChart
             {...args}
@@ -177,8 +177,8 @@ export const WithLabel: Story = {
             ]}
             startAngle={-90}
             endAngle={380}
-            innerRadius={100}
-            outerRadius={200}
+            innerRadius={40}
+            outerRadius={120}
           >
             <ChartTooltip
               cursor={false}

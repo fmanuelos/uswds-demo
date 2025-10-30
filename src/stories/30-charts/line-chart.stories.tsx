@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -85,7 +85,7 @@ export const Default: Story = {
             />
             <Line
               dataKey="desktop"
-              type="monotone"
+              type="natural"
               stroke="var(--color-desktop)"
               strokeWidth={2}
               dot={false}
@@ -343,6 +343,168 @@ export const Multiple: Story = {
       description: {
         story:
           "Multiple line chart showing two data series for comparing trends between desktop and mobile visitors.",
+      },
+    },
+  },
+};
+
+// Line chart with dots
+export const WithDots: Story = {
+  render: (args) => (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Line Chart - Dots
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Monthly visitor trend with smooth curve
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-blue-60v)",
+              },
+            } as ChartConfig
+          }
+        >
+          <LineChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186 },
+              { month: "February", desktop: 305 },
+              { month: "March", desktop: 237 },
+              { month: "April", desktop: 173 },
+              { month: "May", desktop: 209 },
+              { month: "June", desktop: 214 },
+            ]}
+            margin={{ left: 12, right: 12 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Line
+              dataKey="desktop"
+              type="natural"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A basic line chart with smooth (monotone) curve showing desktop visitors over time.",
+      },
+    },
+  },
+};
+
+// Line chart with dots
+export const WithLabel: Story = {
+  render: (args) => (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Line Chart - Label
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          Monthly visitor trend with smooth curve
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              desktop: {
+                label: "Desktop",
+                color: "var(--color-blue-60v)",
+              },
+            } as ChartConfig
+          }
+        >
+          <LineChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { month: "January", desktop: 186 },
+              { month: "February", desktop: 305 },
+              { month: "March", desktop: 237 },
+              { month: "April", desktop: 173 },
+              { month: "May", desktop: 209 },
+              { month: "June", desktop: 214 },
+            ]}
+            margin={{ top: 20, left: 12, right: 12 }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={formatMonthTick}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              dataKey="desktop"
+              type="natural"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList position="top" offset={12} fontSize={12} />
+            </Line>
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A basic line chart with smooth (monotone) curve showing desktop visitors over time.",
       },
     },
   },
