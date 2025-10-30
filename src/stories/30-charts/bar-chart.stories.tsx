@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   Cell,
   LabelList,
+  Rectangle,
   XAxis,
   YAxis,
 } from "recharts";
@@ -47,7 +48,7 @@ BarChart.displayName = "BarChart";
 // Default bar chart
 export const Default: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Bar Chart</h2>
         <p className="text-sm text-muted-foreground">
@@ -112,7 +113,7 @@ export const Default: Story = {
 // Horizontal bar chart
 export const Horizontal: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Horizontal
@@ -161,7 +162,7 @@ export const Horizontal: Story = {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -185,7 +186,7 @@ export const Horizontal: Story = {
 // Multi-series bar chart
 export const Multiple: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Multiple
@@ -255,7 +256,7 @@ export const Multiple: Story = {
 // Multi-series bar chart
 export const Stacked: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Stacked
@@ -335,7 +336,7 @@ export const Stacked: Story = {
 // Bar chart with labels
 export const Labels: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Labels
@@ -382,9 +383,9 @@ export const Labels: Story = {
             <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4}>
               <LabelList
                 position="top"
-                offset={12}
-                className="fill-foreground"
+                offset={8}
                 fontSize={12}
+                fill="var(--color-gray-90)"
               />
             </Bar>
           </BarChart>
@@ -410,7 +411,7 @@ export const Labels: Story = {
 // Horizontal bar chart
 export const CustomLabels: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Custom Labels
@@ -463,7 +464,7 @@ export const CustomLabels: Story = {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5}>
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4}>
               <LabelList
                 dataKey="month"
                 position="insideLeft"
@@ -502,12 +503,14 @@ export const CustomLabels: Story = {
 // Mixed bar chart with different colors
 export const Mixed: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Mixed
         </h2>
-        <p className="text-sm text-muted-foreground">January - June 2024</p>
+        <p className="text-sm text-muted-foreground">
+          A mixed bar chart with different colors
+        </p>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -545,7 +548,11 @@ export const Mixed: Story = {
             data={[
               { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
               { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-              { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+              {
+                browser: "firefox",
+                visitors: 187,
+                fill: "var(--color-firefox)",
+              },
               { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
               { browser: "other", visitors: 90, fill: "var(--color-other)" },
             ]}
@@ -566,7 +573,7 @@ export const Mixed: Story = {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="visitors" layout="vertical" radius={5} />
+            <Bar dataKey="visitors" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -587,20 +594,121 @@ export const Mixed: Story = {
   },
 };
 
-// Format month abbreviation
-const formatMonthTick = (value: string) => value.slice(0, 3);
+// Bar chart with custom active bar
+export const CustomActiveBars: Story = {
+  render: (args) => (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Custom Active Bars
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          A mixed bar chart with different colors and custom active bar
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              visitors: {
+                label: "Visitors",
+              },
+              chrome: {
+                label: "Chrome",
+                color: "var(--color-blue-60v)",
+              },
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
+              },
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
+              },
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-50v)",
+              },
+              other: {
+                label: "Other",
+                color: "var(--color-gray-50)",
+              },
+            } as ChartConfig
+          }
+        >
+          <BarChart
+            {...args}
+            accessibilityLayer
+            data={[
+              { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+              { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+              {
+                browser: "firefox",
+                visitors: 187,
+                fill: "var(--color-firefox)",
+              },
+              { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+              { browser: "other", visitors: 90, fill: "var(--color-other)" },
+            ]}
+            // layout="vertical"
+            margin={{
+              left: 0,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="browser"
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+            />
+            <YAxis dataKey="visitors" type="number" hide />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar
+              dataKey="visitors"
+              radius={4}
+              activeBar={
+                <Rectangle
+                  fillOpacity={0.8}
+                  stroke="var(--color-blue-60v)"
+                  strokeDasharray={4}
+                  strokeDashoffset={4}
+                />
+              }
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Horizontal bar chart with mixed colors - each bar has its own unique USWDS color based on the category.",
+      },
+    },
+  },
+};
 
 // Negative bar chart
 export const Negative: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Bar Chart - Negative
         </h2>
-        <p className="text-sm text-muted-foreground">
-          January - June 2024
-        </p>
+        <p className="text-sm text-muted-foreground">January - June 2024</p>
       </CardHeader>
       <CardContent>
         <ChartContainer
@@ -642,7 +750,6 @@ export const Negative: Story = {
                 dataKey="month"
                 fillOpacity={1}
                 fontSize={12}
-                // formatter={(value) => value.slice(0, 3)}
               />
               {[
                 { month: "January", visitors: 186 },
@@ -654,6 +761,7 @@ export const Negative: Story = {
               ].map((item) => (
                 <Cell
                   key={item.month}
+                  radius={4}
                   fill={
                     item.visitors > 0
                       ? "var(--color-blue-60v)"

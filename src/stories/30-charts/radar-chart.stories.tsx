@@ -39,7 +39,7 @@ RadarChart.displayName = "RadarChart";
 // Default radar chart
 export const Default: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Radar Chart</h2>
         <p className="text-sm text-muted-foreground">
@@ -102,7 +102,7 @@ export const Default: Story = {
 // Radar chart with dots
 export const Dots: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Radar Chart - Dots
@@ -171,7 +171,7 @@ export const Dots: Story = {
 // Radar chart with lines only
 export const LinesOnly: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Radar Chart - Lines Only
@@ -251,7 +251,7 @@ export const LinesOnly: Story = {
 // Radar chart - Multiple
 export const Multiple: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Radar Chart - Multiple

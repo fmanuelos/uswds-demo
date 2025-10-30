@@ -44,7 +44,7 @@ RadialBarChart.displayName = "RadialBarChart";
 // Default usage radial chart
 export const Default: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Radial Chart</h2>
         <p className="text-sm text-muted-foreground">January - June 2024</p>
@@ -124,7 +124,7 @@ export const Default: Story = {
 // Browser usage radial chart
 export const WithLabel: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Radial Chart - Label

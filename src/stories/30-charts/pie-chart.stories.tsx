@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Pie, PieChart, Cell, Legend, LabelList } from "recharts";
+import { Pie, PieChart, Cell, Legend, LabelList, Sector } from "recharts";
 import {
   Card,
   CardContent,
@@ -39,7 +39,7 @@ PieChart.displayName = "PieChart";
 // Default pie chart
 export const Default: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Pie Chart</h2>
         <p className="text-sm text-muted-foreground">
@@ -124,7 +124,7 @@ export const Default: Story = {
 // with labels
 export const WithLabels: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Pie Chart</h2>
         <p className="text-sm text-muted-foreground">
@@ -160,7 +160,7 @@ export const WithLabels: Story = {
               },
             } as ChartConfig
           }
-          className="[&_.recharts-pie-label-text]:fill-gray-900 [&_.recharts-pie-label-text]:text-sm"
+          className="[&_.recharts-pie-label-text]:fill-gray-900"
         >
           <PieChart {...args}>
             <ChartTooltip
@@ -212,11 +212,11 @@ export const WithLabels: Story = {
 };
 
 // without lines
-export const WithoutLinesLabels: Story = {
+export const CustomLabel: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">Pie Chart</h2>
+        <h2 className="font-bold font-merriweather text-lg">Pie Chart - Custom Label</h2>
         <p className="text-sm text-muted-foreground">
           Browser usage distribution
         </p>
@@ -250,7 +250,7 @@ export const WithoutLinesLabels: Story = {
               },
             } as ChartConfig
           }
-          className="[&_.recharts-pie-label-text]:fill-gray-900 [&_.recharts-pie-label-text]:text-sm"
+          className="[&_.recharts-pie-label-text]:fill-gray-900"
         >
           <PieChart {...args}>
             <ChartTooltip
@@ -302,12 +302,12 @@ export const WithoutLinesLabels: Story = {
   },
 };
 
-// without lines
-export const WithLabelsList: Story = {
+// with LabelList
+export const WithLabelList: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">Pie Chart</h2>
+        <h2 className="font-bold font-merriweather text-lg">Pie Chart - Label List</h2>
         <p className="text-sm text-muted-foreground">
           Browser usage distribution
         </p>
@@ -341,13 +341,100 @@ export const WithLabelsList: Story = {
               },
             } as ChartConfig
           }
-          className="[&_.recharts-pie-label-text]:fill-gray-900 [&_.recharts-pie-label-text]:text-sm"
         >
           <PieChart {...args}>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent nameKey="visitors" hideLabel />}
             />
+            <Pie
+              data={[
+                {
+                  browser: "chrome",
+                  visitors: 275,
+                  fill: "var(--color-chrome)",
+                },
+                {
+                  browser: "safari",
+                  visitors: 200,
+                  fill: "var(--color-safari)",
+                },
+                {
+                  browser: "firefox",
+                  visitors: 187,
+                  fill: "var(--color-firefox)",
+                },
+                { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+                { browser: "other", visitors: 90, fill: "var(--color-other)" },
+              ]}
+              dataKey="visitors"
+              innerRadius={0}
+            >
+              <LabelList
+                dataKey="browser"
+                stroke="none"
+                fontSize={12}
+                fill="var(--color-white)"
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing browser distribution for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "A basic pie chart showing browser usage distribution.",
+      },
+    },
+  },
+};
+
+
+// Pie chart with legend
+export const WithLegend: Story = {
+  render: (args) => (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">Pie Chart - Legend</h2>
+        <p className="text-sm text-muted-foreground">
+          Browser usage distribution
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer
+          config={
+            {
+              chrome: {
+                label: "Chrome",
+                color: "var(--color-blue-60v)",
+              },
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
+              },
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
+              },
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-40v)",
+              },
+              other: {
+                label: "Other",
+                color: "var(--color-gray-30)",
+              },
+            } as ChartConfig
+          }
+        >
+          <PieChart {...args}>
             <ChartLegend content={<ChartLegendContent />} />
             <Pie
               data={[
@@ -372,14 +459,7 @@ export const WithLabelsList: Story = {
               dataKey="visitors"
               nameKey="browser"
               innerRadius={0}
-            >
-              <LabelList
-                dataKey="browser"
-                stroke="none"
-                fontSize={16}
-                fill="var(--color-gray-10)"
-              />
-            </Pie>
+            />
           </PieChart>
         </ChartContainer>
       </CardContent>
@@ -402,72 +482,56 @@ export const WithLabelsList: Story = {
 // Donut chart
 export const Donut: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">Donut Chart</h2>
+        <h2 className="font-bold font-merriweather text-lg">Pie Chart - Donut</h2>
         <p className="text-sm text-muted-foreground">
-          Budget allocation by department
+          Browser usage distribution
         </p>
       </CardHeader>
       <CardContent>
         <ChartContainer
           config={
             {
-              operations: {
-                label: "Operations",
+              visitors: {
+                label: "Visitors",
+              },
+              chrome: {
+                label: "Chrome",
                 color: "var(--color-blue-60v)",
               },
-              marketing: {
-                label: "Marketing",
-                color: "var(--color-mint-cool-40v)",
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
               },
-              development: {
-                label: "Development",
-                color: "var(--color-violet-warm-50v)",
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
               },
-              hr: {
-                label: "Human Resources",
-                color: "var(--color-gold-20v)",
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-40v)",
               },
-              admin: {
-                label: "Administration",
-                color: "var(--color-gray-cool-40)",
+              other: {
+                label: "Other",
+                color: "var(--color-gray-30)",
               },
             } as ChartConfig
           }
         >
           <PieChart {...args}>
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={[
-                {
-                  department: "operations",
-                  amount: 450000,
-                  fill: "var(--color-operations)",
-                },
-                {
-                  department: "marketing",
-                  amount: 300000,
-                  fill: "var(--color-marketing)",
-                },
-                {
-                  department: "development",
-                  amount: 650000,
-                  fill: "var(--color-development)",
-                },
-                { department: "hr", amount: 200000, fill: "var(--color-hr)" },
-                {
-                  department: "admin",
-                  amount: 150000,
-                  fill: "var(--color-admin)",
-                },
+                { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+                { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+                { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+                { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+                { browser: "other", visitors: 90, fill: "var(--color-other)" },
               ]}
-              dataKey="amount"
-              nameKey="department"
-              innerRadius={80}
-              outerRadius={120}
-              strokeWidth={5}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={70}
             />
           </PieChart>
         </ChartContainer>
@@ -489,73 +553,68 @@ export const Donut: Story = {
   },
 };
 
-// Pie chart with labels
-export const WithLabel: Story = {
+
+// Donut chart with active segment
+export const DonutActive: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
-        <h2 className="font-bold font-merriweather text-lg">
-          Pie Chart with Labels
-        </h2>
+        <h2 className="font-bold font-merriweather text-lg">Pie Chart - Donut Active</h2>
         <p className="text-sm text-muted-foreground">
-          Project status breakdown
+          Browser usage distribution
         </p>
       </CardHeader>
       <CardContent>
         <ChartContainer
           config={
             {
-              completed: {
-                label: "Completed",
-                color: "var(--color-green-cool-50v)",
+              visitors: {
+                label: "Visitors",
               },
-              inProgress: {
-                label: "In Progress",
+              chrome: {
+                label: "Chrome",
                 color: "var(--color-blue-60v)",
               },
-              pending: {
-                label: "Pending",
-                color: "var(--color-gold-30v)",
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
               },
-              blocked: {
-                label: "Blocked",
-                color: "var(--color-red-warm-50v)",
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
+              },
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-40v)",
+              },
+              other: {
+                label: "Other",
+                color: "var(--color-gray-30)",
               },
             } as ChartConfig
           }
         >
           <PieChart {...args}>
-            <ChartTooltip content={<ChartTooltipContent />} />
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <Pie
               data={[
-                {
-                  status: "completed",
-                  count: 45,
-                  fill: "var(--color-completed)",
-                },
-                {
-                  status: "inProgress",
-                  count: 32,
-                  fill: "var(--color-inProgress)",
-                },
-                { status: "pending", count: 18, fill: "var(--color-pending)" },
-                { status: "blocked", count: 5, fill: "var(--color-blocked)" },
+                { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+                { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+                { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+                { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+                { browser: "other", visitors: 90, fill: "var(--color-other)" },
               ]}
-              dataKey="count"
-              nameKey="status"
-              cx="50%"
-              cy="50%"
-              outerRadius={120}
-              label={(entry) => `${entry.count}%`}
-              labelLine={false}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={70}
+              activeShape={<Sector outerRadius={130}/>}
             />
           </PieChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="text-muted-foreground leading-none">
-          Current project status distribution
+          Annual budget distribution across departments
         </div>
       </CardFooter>
     </Card>
@@ -564,7 +623,7 @@ export const WithLabel: Story = {
     docs: {
       description: {
         story:
-          "A pie chart with percentage labels showing project status breakdown.",
+          "A pie chart with active segment showing browser usage distribution.",
       },
     },
   },

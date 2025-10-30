@@ -40,7 +40,7 @@ const formatMonthTick = (value: string) => value.slice(0, 3);
 // Default line chart with smooth curve
 export const Default: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">Line Chart</h2>
         <p className="text-sm text-muted-foreground">
@@ -113,7 +113,7 @@ export const Default: Story = {
 // Linear line chart
 export const Linear: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Line Chart - Linear
@@ -193,7 +193,7 @@ export const Linear: Story = {
 // Step line chart
 export const Step: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Line Chart - Step
@@ -268,7 +268,7 @@ export const Step: Story = {
 // Multiple line chart
 export const Multiple: Story = {
   render: (args) => (
-    <Card className="max-w-5xl">
+    <Card className="max-w-xl">
       <CardHeader>
         <h2 className="font-bold font-merriweather text-lg">
           Line Chart - Multiple
