@@ -212,6 +212,92 @@ export const WithLabel: Story = {
   },
 };
 
+// Browser usage radial chart
+export const ChartRadialGrid: Story = {
+  render: (args) => (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Radial Chart - Grid
+        </h2>
+        <p className="text-sm text-muted-foreground">January - June 2024</p>
+      </CardHeader>
+      <CardContent className="pb-0">
+        <ChartContainer
+          config={
+            {
+              visitors: {
+                label: "Visitors",
+              },
+              chrome: {
+                label: "Chrome",
+                color: "var(--color-blue-60v)",
+              },
+              safari: {
+                label: "Safari",
+                color: "var(--color-cyan-30v)",
+              },
+              firefox: {
+                label: "Firefox",
+                color: "var(--color-orange-40v)",
+              },
+              edge: {
+                label: "Edge",
+                color: "var(--color-green-cool-50v)",
+              },
+              other: {
+                label: "Other",
+                color: "var(--color-gray-50)",
+              },
+            } as ChartConfig
+          }
+          className="mx-auto aspect-square max-h-[350px]"
+        >
+          <RadialBarChart
+            {...args}
+            data={[
+              { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+              { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+              {
+                browser: "firefox",
+                visitors: 187,
+                fill: "var(--color-firefox)",
+              },
+              { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+              { browser: "other", visitors: 90, fill: "var(--color-other)" },
+            ]}
+            startAngle={-90}
+            endAngle={380}
+            innerRadius={40}
+            outerRadius={120}
+          >
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel nameKey="browser" />}
+            />
+            <PolarGrid gridType="circle" />
+            <RadialBar dataKey="visitors"/>
+          </RadialBarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Multiple browser data displayed as concentric radial bars with different colors for each browser.",
+      },
+    },
+  },
+};
+
+
 const chartData = [
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
