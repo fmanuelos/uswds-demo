@@ -341,15 +341,14 @@ const chartData = [
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
 
-   const ChartRadialText = () => {
-      return (
-     <Card className="max-w-xl">
-       <CardHeader>
-         <h2 className="font-bold font-merriweather text-lg">
-           Radial Chart - Text
-         </h2>
-         <p className="text-sm text-muted-foreground">January - June 2024</p>
-       </CardHeader>
+const ChartRadialText = () => {
+  return (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Radial Chart - Text
+        </h2>
+        <p className="text-sm text-muted-foreground">January - June 2024</p>
       </CardHeader>
       <CardContent className="pb-0">
         <ChartContainer
