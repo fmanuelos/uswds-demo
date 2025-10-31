@@ -594,6 +594,40 @@ export const Mixed: Story = {
   },
 };
 
+const chartBrowserConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
+    color: "var(--color-blue-60v)",
+  },
+  safari: {
+    label: "Safari",
+    color: "var(--color-cyan-30v)",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "var(--color-orange-40v)",
+  },
+  edge: {
+    label: "Edge",
+    color: "var(--color-green-cool-50v)",
+  },
+  other: {
+    label: "Other",
+    color: "var(--color-gray-50)",
+  },
+} satisfies ChartConfig;
+
+const chartBrowserData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 275, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+];
+
 // Bar chart with custom active bar
 export const CustomActiveBars: Story = {
   render: (args) => (
@@ -607,50 +641,11 @@ export const CustomActiveBars: Story = {
         </p>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={
-            {
-              visitors: {
-                label: "Visitors",
-              },
-              chrome: {
-                label: "Chrome",
-                color: "var(--color-blue-60v)",
-              },
-              safari: {
-                label: "Safari",
-                color: "var(--color-cyan-30v)",
-              },
-              firefox: {
-                label: "Firefox",
-                color: "var(--color-orange-40v)",
-              },
-              edge: {
-                label: "Edge",
-                color: "var(--color-green-cool-50v)",
-              },
-              other: {
-                label: "Other",
-                color: "var(--color-gray-50)",
-              },
-            } as ChartConfig
-          }
-        >
+        <ChartContainer config={chartBrowserConfig}>
           <BarChart
             {...args}
             accessibilityLayer
-            data={[
-              { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-              { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-              {
-                browser: "firefox",
-                visitors: 187,
-                fill: "var(--color-firefox)",
-              },
-              { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-              { browser: "other", visitors: 90, fill: "var(--color-other)" },
-            ]}
-            // layout="vertical"
+            data={chartBrowserData}
             margin={{
               left: 0,
             }}
@@ -658,27 +653,34 @@ export const CustomActiveBars: Story = {
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="browser"
-              type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
+              tickFormatter={(value) =>
+                chartBrowserConfig[value as keyof typeof chartBrowserConfig]
+                  ?.label
+              }
             />
-            <YAxis dataKey="visitors" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
             <Bar
               dataKey="visitors"
+              strokeWidth={2}
               radius={4}
-              activeBar={
-                <Rectangle
-                  fillOpacity={0.8}
-                  stroke="var(--color-blue-60v)"
-                  strokeDasharray={4}
-                  strokeDashoffset={4}
-                />
-              }
+              activeIndex={2}
+              activeBar={({ ...props }) => {
+                return (
+                  <Rectangle
+                    {...props}
+                    fillOpacity={0.6}
+                    stroke={props.payload.fill}
+                    strokeDasharray={4}
+                    strokeDashoffset={4}
+                  />
+                );
+              }}
             />
           </BarChart>
         </ChartContainer>
@@ -695,6 +697,128 @@ export const CustomActiveBars: Story = {
       description: {
         story:
           "Horizontal bar chart with mixed colors - each bar has its own unique USWDS color based on the category.",
+      },
+      source: {
+        code: `"use client"
+
+import { Bar, BarChart, CartesianGrid, Rectangle, XAxis } from "recharts"
+
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Rectangle,
+  XAxis,
+} from "recharts";
+
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card"
+
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
+    color: "var(--color-blue-60v)",
+  },
+  safari: {
+    label: "Safari",
+    color: "var(--color-cyan-30v)",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "var(--color-orange-40v)",
+  },
+  edge: {
+    label: "Edge",
+    color: "var(--color-green-cool-50v)",
+  },
+  other: {
+    label: "Other",
+    color: "var(--color-gray-50)",
+  },
+} satisfies ChartConfig;
+
+const chartData = [
+  { browser: "chrome", visitors: 187, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 275, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+];
+
+const ChartBarActive = () => {
+  return (
+    <Card className="max-w-xl">
+      <CardHeader>
+        <h2 className="font-bold font-merriweather text-lg">
+          Bar Chart - Custom Active Bars
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          A mixed bar chart with different colors and custom active bar
+        </p>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="browser"
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) =>
+                chartBrowserConfig[value as keyof typeof chartBrowserConfig]
+                  ?.label
+              }
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Bar
+              dataKey="visitors"
+              strokeWidth={2}
+              radius={4}
+              activeIndex={2}
+              activeBar={({ ...props }) => {
+                return (
+                  <Rectangle
+                    {...props}
+                    fillOpacity={0.6}
+                    stroke={props.payload.fill}
+                    strokeDasharray={4}
+                    strokeDashoffset={4}
+                  />
+                );
+              }}
+            />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="text-muted-foreground leading-none">
+          Showing total visitors for the last 6 months
+        </div>
+      </CardFooter>
+    </Card>
+  );
+}
+
+export default ChartBarActive;`.trim(),
       },
     },
   },
