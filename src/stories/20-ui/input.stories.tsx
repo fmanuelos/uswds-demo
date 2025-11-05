@@ -2,6 +2,7 @@ import * as React from "react"
 import type { Meta, StoryObj } from '@storybook/react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from "@/components/ui/textarea"
 
 const meta = {
   title: 'UI/Input',
@@ -121,4 +122,26 @@ export const WithDefaultValue: Story = {
       <Input id="default-value-input" {...args} />
     </div>
   ),
+}
+
+// With Error State
+export const WithError: Story = {
+  args: {
+    'aria-invalid': true,
+    defaultValue: 'This field has an error.',
+  },
+  render: (args) => (
+    <div className="grid w-full max-w-sm items-center">
+      <Label htmlFor="error-input">Description</Label>
+      <Input id="error-input" {...args} />
+      <p className="text-sm text-red-60v mt-1">This field is required.</p>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Textarea with error state indicated by red border and error message.',
+      },
+    },
+  },
 }
