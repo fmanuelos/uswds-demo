@@ -122,37 +122,3 @@ export const WithDefaultValue: Story = {
     </div>
   ),
 }
-
-// Form Example
-export const FormExample: Story = {
-  render: () => (
-    <form className="space-y-4 w-full max-w-md">
-      <div className="grid w-full items-center">
-        <Label htmlFor="first-name">First Name</Label>
-        <Input id="first-name" placeholder="Enter your first name" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="last-name">Last Name</Label>
-        <Input id="last-name" placeholder="Enter your last name" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" placeholder="Enter your email" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="phone">Phone</Label>
-        <Input id="phone" type="tel" placeholder="(555) 123-4567" />
-      </div>
-    </form>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Multiple input fields used in a form context.',
-      },
-    },
-  },
-}
