@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 
 type BannerProps = React.HTMLAttributes<HTMLElement> & {
   languageToggle?: {
+    text: string
     href: string 
     label: string
   }
@@ -35,7 +36,7 @@ const Banner = React.forwardRef<HTMLElement, BannerProps>(
                   </svg>
                 </div>
                 <span className="font-open-sans text-xs text-gray-90">
-                  An official website of the United States government
+                  {languageToggle?.text || 'An official website of the United States government'}
                 </span>
               </div>
               {languageToggle && (
