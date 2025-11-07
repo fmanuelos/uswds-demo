@@ -4,13 +4,8 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 const getPaddingClass = (depth: number): string => {
-  const paddingMap: Record<number, string> = {
-    0: 'pl-4',
-    1: 'pl-8',
-    2: 'pl-12',
-    3: 'pl-16',
-  }
-  return paddingMap[depth] || 'pl-16'
+  const paddingValue = 4 + (depth * 4)
+  return `pl-${paddingValue}`
 }
 
 interface TreeDataItem {
@@ -253,10 +248,10 @@ const TreeNode = ({
 
   return (
     <div>
-      <a
-        href={item.href || '#'}
+      <button
+        type="button"
         className={cn(
-          'block relative py-2 px-4 text-gray-60 hover:text-blue-60v hover:bg-gray-5 no-underline',
+          'block relative py-2 px-4 text-gray-60 hover:text-blue-60v hover:bg-gray-5 w-full text-left',
           getPaddingClass(depth),
           'focus:outline focus:outline-4 focus:outline-offset-0 focus:outline-blue-40v',
           'aria-[current]:text-blue-60v aria-[current]:font-bold',
@@ -289,7 +284,7 @@ const TreeNode = ({
           <span className="text-sm truncate flex-1">{item.name}</span>
           <TreeActions isSelected={selectedItemId === item.id}>{item.actions}</TreeActions>
         </div>
-      </a>
+      </button>
       {isOpen && item.children && (
         <ul>
           <TreeItem
