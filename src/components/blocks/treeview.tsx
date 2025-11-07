@@ -4,8 +4,13 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 const getPaddingClass = (depth: number): string => {
-  const paddingValue = 4 + (depth * 4)
-  return `pl-${paddingValue}`
+  const paddingMap: Record<number, string> = {
+    0: 'pl-4',
+    1: 'pl-8',
+    2: 'pl-12',
+    3: 'pl-16',
+  }
+  return paddingMap[depth] || 'pl-16'
 }
 
 interface TreeDataItem {
