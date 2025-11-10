@@ -327,6 +327,76 @@
       "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
     },
     {
+      "name": "context-menu",
+      "type": "registry:component",
+      "title": "Context Menu",
+      "description": "A context menu component that displays a menu when right-clicking on an element. Built with native HTML/CSS following USWDS design guidelines. Supports checkboxes, radio groups, submenus, shortcuts, and destructive actions.",
+      "files": [
+        {
+          "path": "src/components/ui/context-menu.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown Menu",
+      "description": "A dropdown menu component that displays a list of actions or options when triggered. Built with native HTML/CSS following USWDS design guidelines. Supports checkboxes, radio groups, submenus, shortcuts, and destructive actions.",
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json", "https://fmanuelos.github.io/uswds-demo/r/icon.json"]
+    },
+    {
+      "name": "progress",
+      "type": "registry:component",
+      "title": "Progress",
+      "description": "A progress bar component that visually indicates the completion status of a task. Built with native HTML/CSS following USWDS design guidelines. Supports multiple variants (default, success, warning, error) and optional labels.",
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:component",
+      "title": "Avatar",
+      "description": "USWDS-compliant avatar component for displaying user profile images with fallback initials. Supports multiple sizes and proper accessibility.",
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:component",
+      "title": "Textarea",
+      "description": "USWDS-compliant textarea component for multi-line text input with proper labeling, validation states, and accessibility features.",
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": ["clsx"],
+      "registryDependencies": ["https://fmanuelos.github.io/uswds-demo/r/utils.json"]
+    },
+    {
       "name": "header",
       "type": "registry:block",
       "title": "Header",
