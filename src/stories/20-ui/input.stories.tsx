@@ -2,6 +2,7 @@ import * as React from "react"
 import type { Meta, StoryObj } from '@storybook/react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from "@/components/ui/textarea"
 
 const meta = {
   title: 'UI/Input',
@@ -123,35 +124,23 @@ export const WithDefaultValue: Story = {
   ),
 }
 
-// Form Example
-export const FormExample: Story = {
-  render: () => (
-    <form className="space-y-4 w-full max-w-md">
-      <div className="grid w-full items-center">
-        <Label htmlFor="first-name">First Name</Label>
-        <Input id="first-name" placeholder="Enter your first name" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="last-name">Last Name</Label>
-        <Input id="last-name" placeholder="Enter your last name" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" placeholder="Enter your email" />
-      </div>
-      
-      <div className="grid w-full items-center">
-        <Label htmlFor="phone">Phone</Label>
-        <Input id="phone" type="tel" placeholder="(555) 123-4567" />
-      </div>
-    </form>
+// With Error State
+export const WithError: Story = {
+  args: {
+    'aria-invalid': true,
+    defaultValue: 'This field has an error.',
+  },
+  render: (args) => (
+    <div className="grid w-full max-w-sm items-center">
+      <Label htmlFor="error-input">Description</Label>
+      <Input id="error-input" {...args} />
+      <p className="text-sm text-red-60v mt-1">This field is required.</p>
+    </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Multiple input fields used in a form context.',
+        story: 'Textarea with error state indicated by red border and error message.',
       },
     },
   },

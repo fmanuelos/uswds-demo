@@ -69,8 +69,9 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
                   className="inline-flex"
                   wrap={wrapValue}
                 >
-                  <span aria-hidden="true" className="sm:hidden">
-                    <Icon icon="navigate_before" className="align-middle text-gray-50 size-4" />
+                  {/* Put the back icon and label in the same inline-flex so they center vertically on mobile */}
+                  <span aria-hidden="true" className="sm:hidden inline-flex items-center mr-2">
+                    <Icon icon="navigate_before" size="2xl" className="text-gray-50" />
                   </span>
                   <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
                   <BreadcrumbSeparator />
@@ -135,13 +136,14 @@ const BreadcrumbLink = React.forwardRef<
   <a
     ref={ref}
     className={cn(
-      "text-blue-60v visited:text-violet-70v hover:text-blue-70v",
+      // Make the anchor an inline-flex container so any icon + text center vertically
+      "inline-flex items-center gap-1 text-sm text-cerulean-60v visited:text-violet-70v hover:text-cerulean-70v",
       "focus:outline focus:outline-4 focus:outline-blue-40v underline",
       className
     )}
     {...props}
   >
-    <span>{children}</span>
+    <span className="inline-flex items-center">{children}</span>
   </a>
 ))
 BreadcrumbLink.displayName = "BreadcrumbLink"
@@ -155,7 +157,7 @@ const BreadcrumbPage = React.forwardRef<
     role="link"
     aria-disabled="true"
     aria-current="page"
-    className={className}
+    className={cn("gap-1 text-sm text-gray-90", className)}
     {...props}
   />
 ))
@@ -168,10 +170,10 @@ const BreadcrumbSeparator = React.forwardRef<
   <span
     ref={ref}
     aria-hidden="true"
-    className={cn("hidden sm:inline", className)}
+    className={cn("hidden sm:inline-flex items-center", className)}
     {...props}
   >
-    <Icon icon="navigate_next" className="align-middle text-gray-50 size-4" />
+    <Icon icon="navigate_next" size="2xs" className="text-gray-50" />
   </span>
 ))
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
