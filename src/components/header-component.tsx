@@ -1,6 +1,6 @@
 "use client"
 
-import { Header } from "@/components/blocks/Header"
+import { Header } from "@/components/blocks/header"
 
 export function HeaderComponent() {
   const handleSearch = (value: string) => {
