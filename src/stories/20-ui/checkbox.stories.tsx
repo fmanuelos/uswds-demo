@@ -30,18 +30,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Default story
-export const Default: Story = {
-  render: (args) => <Checkbox {...args} />,
-}
-
 // With Label
-export const WithLabel: Story = {
+export const Default: Story = {
   render: (args) => (
     <div className="flex items-center space-x-2">
-      <Checkbox id="terms" {...args} />
-      <Label htmlFor="terms" className="cursor-pointer">
-        Accept terms and conditions
+      <Checkbox id="default" {...args} />
+      <Label htmlFor="default" className="cursor-pointer">
+        Checkbox 
       </Label>
     </div>
   ),
