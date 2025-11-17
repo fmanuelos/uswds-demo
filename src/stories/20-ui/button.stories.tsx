@@ -1,7 +1,8 @@
 import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '@/components/ui/button'
-import { Icon as UswdsIcon } from '@/components/ui/icon'
+import { Icon } from '@/components/ui/icon'
+import { background } from 'storybook/theming'
 
 const meta = {
   title: 'UI/Button',
@@ -23,7 +24,7 @@ const meta = {
     },
     size: {
       control: { type: 'select' },
-      options: ['sm', 'default', 'lg', 'xl', 'icon'],
+      options: ['sm', 'default', 'lg', 'icon'],
       description: 'The size of the button',
     },
     disabled: {
@@ -34,7 +35,6 @@ const meta = {
       control: 'text',
       description: 'The content of the button',
     },
-    onClick: { action: 'clicked' },
   },
 } satisfies Meta<typeof Button>
 
@@ -52,70 +52,81 @@ export const Default: Story = {
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Primary Button',
-  },
-}
-
-export const Base: Story = {
-  args: {
-    variant: 'base',
-    children: 'Base Button',
+    children: 'Primary',
   },
 }
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Secondary Button',
+    children: 'Secondary',
   },
 }
 
 export const AccentCool: Story = {
   args: {
     variant: 'accent-cool',
-    children: 'Accent Button',
+    children: 'Accent Cool',
+  },
+}
+
+export const AccentWarm: Story = {
+  args: {
+    variant: 'accent-warm',
+    children: 'Accent Warm',
+  },
+}
+
+export const Base: Story = {
+  args: {
+    variant: 'base',
+    children: 'Base',
   },
 }
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
-    children: 'Outline Button',
+    children: 'Outline',
+  },
+}
+
+export const OutlineInverse: Story = {
+  args: {
+    variant: 'outline-inverse',
+    children: 'Outline Inverse',
+  },
+   globals: {
+    // 👇 Override background value for this story
+    backgrounds: { value: 'dark' },
   },
 }
 
 export const Success: Story = {
   args: {
     variant: 'success',
-    children: 'Success Button',
+    children: 'Success',
   },
 }
 
 export const Warning: Story = {
   args: {
     variant: 'warning',
-    children: 'Warning Button',
+    children: 'Warning',
   },
 }
 
 export const Danger: Story = {
   args: {
     variant: 'danger',
-    children: 'Danger Button',
-  },
-}
-
-export const Ghost: Story = {
-  args: {
-    variant: 'ghost',
-    children: 'Ghost Button',
+    children: 'Danger',
   },
 }
 
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Link Button',
+    children: 'Link',
   },
 }
 
@@ -134,14 +145,7 @@ export const Large: Story = {
   },
 }
 
-export const ExtraLarge: Story = {
-  args: {
-    size: 'xl',
-    children: 'Extra Large Button',
-  },
-}
-
-export const Icon: Story = {
+export const IconButton: Story = {
   args: {
     size: 'icon',
     variant: 'primary',
@@ -149,7 +153,7 @@ export const Icon: Story = {
   },
   render: (args) => (
     <Button {...args}>
-      <UswdsIcon icon="search" />
+      <Icon icon="search" size="sm" />
     </Button>
   ),
   parameters: {
@@ -161,21 +165,23 @@ export const Icon: Story = {
   },
 }
 
-// Accessibility story
-export const AccessibilityTest: Story = {
+
+export const WithIcon: Story = {
   args: {
-    children: 'Accessible Button',
-    'aria-label': 'Custom accessible label',
-    'aria-describedby': 'button-description',
+    variant: 'primary',
   },
   render: (args) => (
-    <div>
-      <Button {...args} />
-      <div id="button-description" className="sr-only">
-        This button performs a custom action
-      </div>
-    </div>
+    <Button {...args}>
+      Primary <Icon icon="navigate_next" size="xs" />
+    </Button>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Icon-only button with fixed square dimensions. Always include an aria-label for accessibility.',
+      },
+    },
+  },
 }
 
 // State stories
@@ -190,13 +196,12 @@ export const Disabled: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button variant="primary">Primary</Button>
+      <Button variant="primary">Primary <Icon icon="search" size="xs" /></Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="success">Success</Button>
       <Button variant="warning">Warning</Button>
       <Button variant="danger">Danger</Button>
-      <Button variant="ghost">Ghost</Button>
       <Button variant="link">Link</Button>
     </div>
   ),
@@ -204,28 +209,6 @@ export const AllVariants: Story = {
     docs: {
       description: {
         story: 'All available button variants displayed together.',
-      },
-    },
-  },
-}
-
-// All Sizes showcase
-export const AllSizes: Story = {
-  render: () => (
-    <div className="flex flex-wrap items-center gap-4">
-      <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
-      <Button size="lg">Large</Button>
-      <Button size="xl">Extra Large</Button>
-      <Button size="icon" aria-label="Icon button">
-        <UswdsIcon icon="settings" />
-      </Button>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All available button sizes displayed together.',
       },
     },
   },

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 const buttonVariants = cva(
   cn(
     // Base layout and appearance
-    "relative rounded font-bold font-source-sans leading-none cursor-pointer",
+    "relative rounded font-semibold font-open-sans leading-none cursor-pointer",
 
     // Focus states
     "focus:outline focus:outline-4 focus:outline-offset-4 focus:outline-blue-40v",
@@ -18,24 +18,25 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "text-white bg-blue-60v hover:bg-blue-warm-70v active:bg-blue-warm-80v",
-        base: "text-white bg-gray-50 hover:bg-gray-60 active:bg-gray-80",
-        secondary: "text-white bg-red-50 hover:bg-red-60v active:bg-red-70v",
-        'accent-cool': "text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v",
-        outline: "text-gray-80v bg-transparent border border-gray-60v hover:bg-gray-5v active:bg-gray-10v",
-        info: "text-black bg-cyan-30v hover:bg-blue-cool-40v active:bg-blue-cool-60v",
-        success: "text-white bg-green-60v hover:bg-green-70v active:bg-green-80v",
-        warning: "text-white bg-orange-60v hover:bg-orange-70v active:bg-orange-80v",
-        error: "text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v",
+        primary: "text-white bg-cerulean-50 hover:bg-cerulean-70 active:bg-cerulean-80",
+        secondary: "text-white bg-teal-50 hover:bg-teal-70 active:bg-teal-80",
+        'accent-cool': "text-white bg-navy-50 hover:bg-navy-70 active:bg-navy-80",
+        'accent-warm': "text-gray-90 bg-golden-20 hover:bg-golden-30 active:bg-golden-40",
+        base: "text-white bg-gray-cool-50 hover:bg-gray-cool-60 active:bg-gray-cool-70",
+        outline: "text-cerulean-50 bg-transparent border-2 border-cerulean-50 hover:text-cerulean-70 hover:border-cerulean-70 active:text-cerulean-80 active:border-cerulean-80 disabled:border-gray-20 disabled:text-gray-50 disabled:bg-transparent",
+        'outline-inverse': "text-gray-cool-10 bg-transparent border-2 border-gray-cool-10 hover:text-gray-5 hover:border-gray-5 active:text-white active:border-white disabled:border-gray-40 disabled:text-gray-50 disabled:bg-transparent",
+        'outline-primary': "text-cerulean-50 bg-transparent border-2 border-cerulean-50 hover:text-cerulean-70 hover:border-cerulean-70 active:text-cerulean-80 active:border-cerulean-80 disabled:border-gray-20 disabled:text-gray-50 disabled:bg-transparent",
+        'outline-secondary': "text-teal-50 bg-transparent border-2 border-teal-50 hover:text-teal-70 hover:border-teal-70 active:text-teal-80 active:border-teal-80 disabled:border-gray-20 disabled:text-gray-50 disabled:bg-transparent",
+        info: "text-white bg-navy-50 hover:bg-navy-70 active:bg-navy-80",
+        success: "text-white bg-green-cool-50v hover:bg-green-cool-60v active:bg-green-cool-70v",
+        warning: "text-gray-90 bg-golden-20 hover:bg-golden-30 active:bg-golden-40",
         danger: "text-white bg-red-60v hover:bg-red-warm-70v active:bg-red-warm-80v",
-        ghost: "text-gray-80v hover:bg-gray-5v active:bg-gray-10v",
-        link: "text-blue-60v underline-offset-4 hover:underline hover:text-blue-warm-70v"
+        link: "text-blue-60v underline underline-offset-2 hover:text-blue-warm-70v !p-0 font-normal rounded-none disabled:text-gray-50 disabled:bg-transparent "
       },
       size: {
-        sm: "px-3 py-2 text-sm",
+        sm: "p-2 text-sm",
         default: "px-5 py-3",
-        lg: "px-6 py-4 text-lg",
-        xl: "px-8 py-5 text-xl",
+        lg: "px-6 py-4 text-xl",
         icon: "size-9",
       }
     },
