@@ -178,7 +178,7 @@ export const WithIcon: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Icon-only button with fixed square dimensions. Always include an aria-label for accessibility.',
+        story: 'Button with an icon, demonstrating how to include icons alongside text.',
       },
     },
   },
