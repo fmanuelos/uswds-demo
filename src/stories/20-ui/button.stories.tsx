@@ -2,7 +2,6 @@ import * as React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
-import { background } from 'storybook/theming'
 
 const meta = {
   title: 'UI/Button',
