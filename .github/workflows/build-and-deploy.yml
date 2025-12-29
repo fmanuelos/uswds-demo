@@ -2,8 +2,13 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: 
+      - "main"
+      - "develop"
   pull_request:
+      branches:
+      - "main"
+      - "develop"
 
 permissions:
   contents: read
@@ -25,7 +30,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install
