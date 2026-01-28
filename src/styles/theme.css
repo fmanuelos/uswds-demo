@@ -40,11 +40,16 @@
   --sidebar-border: #e5e5e5;
   --sidebar-ring: #a1a1a1;
 
-  --font-sans: Poppins, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Primary Font Options */
+  --font-sans: Poppins, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   --font-serif: Merriweather, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", "Fira Code", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* --radius: 0.625rem; */
+ /* Secondary/Alternative Font Options */
+ --font-heading: Poppins, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+ --font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --radius: 0.625rem;
 
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -62,7 +67,7 @@
   --shadow-2xl: 0 1px 3px 0px rgb(0 0 0 / 0.25);
 
   --tracking-normal: 0em;
-  /* --spacing: 0.25rem; */
+  --spacing: 0.25rem;
 }
 
 .dark {
@@ -109,7 +114,11 @@
   --font-serif: Merriweather, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "Roboto Mono", "SF Mono", Monaco, "Cascadia Code", "Fira Code", Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* --radius: 0.25rem; */
+ /* Secondary/Alternative Font Options */
+ --font-heading: Poppins, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+ --font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --radius: 0.625rem;
 
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -174,12 +183,14 @@
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
-
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  
   /* Theme Radius with normalization support */
-  /* --radius-sm: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px); */
+  --radius-xl: calc(var(--radius) + 4px);
 
   /* Theme Shadow with normalization support */
   --shadow-x: var(--shadow-x);
