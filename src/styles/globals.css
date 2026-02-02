@@ -2,3 +2,9 @@
 @import "./fonts.css";
 @import "tailwindcss";
 @import "./theme.css";
+
+/* Remove focus ring on mouse click; keep it for keyboard navigation (accessibility) */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}

@@ -2,6 +2,9 @@
   "name": "uswds-demo",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.10.0"
+  },
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "npm run registry:build && npm run storybook:build",
