@@ -1,21 +1,20 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { DataTable, type SortDirection } from "@/components/data-table";
 import {
-  TableComponent,
+  PARTICIPANT_COLUMNS,
   type ParticipantRow,
-  type SortableColumn,
-  type SortDirection,
-} from "@/components/table-component";
+} from "@/components/tabbed-table-component";
 
 const meta = {
   title: "Blocks/Table Component",
-  component: TableComponent,
+  component: DataTable,
   parameters: {
     layout: "padded",
     docs: {
       description: {
         component:
-          "A participant data table with row selection, sortable Participant ID column, and optional links. Uses the UI table, checkbox, and icon components.",
+          "A participant data table (DataTable) with row selection, sortable columns, column visibility, and CSV/JSON export. Uses the config-driven DataTable with participant column config.",
       },
     },
   },
@@ -45,7 +44,7 @@ const meta = {
       control: { type: "select" },
     },
   },
-} satisfies Meta<typeof TableComponent>;
+} satisfies Meta<typeof DataTable>;
 
 export default meta;
 
@@ -310,15 +309,23 @@ const mockParticipantData: ParticipantRow[] = [
   },
 ];
 
+const participantTableArgs = {
+  columns: PARTICIPANT_COLUMNS,
+  data: mockParticipantData,
+  getRowId: (r: ParticipantRow) => r.participantId,
+  filenamePrefix: "participants",
+};
+
 export const Default: Story = {
   args: {
+    ...participantTableArgs,
     data: mockParticipantData,
   },
   parameters: {
     docs: {
       description: {
         story:
-          "Participant table with select-all and row checkboxes, all columns are sortable. Click any column header to toggle between ascending, descending, and no sort. Blue links where hrefs are provided. People icon shows an optional badge count.",
+          "Participant table with select-all and row checkboxes, sortable columns, column visibility, and CSV/JSON export. People icon shows an optional badge count.",
       },
     },
   },
@@ -326,6 +333,7 @@ export const Default: Story = {
 
 export const AscendingSort: Story = {
   args: {
+    ...participantTableArgs,
     data: mockParticipantData,
     sortColumn: "participantId",
     sortDirection: "asc",
@@ -341,6 +349,7 @@ export const AscendingSort: Story = {
 
 export const DescendingSort: Story = {
   args: {
+    ...participantTableArgs,
     data: mockParticipantData,
     sortColumn: "participantId",
     sortDirection: "desc",
@@ -356,6 +365,7 @@ export const DescendingSort: Story = {
 
 export const NoSort: Story = {
   args: {
+    ...participantTableArgs,
     data: mockParticipantData,
     sortColumn: null,
     sortDirection: null,
@@ -371,13 +381,14 @@ export const NoSort: Story = {
 
 export const FewRows: Story = {
   args: {
+    ...participantTableArgs,
     data: mockParticipantData.slice(0, 3),
   },
 };
 
 export const ControlledSort: Story = {
   render: function ControlledSortStory(args) {
-    const [sortColumn, setSortColumn] = React.useState<SortableColumn | null>("participantId");
+    const [sortColumn, setSortColumn] = React.useState<string | null>("participantId");
     const [sortDirection, setSortDirection] = React.useState<SortDirection>("asc");
 
     return (
@@ -390,9 +401,11 @@ export const ControlledSort: Story = {
             Click column headers to toggle sorting. Sorting is controlled externally.
           </p>
         </div>
-        <TableComponent
-          {...args}
+        <DataTable<ParticipantRow>
+          columns={PARTICIPANT_COLUMNS}
           data={args.data}
+          getRowId={(r) => r.participantId}
+          filenamePrefix="participants"
           sortColumn={sortColumn}
           sortDirection={sortDirection}
           onSortChange={(column, direction) => {
@@ -423,9 +436,11 @@ export const WithSelectionCallback: Story = {
         <p className="font-public-sans text-sm text-gray-70">
           Selected: {selected.length === 0 ? "None" : selected.join(", ")}
         </p>
-        <TableComponent
-          {...args}
+        <DataTable<ParticipantRow>
+          columns={PARTICIPANT_COLUMNS}
           data={args.data}
+          getRowId={(r) => r.participantId}
+          filenamePrefix="participants"
           onSelectionChange={setSelected}
         />
       </div>

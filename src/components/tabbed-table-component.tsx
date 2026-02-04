@@ -2,10 +2,26 @@
 
 import * as React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { TableComponent, type ParticipantRow } from "@/components/table-component";
-import { StudiesTableComponent } from "@/components/studies-table-component";
-import { SamplesTableComponent } from "@/components/samples-table-component";
-import { FilesTableComponent } from "@/components/files-table-component";
+import { DataTable, type DataTableColumn } from "@/components/data-table";
+import { PeopleIcon } from "@/components/ui/icon";
+
+/** Participant row shape (e.g. for participant tables). */
+export interface ParticipantRow {
+  participantId: string;
+  studyId: string;
+  sexAtBirth: string;
+  race: string;
+  diagnosis: string;
+  diagnosisAnatomicSite: string;
+  diagnosisCategory: string;
+  ageAtDiagnosis?: number | null;
+  treatmentType?: string | null;
+  lastKnownSurvivalStatus?: string | null;
+  badgeCount?: number;
+  participantHref?: string;
+  anatomicSiteHref?: string;
+  categoryHref?: string;
+}
 
 /** Matches studyOverview API (e.g. StudyOverViewResult). Use as-is from data.studyOverview. */
 export interface StudyRow {
@@ -63,6 +79,155 @@ export interface FileRow {
   file_mapping_level: string;
   __typename?: string;
 }
+
+// Helpers for file/display formatting (used by column configs)
+function formatFileSize(bytes: string | number | null | undefined): string {
+  const num = typeof bytes === "string" ? (bytes ? Number(bytes) : NaN) : bytes;
+  if (num == null || Number.isNaN(num) || num === 0) return "";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let size = num;
+  let unitIndex = 0;
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex++;
+  }
+  return `${size.toFixed(unitIndex === 0 ? 0 : 2)} ${units[unitIndex]}`;
+}
+function stripBrackets(s: string | null | undefined): string {
+  if (s == null) return "";
+  return s.replace(/^\s*\[/, "").replace(/\]\s*$/, "").trim();
+}
+
+// Column configs: one DataTable drives all four tabs; only data and columns change.
+export const PARTICIPANT_COLUMNS: DataTableColumn<ParticipantRow>[] = [
+  {
+    id: "participantId",
+    label: "Participant ID",
+    fixed: true,
+    minWidth: "min-w-[200px]",
+    render: (value, row) => (
+      <div className="flex items-center gap-2">
+        <span className="font-public-sans text-gray-90">{row.participantId}</span>
+        {row.badgeCount != null && row.badgeCount > 0 && (
+          <span className="relative inline-flex shrink-0">
+            <PeopleIcon size="sm" className="text-blue-60v" aria-hidden />
+            <span
+              className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-60v px-1 text-[10px] font-bold leading-none text-white"
+              aria-hidden
+            >
+              {row.badgeCount}
+            </span>
+          </span>
+        )}
+      </div>
+    ),
+  },
+  { id: "studyId", label: "Study ID", minWidth: "min-w-[120px]" },
+  { id: "sexAtBirth", label: "Sex at Birth", minWidth: "min-w-[100px]" },
+  { id: "race", label: "Race", minWidth: "min-w-[160px]" },
+  { id: "diagnosis", label: "Diagnosis", minWidth: "min-w-[220px]" },
+  { id: "diagnosisAnatomicSite", label: "Diagnosis Anatomic Site", minWidth: "min-w-[200px]" },
+  { id: "diagnosisCategory", label: "Diagnosis Category", minWidth: "min-w-[140px]" },
+  {
+    id: "ageAtDiagnosis",
+    label: "Age at Diagnosis (days)",
+    headerLabel: (
+      <>
+        <span>Age at Diagnosis</span>
+        <span className="text-xs font-normal">(days)</span>
+      </>
+    ),
+    numeric: true,
+    minWidth: "min-w-[140px]",
+    render: (v) => (v != null ? String(v) : ""),
+  },
+  { id: "treatmentType", label: "Treatment Type", minWidth: "min-w-[200px]", render: (v) => (v ?? "") as string },
+  { id: "lastKnownSurvivalStatus", label: "Last Known Survival Status", minWidth: "min-w-[160px]", render: (v) => (v ?? "") as string },
+];
+
+const STUDIES_COLUMNS: DataTableColumn<StudyRow>[] = [
+  { id: "study_id", label: "Study ID", fixed: true, minWidth: "min-w-[120px]" },
+  { id: "study_name", label: "Study Name", minWidth: "min-w-[220px]" },
+  { id: "study_status", label: "Status", minWidth: "min-w-[100px]" },
+  { id: "personnel_name", label: "Personnel", minWidth: "min-w-[160px]" },
+  {
+    id: "diagnosis",
+    label: "Diagnosis",
+    sortable: false,
+    minWidth: "min-w-[120px]",
+    accessor: (row) => (row.diagnosis?.length ? row.diagnosis.join(", ") : ""),
+  },
+  {
+    id: "anatomic_site",
+    label: "Anatomic Site",
+    sortable: false,
+    minWidth: "min-w-[140px]",
+    accessor: (row) => (row.anatomic_site?.length ? row.anatomic_site.join(", ") : ""),
+  },
+  {
+    id: "num_of_participants",
+    label: "Participants",
+    numeric: true,
+    minWidth: "min-w-[100px]",
+    accessor: (row) => (row.num_of_participants != null ? Number(String(row.num_of_participants).replace(/,/g, "")) || 0 : null),
+    render: (v) => (v != null && v !== "" ? Number(v).toLocaleString() : ""),
+  },
+  {
+    id: "num_of_samples",
+    label: "Samples",
+    numeric: true,
+    minWidth: "min-w-[90px]",
+    accessor: (row) => (row.num_of_samples != null ? Number(String(row.num_of_samples).replace(/,/g, "")) || 0 : null),
+    render: (v) => (v != null && v !== "" ? Number(v).toLocaleString() : ""),
+  },
+  {
+    id: "num_of_files",
+    label: "Files",
+    numeric: true,
+    minWidth: "min-w-[90px]",
+    accessor: (row) => (row.num_of_files != null ? Number(String(row.num_of_files).replace(/,/g, "")) || 0 : null),
+    render: (v) => (v != null && v !== "" ? Number(v).toLocaleString() : ""),
+  },
+  {
+    id: "file_type",
+    label: "File Types",
+    sortable: false,
+    minWidth: "min-w-[100px]",
+    accessor: (row) => (row.file_type?.length ? row.file_type.join(", ") : ""),
+  },
+];
+
+const SAMPLES_COLUMNS: DataTableColumn<SampleRow>[] = [
+  { id: "sample_id", label: "Sample ID", fixed: true, minWidth: "min-w-[120px]" },
+  { id: "participant_id", label: "Participant ID", minWidth: "min-w-[120px]" },
+  { id: "study_id", label: "Study ID", minWidth: "min-w-[110px]" },
+  { id: "anatomic_site", label: "Anatomic Site", minWidth: "min-w-[140px]" },
+  { id: "participant_age_at_collection", label: "Age at Collection (days)", numeric: true, minWidth: "min-w-[140px]" },
+  { id: "sample_tumor_status", label: "Tumor Status", minWidth: "min-w-[100px]" },
+  { id: "tumor_classification", label: "Tumor Classification", minWidth: "min-w-[140px]" },
+  { id: "diagnosis", label: "Diagnosis", minWidth: "min-w-[120px]" },
+  { id: "diagnosis_category", label: "Diagnosis Category", minWidth: "min-w-[140px]" },
+];
+
+const FILES_COLUMNS: DataTableColumn<FileRow>[] = [
+  { id: "file_name", label: "File Name", fixed: true, minWidth: "min-w-[220px]" },
+  { id: "data_category", label: "Data Category", minWidth: "min-w-[140px]", render: (v) => stripBrackets(String(v ?? "")) },
+  { id: "file_type", label: "File Type", minWidth: "min-w-[90px]" },
+  {
+    id: "file_size",
+    label: "File Size",
+    numeric: true,
+    minWidth: "min-w-[100px]",
+    accessor: (row) => (row.file_size != null ? Number(row.file_size) || 0 : null),
+    render: (v) => formatFileSize(v as string | number | null | undefined),
+  },
+  { id: "study_id", label: "Study ID", minWidth: "min-w-[110px]" },
+  { id: "participant_id", label: "Participant ID", minWidth: "min-w-[180px]", render: (v) => stripBrackets(String(v ?? "")) },
+  { id: "sample_id", label: "Sample ID", minWidth: "min-w-[180px]", render: (v) => stripBrackets(String(v ?? "")) },
+  { id: "file_access", label: "File Access", minWidth: "min-w-[100px]" },
+  { id: "file_mapping_level", label: "Mapping Level", minWidth: "min-w-[120px]" },
+  { id: "library_strategy", label: "Library Strategy", minWidth: "min-w-[120px]", render: (v) => (v ?? "") as string },
+];
 
 export interface TabbedTableComponentProps {
   participants?: ParticipantRow[];
@@ -264,22 +429,50 @@ export function TabbedTableComponent({
 
         <TabsContent value="participants" className="border-0 p-0">
           {participantsData.length > 0 ? (
-            <TableComponent data={participantsData} onSelectionChange={handleParticipantSelection} />
+            <DataTable<ParticipantRow>
+              columns={PARTICIPANT_COLUMNS}
+              data={participantsData}
+              getRowId={(r) => r.participantId}
+              filenamePrefix="participants"
+              onSelectionChange={handleParticipantSelection}
+              idSuffix="-participants"
+            />
           ) : (
             <div className="text-center py-8 text-gray-70">No participant data available</div>
           )}
         </TabsContent>
 
         <TabsContent value="studies" className="border-0 p-0">
-          <StudiesTableComponent data={studiesData} onSelectionChange={handleStudySelection} />
+          <DataTable<StudyRow>
+            columns={STUDIES_COLUMNS}
+            data={studiesData}
+            getRowId={(r) => r.id}
+            filenamePrefix="studies"
+            onSelectionChange={handleStudySelection}
+            idSuffix="-studies"
+          />
         </TabsContent>
 
         <TabsContent value="samples" className="border-0 p-0">
-          <SamplesTableComponent data={samplesData} onSelectionChange={handleSampleSelection} />
+          <DataTable<SampleRow>
+            columns={SAMPLES_COLUMNS}
+            data={samplesData}
+            getRowId={(r) => r.id}
+            filenamePrefix="samples"
+            onSelectionChange={handleSampleSelection}
+            idSuffix="-samples"
+          />
         </TabsContent>
 
         <TabsContent value="files" className="border-0 p-0">
-          <FilesTableComponent data={filesData} onSelectionChange={handleFileSelection} />
+          <DataTable<FileRow>
+            columns={FILES_COLUMNS}
+            data={filesData}
+            getRowId={(r) => r.id}
+            filenamePrefix="files"
+            onSelectionChange={handleFileSelection}
+            idSuffix="-files"
+          />
         </TabsContent>
       </Tabs>
     </div>
