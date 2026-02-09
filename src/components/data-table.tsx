@@ -220,6 +220,17 @@ export function DataTable<TRow>({
 
   const renderPaginationPanel = (panelSuffix: string) => (
     <div className="flex flex-wrap items-center justify-end gap-4 font-public-sans text-base text-gray-90">
+      <button
+        type="button"
+        className="px-4 py-2 bg-[#3d4551] text-white font-public-sans font-normal rounded hover:bg-[#2d3441] focus:outline focus:outline-4 focus:outline-blue-40 focus:outline-offset-0"
+        onClick={() => {
+          // Sample button action - customize as needed
+          console.log('Sample button clicked');
+        }}
+        aria-label="Sample action button"
+      >
+        Sample
+      </button>
       <label htmlFor={`data-table-page-size${idSuffix}${panelSuffix}`} className="text-gray-90">
         Results per Page:
       </label>
